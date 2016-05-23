@@ -1,0 +1,235 @@
+﻿@model WeBind.Models.ExpertProfileViewModel
+@{
+}
+
+@Html.Partial("_ExpertHeaderPartial")
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (TempData["profileUpdated"] != null)
+                {
+                    <div class="panel panel-success paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h3 class="margin-none text-green-500 text-center">@TempData["profileUpdated"]</h3>
+                        </div>
+                    </div>
+                }
+
+                <!-- Tabbable Widget -->
+                <div class="tabbable paper-shadow relative" data-z="0.5">
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="website-instructor-profile.html"><i class="fa fa-fw fa-lock"></i> <span class="hidden-sm hidden-xs">Manage Account</span></a></li>
+                        @*<li><a href="website-instructor-billing.html"><i class="fa fa-fw fa-credit-card"></i> <span class="hidden-sm hidden-xs">Billing Details</span></a></li>*@
+                    </ul>
+                    <!-- // END Tabs -->
+                    <!-- Panes -->
+                    <div class="tab-content">
+                        <div id="account" class="tab-pane active">
+                            @using (Html.BeginForm("ExpertProfile", "Expert", new { expertId = Model.ExpertID }, FormMethod.Post, new { @name = "expertProfileForm", @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Profile Pic</label>
+                                    <div class="col-md-6">
+                                        <div class="media v-middle">
+                                            <div class="media-left">
+                                                <div class="icon-block width-100 bg-grey-100">
+                                                    <img src="@Url.Content(Model.ProfilePicPath)" alt="" id="preview" class="width-80" />
+                                                    @*<i class="fa fa-photo text-light"></i>*@
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                Update Profile Photo
+                                                <input type="file" name="file" accept=".jpg,.png,.jpeg" id="file" class="btn btn-white btn-sm paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated value="Update Photo" />
+                                                <div id="expertProfileForm_file_errorloc" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="media v-middle">
+                                            <div class="media-left">
+                                                <div class="icon-block width-100">
+                                                    @*<img src="" alt="" class="width-80" id="preview" />*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Name <span class="text-danger">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                @Html.TextBoxFor(m => m.FirstName, new { id = "exampleInputFirstName", @class = "form-control", placeholder = "Your Name", type = "text" })
+                                                <label for="exampleInputFirstName">Name</label>
+                                            </div>
+                                        </div>
+                                        <div id="expertProfileForm_FirstName_errorloc" class="text-danger"></div>
+                                    </div>
+                                    @*<div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-control-material">
+                                                        @Html.TextBoxFor(m => m.LastName, new { id = "exampleInputLastName", @class = "form-control", placeholder = "Your last name", type = "text" })
+                                                        <label for="exampleInputLastName">Last name</label>
+                                                    </div>
+                                                    <div id="expertProfileForm_LastName_errorloc" class="text-danger"></div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Email <span class="text-danger">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                @Html.HiddenFor(m => m.EmailID)
+                                                @Html.TextBoxFor(m => m.EmailID, new { disabled = "disabled", id = "inputEmail3", @class = "form-control", placeholder = "Email", type = "email" })
+                                                <label for="inputEmail3">Email address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Company</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                                @Html.TextBoxFor(m => m.Company, new { id = "company", @class = "form-control", placeholder = "Company" })
+                                                <label for="company">Company Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="position" class="col-md-2 control-label">Position</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="icon-identification"></i></span>
+                                                @Html.TextBoxFor(m => m.Position, new { id = "position", @class = "form-control", placeholder = "Position" })
+                                                <label for="position">Enter Position</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Experience</label>
+                                    <div class="col-md-3">
+                                        <div class="form-control-material">
+                                            @Html.DropDownListFor(m => m.ExperienceYear, new SelectList(Model.ExperienceYearList), "", new { id = "ExperienceYear", @class = "form-control", placeholder = "Select Years" })
+                                            <label for="ExperienceYear">Years</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-control-material">
+                                            @Html.DropDownListFor(m => m.ExperienceMonth, new SelectList(Model.ExperienceMonthList), "", new { id = "ExperienceMonth", @class = "form-control", placeholder = "Select Months" })
+                                            <label for="ExperienceMonth">Month</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">LinkedIn Profile link</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                                @Html.TextBoxFor(m => m.LinkedInProfileLink, new { id = "linkedinprofile", @class = "form-control", placeholder = "LinedIn Profile link" })
+                                                <label for="website">Enter LinkedIn Profile Link</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Twitter Profile link</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+                                                @Html.TextBoxFor(m => m.TweeterProfileLink, new { id = "tweeterprofile", @class = "form-control", placeholder = "Twitter Profile link" })
+                                                <label for="website">Enter twitter Profile Link</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-md-2 control-label">Contact No</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextBoxFor(m => m.ContactNo, new { id = "inputcontactno", @class = "form-control", placeholder = "Contact Number" })
+                                            <label for="inputcontactno">Contact No</label>
+                                        </div>
+                                        <div id="expertProfileForm_ContactNo_errorloc" class="text-danger"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expertTags" class="col-md-2 control-label">Tags</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextBoxFor(m => m.MyTags, new { @class = "form-control", type = "text", id = "expertTags", data_toggle = "select2-tags", data_Tags = Model.AllTags, value = Model.MyTags, style = "width: 100%;" })
+                                            <label for="expertTags">Select Tags</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-md-2 control-label">About Me</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextAreaFor(m => m.AboutMe, new { id = "inputAboutMe", rows = "3", @class = "form-control", placeholder = "Write something About your self" })
+                                            <label for="inputAboutMe">About Me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                        <div class="col-md-offset-2 col-md-6">
+                                            <div class="checkbox checkbox-success">
+                                                <input id="checkbox3" type="checkbox" checked="">
+                                                <label for="checkbox3">Subscribe to our Newsletter</label>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group margin-none">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated>Save Changes</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- // END Panes -->
+                </div>
+                <!-- // END Tabbable Widget -->
+                <br />
+                <br />
+            </div>
+            @Html.Partial("_ExpertNavigationPartial")
+        </div>
+    </div>
+</div>
+
+<script language="JavaScript" type="text/javascript"
+        xml:space="preserve">
+    //<![CDATA[
+    //You should create the validator only after the definition of the HTML form
+
+    var frmvalidator = new Validator("expertProfileForm");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("FirstName", "req", "Please enter your Name");
+    frmvalidator.addValidation("LastName", "req", "Please enter your Last Name");
+
+    frmvalidator.addValidation("ContactNo", "num", "Contact number must have numerics only");
+    frmvalidator.addValidation("ContactNo", "minlen=10", "Too short contact number");
+    frmvalidator.addValidation("ContactNo", "maxlen=13", "Too long contact number");
+
+    frmvalidator.addValidation("file", "file_extn=jpeg;jpg;png", "Only jpeg, jpg and png files are allowed");
+    frmvalidator.addValidation("file", "file_size=2048", "File size must be less than 2MB");
+
+    //]]></script>

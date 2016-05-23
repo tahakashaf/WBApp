@@ -1,0 +1,47 @@
+﻿@model WeBind.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<div class="text-center paper-shadow" data-z="0.5">
+    <h1 class="text-display-1 text-center margin-bottom-none">Hello! Master</h1><br />
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl, RoleID = 1 }, FormMethod.Post, new { @name = "expertLoginForm", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @*@Html.Hidden("RoleId", "1")*@
+
+        if (ViewData.ModelState["invalidLogin"] != null && ViewData.ModelState["invalidLogin"].Errors.Count > 0)
+        {
+            <div class="text-danger">Invalid Username or password</div>
+        }
+        else
+        {
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        }
+
+        <div class="panel-body" style="padding-bottom:0">
+            <div class="form-group">
+                <div class="form-control-material">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control  text-center", @placeholder = "Enter Email Address", id = "expertEmailusername" })
+                    <label for="username">Email Address</label>
+                </div>
+                <div id="expertLoginForm_Email_errorloc" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <div class="form-control-material">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control  text-center", @placeholder = "Enter Password", id = "expertPassword" })
+                    <label for="password">Password</label>
+                </div>
+                <div id="expertLoginForm_Password_errorloc" class="text-danger"></div>
+            </div>
+            @*<div class="checkbox checkbox-primary">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div><br />*@
+            <button type="submit" class="btn btn-primary">Login <i class="fa fa-fw fa-unlock-alt"></i></button><br /><br />
+            @Html.ActionLink("Forgot password?", "ForgotPassword", null, htmlAttributes: new { @class = "forgot-password" })<br /><br />
+            @*<a href="#" class="forgot-password">Forgot password?</a>*@
+            @*<a href="sign-up.html" class="link-text-color">Create account</a>*@
+            @Html.ActionLink("Create account", "Register", "Account", routeValues: null, htmlAttributes: new { id = "signupLink", @class = "link-text-color" })
+        </div>
+    }
+</div>

@@ -1,0 +1,105 @@
+﻿@model List<WeBind.Models.WebinarViewModel>
+
+@*@Html.Partial("_ExpertHeaderPartial")*@
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-comment-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">FeedBacks</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (TempData["feedbackSentMsg"] != null)
+                {
+                    <div class="panel panel-success paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h3 class="margin-none text-green-500 text-center">@TempData["feedbackSentMsg"]</h3>
+                        </div>
+                    </div>
+                }
+                @if (Model.Count > 0)
+                {
+                    foreach (var webinar in Model)
+                    {
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-body">
+
+                                <div class="media media-clearfix-xs">
+                                    <div class="media-body">
+                                        <h4 class="text-headline margin-v-5-0">
+                                            @Html.ActionLink(webinar.WebinarName, "WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID }, htmlAttributes: new { id = "signupLink" })
+                                        </h4>
+                                        <p class="small">
+                                            <i class="fa fa-calendar fa-fw"></i> Date: @webinar.FromDateTime.ToString("dd/MM/yyyy")
+                                        </p>
+                                        <p class="margin-none">
+                                            @foreach (string Tag in webinar.Tags)
+                                            {
+                                                <span class="label bg-gray-dark">@Tag</span>
+                                            }
+                                        </p>
+                                        <hr class="margin-v-8" />
+                                        @using (Html.BeginForm("EducatorCampusFeedback", "Educator", FormMethod.Post, new { @name = "educatorFeedbackForm", role = "form" }))
+                                        {
+                                            <div class="media v-middle form-group">
+                                                @Html.HiddenFor(m => m[0].CampusWebinarID)
+                                                @Html.TextAreaFor(m => m[0].FeedBackMsg, new { @name = "FeedBackMsg", @class = "form-control", placeholder = "Write you feedback", rows = "5", id = "FeedBackMsg" })
+                                                <div id="educatorFeedbackForm_0.FeedBackMsg_errorloc" class="text-danger"></div>
+                                            </div>
+                                            <div class="form-group media-bottom">
+                                                <div class="col-sm-9">
+                                                    <button type="submit" class="btn btn-primary">Post Feedback</button>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">No Feedbacks Remaining</h4>
+                        </div>
+                    </div>
+                }
+
+                @*<ul class="pagination margin-top-none">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                    <br />
+                    <br />*@
+            </div>
+
+            @Html.Partial("_EducatorNavigationPartial")
+        </div>
+    </div>
+</div>
+<script language="JavaScript" type="text/javascript"
+        xml:space="preserve">
+    //<![CDATA[
+    //You should create the validator only after the definition of the HTML form
+
+    var frmvalidator = new Validator("educatorFeedbackForm");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("[0].FeedBackMsg", "req", "Please enter the feedback message");
+    //]]></script>

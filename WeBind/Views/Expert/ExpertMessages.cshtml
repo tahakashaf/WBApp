@@ -1,0 +1,103 @@
+﻿@model WeBind.Models.MessageViewModel
+
+@*@Html.Partial("_ExpertHeaderPartial")*@
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-envelope-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Messages</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (Model.Campuses.Count() == 0)
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">No Messages</h4>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="media messages-container media-clearfix-xs-min media-grid">
+                        <div class="media-left">
+                            <div class="messages-list">
+                                <div class="panel panel-default paper-shadow" data-z="0.5" data-scrollable-h>
+                                    <ul class="list-group" id="messageNavigation">
+                                        @foreach (var campus in Model.Campuses)
+                                    {
+                                    <li class="list-group-item">
+                                        <a href="@Url.Action("ExpertMessages", "Expert", routeValues: new { CampusID = campus.CampusID })">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <img src="@Url.Content(campus.ProfilePicPath)" width="50" alt="" class="media-object" />
+                                                </div>
+                                                <div class="media-body">
+                                                    @*<span class="date">@campus.MessageAgoDateTime</span>*@
+                                                    <span class="user">@campus.CampusName</span>
+                                                    <div class="text-light">@campus.DepartmentName</div>
+                                                    @*<div class="text-light" style="height:23px">@campus.LastMessage</div>*@
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media-body">
+
+                            <div class="form-group">
+                                @using (Html.BeginForm("PostMessage", "Expert", FormMethod.Post, new { id = "postMsgForm" }))
+                            {
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <a class="btn btn-primary" href="javascript:document.getElementById('postMsgForm').submit()">
+                                        <i class="fa fa-envelope"></i> Send
+                                    </a>
+                                </div>
+                                @Html.HiddenFor(m => m.PostMessage.CampusID)
+                                <!-- /btn-group -->
+                                @Html.TextBoxFor(m => m.PostMessage.Message, new { @class = "form-control share-text", placeholder = "Write message..." })
+                            </div>
+                                <!-- /input-group -->
+                            }
+                            </div>
+
+                            @foreach (var message in @Model.Messages)
+                        {
+                        <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                            <div class="panel-body">
+                                <div class="media v-middle">
+                                    <div class="media-left">
+                                        <img src="@Url.Content(message.ProfilePicPath)" alt="person" class="media-object img-circle width-50" />
+                                    </div>
+                                    <div class="media-body message">
+                                        <h4 class="text-subhead margin-none"><a href="#">@message.MessageFrom</a></h4>
+                                        <p class="text-caption text-light"><i class="fa fa-clock-o"></i> @message.MessageAgoDateTime</p>
+                                    </div>
+                                </div>
+                                <p>@message.Message</p>
+                            </div>
+                        </div>
+                        }
+                        </div>
+                    </div>
+                }
+                <br />
+                <br />
+            </div>
+            @Html.Partial("_ExpertNavigationPartial")
+        </div>
+    </div>
+</div>

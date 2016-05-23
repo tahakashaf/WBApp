@@ -1,0 +1,161 @@
+﻿@model WeBind.Models.ExpertProfileViewModel
+@{
+}
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=133924510083142";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+@Html.Partial("_ExpertHeaderPartial")
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row" data-toggle="isotope">
+                    <div class="item col-xs-12 col-lg-6">
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <div class="media v-middle">
+                                    <div class="media-body">
+                                        <h4 class="text-headline margin-none">Lives Touched</h4>
+                                        <p class="text-subhead text-light">Per Master Class</p>
+                                    </div>
+                                    @*<div class="media-right">
+                                            <a class="btn btn-white btn-flat" href="website-instructor-earnings.html">Reports</a>
+                                        </div>*@
+                                </div>
+                            </div>
+                            @if (Model.Webinars.Count > 0)
+                            {
+                                <div class="panel-body">
+                                    <div id="line-holder" data-toggle="flot-chart-mixed" data="@Model.ChartValue" class="flotchart-holder height-200"></div>
+                                </div>
+                                <hr />
+                            }
+                            <div class="panel-body">
+                                <div class="row text-center">
+                                    <div class="col-md-6">
+                                        <h4 class="margin-none"></h4>
+                                        <p class="text-display-1 text-warning margin-none"></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="margin-none">Total Lives Touched</h4>
+                                        <p class="text-display-1 text-success margin-none">
+                                            @{
+                                                Int64 participantCount = 0;
+                                                foreach (var item in Model.Webinars)
+                                                {
+                                                    participantCount += (long)item.Participants;
+                                                }
+                                                @participantCount
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item col-xs-12 col-lg-6">
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <h4 class="text-headline margin-none">Master Class Delivered</h4>
+                                <p class="text-subhead text-light">Your recently conducted Master Classes</p>
+                            </div>
+                            @if (Model.Webinars.Count == 0)
+                            {
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="media v-middle margin-v-0-10">
+                                            <div class="media-body">
+                                                <p class="text-subhead">
+                                                    No Master Class delivered till now
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="list-group">
+                                    @foreach (var item in Model.Webinars)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="media v-middle margin-v-0-10">
+                                                <div class="media-body">
+                                                    <p class="text-subhead">
+                                                        @Html.ActionLink(item.WebinarName, "WebinarDetails", "Home", routeValues: new { WebinarID = item.WebinarID }, htmlAttributes: new { id = "signupLink" }) &nbsp;
+                                                    </p>
+                                                </div>
+                                                <div class="media-right">
+                                                    <div class="width-100 text-right">
+                                                        <i class="fa fa-calendar fa-fw"></i>
+                                                        <span class="text-caption text-light">@item.FromDateTime.ToString("dd/MM/yyyy") </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p>@item.WebinarSummary</p>
+                                            <p><i class="fa fa-clock-o fa-fw"></i><span class="caption"> Duration &nbsp;</span> <strong>@item.TimeDuration</strong></p>
+                                            @foreach (var campus in item.Campuses)
+                                            {
+                                                <p><i class="fa fa-building fa-fw"></i><strong> @campus.CampusName</strong> <span class="text-light">@campus.DepartmentName</span></p>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="panel-footer text-right">
+                                    @Html.ActionLink("View All", "ExpertWebinarsList", "Expert", routeValues: null, htmlAttributes: new { id = "expertWebinarsList", @class = "btn btn-white paper-shadow relative" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="item col-xs-12 col-lg-6" style="height:500px">
+                        <div class="panel paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <div class="media v-middle">
+                                    <div class="media-body">
+                                        <h4 class="text-headline margin-none">Tweets</h4>
+                                        <p class="text-subhead text-light"></p>
+                                    </div>
+                                    <div class="media-right">
+                                        <a class="btn btn-white btn-flat" href="website-instructor-statement.html"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="twitter-timeline" href="https://twitter.com/hashtag/WeBind" data-widget-id="680745322755194880">#WeBind Tweets</a>
+                            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                        </div>
+                    </div>
+                    @*<div class="item col-xs-12 col-lg-6">
+                            <div class="panel panel-default paper-shadow" data-z="0.5">
+                                <div class="panel-heading">
+                                    <div class="media v-middle">
+                                        <div class="media-body">
+                                            <h4 class="text-headline margin-none">FaceBook Comments</h4>
+                                            <p class="text-subhead text-light"></p>
+                                        </div>
+                                        <div class="media-right">
+                                            <a class="btn btn-white btn-flat" href="website-instructor-statement.html"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="fb-root"></div>
+
+                                <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-width="400" data-numposts="2"></div>
+                                <br />
+                                <br />
+                            </div>
+                        </div>*@
+                </div>
+                <br />
+                <br />
+            </div>
+            @Html.Partial("_ExpertNavigationPartial")
+        </div>
+    </div>
+</div>

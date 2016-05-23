@@ -1,0 +1,125 @@
+﻿@model List<WeBind.Models.ExpertProfileViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 5);
+    grid.Pager(WebGridPagerModes.All);
+}
+
+
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.0em;
+        width: 30%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/messagesService.js"></script>
+<h2>Set or Remove Elite Master</h2>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/Custom/eliteMaster.js"></script>
+
+<div id="content">
+    @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+                @*grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),*@
+                    grid.Column(columnName: "FirstName", header: "FirstName"),
+                    grid.Column(columnName: "LastName", header: "LastName"),
+                    grid.Column(columnName: "Company", header: "Company"),
+                    grid.Column(columnName: "EmailID", header: "EmailID"),
+                    grid.Column(columnName: "Position", header: "Position"),
+                    grid.Column(columnName: "ExperienceYear", header: "ExperienceYear"),
+                    grid.Column(columnName: "ExperienceMonth", header: "ExperienceMonth"),
+                            grid.Column(columnName: "AboutMe", header: "AboutMe"),
+                    grid.Column(columnName: "LinkedInProfileLink", header: "LinkedInProfileLink"),
+                    grid.Column(columnName: "TweeterProfileLink", header: "TweeterProfileLink"),
+                    grid.Column(columnName: "RegisteredOn", header: "RegisteredOn"),
+                    grid.Column("Action", format: @<text>
+                        @if (item.IsEliteMaster == true)
+                        {
+                            <button class="unsetmaster-message-case" id="@item.ExpertID">UnSet</button>
+                            <br />
+                            <br />
+                        }
+                        else
+                        {
+                            <button class="setmaster-message-case" id="@item.ExpertID">Set</button>
+                        }
+                    </text>, style: "col3Width", canSort: false)))
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

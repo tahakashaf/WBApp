@@ -1,0 +1,135 @@
+﻿@model WeBind.Models.WebinarViewModel
+
+<div class="page-section half bg-white">
+    <div class="container">
+        <div class="section-toolbar">
+            <div class="">
+                <div class="media width-120 v-middle margin-none">
+                    <div class="media-left">
+                        <div class="icon-block bg-grey-200 s30"><i class="fa fa-question"></i></div>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-body-2 text-light margin-none">Questions</p>
+                        <p class="text-title text-primary margin-none">@Model.WebinarQuestions.Count()</p>
+                    </div>
+                </div>
+            </div>
+            @*<div class="cell">
+                    <div class="media width-120 v-middle margin-none">
+                        <div class="media-left">
+                            <div class="icon-block bg-grey-200 s30"><i class="fa fa-diamond"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-body-2 text-light margin-none">Score</p>
+                            <p class="text-title text-success margin-none">800 pt</p>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="page-section padding-top-none">
+                    <div class="media v-middle">
+                        <div class="media-body">
+                            <h1 class="text-display-1 margin-none">Quize For "@Model.WebinarName"</h1>
+                        </div>
+                        <div class="media-right">
+                            <a href="#" class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated><i class="fa fa-fw fa-file-text"></i> My Certificates</a>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.WebinarQuestions.Count() == 0)
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">No Questions Found</h4>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.WebinarQuestions.Count(); i++)
+                    {
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <div class="text-subhead-2 text-light">Question @(i + 1)</div>
+                            </div>
+                            <div class="panel-body">
+                                <p class="text-body-2">@Model.WebinarQuestions.ElementAt(i).Question</p>
+                            </div>
+                            <div class="panel-body">
+                                @for (int j = 0; j < Model.WebinarQuestions.ElementAt(i).WebinarAnswers.Count(); j++)
+                                {
+                                    <div class="checkbox checkbox-primary">
+                                        @*@Html.LabelFor(m => m.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).Answer)*@
+                                        @Html.CheckBox(Model.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).Answer)@*,Model.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).IsSelected, new { id = "checkbox" + (Model.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).AnswerID) })*@
+                                        <label for="checkbox@(Model.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).AnswerID)"> @Model.WebinarQuestions.ElementAt(i).WebinarAnswers.ElementAt(j).Answer</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    <div class="">
+                        <div class="text-right">
+                            <button class="btn btn-success"><i class="fa fa-save fa-fw"></i> Submit Answers</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            @*<div class="col-md-3">
+                    <div class="s-container">
+                        <div class="text-subhead-2 text-light">Time to complete</div>
+                        <div class="tk-countdown"></div>
+                    </div>
+                    <div class="text-subhead-2 text-light">Questions</div>
+                    <div class="panel panel-default margin-none">
+                        <div class="panel-body list-group">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="media v-middle">
+                                        <div class="media-left">
+                                            <div class="icon-block s30 bg-green-400 text-white">1</div>
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#" class="link-text-color">Dolores explicabo mollitia nisi perspiciatis quas. Itaque.</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media v-middle">
+                                        <div class="media-left">
+                                            <div class="icon-block s30 bg-blue-400 text-white">2</div>
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#" class="link-text-color">Lorem ipsum dolor sit amet, consectetur adipisicing.</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media v-middle">
+                                        <div class="media-left">
+                                            <div class="icon-block s30 bg-grey-400 text-white">3</div>
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#" class="link-text-color">A aliquam dolore et explicabo possimus vitae?</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                            <h4 class="text-subhead margin-v-0-5">Legend</h4>
+                            <span class="fa fa-fw fa-circle text-green-400"></span> Answered question
+                            <br />
+                            <span class="fa fa-fw fa-circle text-blue-400"></span> Selected question
+                        </div>
+                    </div>
+                </div>*@
+            @Html.Partial("_StudentNavigationPartial")
+        </div>
+    </div>
+</div>

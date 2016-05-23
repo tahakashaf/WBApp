@@ -1,0 +1,44 @@
+﻿
+<div class="col-md-3">
+    <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+        <div class="panel-heading panel-collapse-trigger">
+            <h4 class="panel-title">My Account</h4>
+        </div>
+        <div class="panel-body list-group">
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutFormNav1" }))
+            {
+                @Html.AntiForgeryToken()
+                <ul class="list-group list-group-menu" id="navigation">
+                    <li id="nav1" class="list-group-item active"><a class="link-text-color" href="@Url.Action("ExpertDashBoard", "Expert", routeValues: null)">Dashboard <i class="fa fa-bar-chart-o pull-right"></i></a></li>
+                    <li id="nav2" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertWebinarsList", "Expert", routeValues: null)">My Master Classes <i class="fa fa-mortar-board pull-right"></i></a></li>
+                    <li id="nav3" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertProfile", "Expert", routeValues: null)">Profile <i class="fa fa-user pull-right"></i></a></li>
+                    <li id="nav4" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertRequest", "Expert", routeValues: null)">Requests <i class="fa fa-share-square-o pull-right"></i></a></li>
+                    <li id="nav5" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertMessages", "Expert", routeValues: null)">Messages <i class="fa fa-envelope-o pull-right"></i></a></li>
+                    <li id="nav6" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertCampusFeedback", "Expert", routeValues: null)">Educators Feedbacks <i class="fa fa-comment-o pull-right"></i></a></li>
+                    <li id="nav7" class="list-group-item"><a class="link-text-color" href="@Url.Action("ExpertReferFriend", "Expert", routeValues: null)">Recommend A Friend <i class="md md-group pull-right"></i></a></li>
+                    <li class="list-group-item">
+                        <a class="link-text-color" href="javascript:window.localStorage.clear();document.getElementById('logoutFormNav1').submit()">
+                            <span>Logout</span><i class="fa fa-sign-out pull-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+        <div class="panel-heading">
+            <h4 class="panel-title">Profile Completed</h4>
+        </div>
+        <div class="panel-body">
+            <span>@ViewBag.UserData.ProfileCompleted % Complete</span>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@ViewBag.UserData.ProfileCompleted" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                    <span class="sr-only">@ViewBag.UserData.ProfileCompleted % Complete (success)</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+﻿@model WeBind.Models.CampusViewModel
+@{
+}
+
+@Html.Partial("_EducatorHeaderPartial")
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- Tabbable Widget -->
+                <div class="tabbable paper-shadow relative" data-z="0.5">
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="website-instructor-profile.html"><i class="fa fa-fw fa-lock"></i> <span class="hidden-sm hidden-xs">Manage Account</span></a></li>
+                        @*<li><a href="website-instructor-billing.html"><i class="fa fa-fw fa-credit-card"></i> <span class="hidden-sm hidden-xs">Billing Details</span></a></li>*@
+                    </ul>
+                    <!-- // END Tabs -->
+                    <!-- Panes -->
+                    <div class="tab-content">
+                        <div id="account" class="tab-pane active">
+                            @using (Html.BeginForm("EducatorProfile", "Educator", new { CampusID = Model.CampusID }, FormMethod.Post, new { @name="educatorProfileForm", @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Campus Logo</label>
+                                    <div class="col-md-6">
+                                        <div class="media v-middle">
+                                            <div class="media-left">
+                                                <div class="icon-block width-100 bg-grey-100">
+                                                    <img src="@Url.Content(Model.ProfilePicPath)" alt="" id="preview" class="width-80" />
+                                                    @*<i class="fa fa-photo text-light"></i>*@
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                Update Profile Photo
+                                                <input type="file" name="file" accept=".jpg,.png,.jpeg" id="file" class="btn btn-white btn-sm paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated value="Update Photo" />
+                                                <div id="educatorProfileForm_file_errorloc" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Educator Name <span class="text-danger">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-control-material">
+                                                    @Html.TextBoxFor(m => m.CampusName, new { id = "inputEducatorName", @class = "form-control", placeholder = "Educator Name", type = "text" })
+                                                    <label for="inputEducatorName">Educator name</label>
+                                                </div>
+                                                <div id="educatorProfileForm_CampusName_errorloc" class="text-danger"></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-control-material">
+                                                    @Html.TextBoxFor(m => m.DepartmentName, new { id = "deptname", @class = "form-control", placeholder = "Department Name", type = "text" })
+                                                    <label for="deptname">Department name</label>
+                                                </div>
+                                                <div id="educatorProfileForm_DepartmentName_errorloc" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Email <span class="text-danger">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                @Html.HiddenFor(m => m.EmailID)
+                                                @Html.TextBoxFor(m => m.EmailID, new { disabled = "disabled", id = "inputEmail", @class = "form-control", placeholder = "Email", type = "email" })
+                                                <label for="inputEmail">Email address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">Institute Website Link</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                                @Html.TextBoxFor(m => m.EmailID, new { id = "website", @class = "form-control", placeholder = "Institute Website Link", type = "email" })
+                                                <label for="website">Institute Website Link</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-md-2 control-label">Contact No</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextBoxFor(m => m.ContactNo, new { id = "inputcontactno", @class = "form-control", placeholder = "Contact Number" })
+                                            <label for="inputcontactno">Contact No</label>
+                                        </div>
+                                        <div id="educatorProfileForm_ContactNo_errorloc" class="text-danger"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-md-2 control-label">Address</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextAreaFor(m => m.Street, new { id = "educatoraddress", rows = "2", @class = "form-control", placeholder = "Write your Address" })
+                                            <label for="educatoraddress">Address</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-md-2 control-label">District / State</label>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-control-material">
+                                                    @Html.TextBoxFor(m => m.District, new { id = "district", @class = "form-control", placeholder = "District Name", type = "text" })
+                                                    <label for="district">District</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-control-material">
+                                                    @Html.TextBoxFor(m => m.State, new { id = "area", @class = "form-control", placeholder = "State Name", type = "text" })
+                                                    <label for="area">State</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                    <label for="inputPassword3" class="col-md-2 control-label">State</label>
+                                    <div class="col-md-6">
+                                        <div class="form-control-material">
+                                            @Html.TextBoxFor(m => m.State, new { id = "state", @class = "form-control", placeholder = "State Name" })
+                                            <label for="state">State</label>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                @*<div class="form-group">
+                                        <div class="col-md-offset-2 col-md-6">
+                                            <div class="checkbox checkbox-success">
+                                                <input id="checkbox3" type="checkbox" checked="">
+                                                <label for="checkbox3">Subscribe to our Newsletter</label>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group margin-none">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated>Save Changes</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- // END Panes -->
+                </div>
+                <!-- // END Tabbable Widget -->
+                <br />
+                <br />
+            </div>
+            @Html.Partial("_EducatorNavigationPartial")
+        </div>
+    </div>
+</div>
+<script language="JavaScript" type="text/javascript"
+        xml:space="preserve">
+    //<![CDATA[
+    //You should create the validator only after the definition of the HTML form
+
+    var frmvalidator = new Validator("educatorProfileForm");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("CampusName", "req", "Please enter Campus Name");
+    frmvalidator.addValidation("DepartmentName", "req", "Please enter Department Name");
+
+    frmvalidator.addValidation("ContactNo", "num", "Contact number must have numerics only");
+    frmvalidator.addValidation("ContactNo", "minlen=10", "Too short contact number");
+    frmvalidator.addValidation("ContactNo", "maxlen=13", "Too long contact number");
+
+    frmvalidator.addValidation("file", "file_extn=jpeg;jpg;png", "Only jpeg, jpg and png files are allowed");
+    frmvalidator.addValidation("file", "file_size=2048", "File size must be less than 2MB");
+
+    //]]></script>
+
+

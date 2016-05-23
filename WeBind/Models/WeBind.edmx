@@ -1,0 +1,1914 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WeBindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BrandBannerImage">
+          <Key>
+            <PropertyRef Name="BrandImageID" />
+          </Key>
+          <Property Name="BrandImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandBannerImagePath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="BrandID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BrandProfile">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="12" />
+          <Property Name="BrandLogoID" Type="bigint" Nullable="false" />
+          <Property Name="BrandLink" Type="nvarchar(max)" />
+          <Property Name="YoutubeURL" Type="nvarchar(max)" />
+          <Property Name="BrandContent" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CampusDepartments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CampusID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CampusExpertRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ScheduleDate" Type="datetime" Nullable="false" />
+          <Property Name="CampusID" Type="bigint" Nullable="false" />
+          <Property Name="RequestedToID" Type="bigint" Nullable="false" />
+          <Property Name="RequestedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsAdminApproved" Type="bit" />
+          <Property Name="IsExpertApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="CampusProfile">
+          <Key>
+            <PropertyRef Name="CampusID" />
+          </Key>
+          <Property Name="CampusID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProfessorName" Type="nvarchar(max)" />
+          <Property Name="DepartmentName" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="Area" Type="nvarchar(max)" />
+          <Property Name="District" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="12" />
+          <Property Name="LoginID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegisteredOn" Type="datetime" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="ProfilePicID" Type="bigint" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="IsPartnerCollege" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CampusRequest">
+          <Key>
+            <PropertyRef Name="expertRequestID" />
+          </Key>
+          <Property Name="expertRequestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CampusID" Type="bigint" Nullable="false" />
+          <Property Name="RequestedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CampusWebinarMapping">
+          <Key>
+            <PropertyRef Name="CampusWebinarID" />
+          </Key>
+          <Property Name="CampusWebinarID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebinarID" Type="bigint" Nullable="false" />
+          <Property Name="CampusID" Type="bigint" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="ConfigurationData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Default_Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="EmailTemplateID" />
+          </Key>
+          <Property Name="EmailTemplateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailTemplate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailSubject" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpertProfile">
+          <Key>
+            <PropertyRef Name="ExpertID" />
+          </Key>
+          <Property Name="ExpertID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="EmailID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LoginID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegisteredOn" Type="datetime" Nullable="false" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="12" />
+          <Property Name="AboutMe" Type="nvarchar(max)" />
+          <Property Name="Company" Type="nvarchar(max)" />
+          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="ExperienceYear" Type="int" />
+          <Property Name="ExperienceMonth" Type="int" />
+          <Property Name="LinkedInProfileLink" Type="nvarchar(max)" />
+          <Property Name="TweeterProfileLink" Type="nvarchar(max)" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="ProfilePicID" Type="bigint" />
+          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="ProfileCompleted" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="IsEliteMaster" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpertTagMapping">
+          <Key>
+            <PropertyRef Name="ExpertTagMappingID" />
+          </Key>
+          <Property Name="ExpertTagMappingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagID" Type="bigint" Nullable="false" />
+          <Property Name="ExpertID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExpertID" Type="bigint" Nullable="false" />
+          <Property Name="CampusID" Type="bigint" Nullable="false" />
+          <Property Name="MessageDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsFromExpert" Type="bit" Nullable="false" />
+          <Property Name="IsAdminApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProfilePic">
+          <Key>
+            <PropertyRef Name="ProfilePicID" />
+          </Key>
+          <Property Name="ProfilePicID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfilePicPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RecommandAFriend">
+          <Key>
+            <PropertyRef Name="RecommandationID" />
+          </Key>
+          <Property Name="RecommandationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpertID" Type="bigint" Nullable="false" />
+          <Property Name="FriendEmailIDs" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecommandedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusMaster">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentBlogs">
+          <Key>
+            <PropertyRef Name="StudentBlogID" />
+          </Key>
+          <Property Name="StudentBlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Blog" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BlogTitle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StudentID" Type="bigint" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdationDate" Type="datetime" Nullable="false" />
+          <Property Name="BrandID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="StudentProfile">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LoginID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar(max)" />
+          <Property Name="DepartmentName" Type="nvarchar(max)" />
+          <Property Name="Year" Type="bigint" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="ProfilePicID" Type="bigint" />
+          <Property Name="RegisteredOn" Type="datetime" Nullable="false" />
+          <Property Name="IsConfirmed" Type="bit" />
+        </EntityType>
+        <EntityType Name="TagMaster">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Webinar">
+          <Key>
+            <PropertyRef Name="WebinarID" />
+          </Key>
+          <Property Name="WebinarID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebinarName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WebinarSummary" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="WebinarDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WhatWillYouLearn" Type="nvarchar(max)" />
+          <Property Name="FromDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TimeDuration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ToDateTime" Type="datetime" />
+          <Property Name="statusID" Type="bigint" Nullable="false" />
+          <Property Name="Participants" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="YoutubeUrl" Type="nvarchar(max)" />
+          <Property Name="WebinarPicID" Type="bigint" Nullable="false" />
+          <Property Name="BrandID" Type="bigint" />
+          <Property Name="ExpertID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="WebinarAnswers">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionID" Type="bigint" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="IsCorrect" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebinarFeedBack">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedBack" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CampusWabinarID" Type="bigint" Nullable="false" />
+          <Property Name="SubmittedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="WebinarQuestions">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebinarID" Type="bigint" />
+          <Property Name="Question" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WebinarTagMapping">
+          <Key>
+            <PropertyRef Name="WebinarTagMappingID" />
+          </Key>
+          <Property Name="WebinarTagMappingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebinarID" Type="bigint" Nullable="false" />
+          <Property Name="TagID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BrandBannerImage_BrandProfile">
+          <End Role="BrandProfile" Type="Self.BrandProfile" Multiplicity="1" />
+          <End Role="BrandBannerImage" Type="Self.BrandBannerImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="BrandBannerImage">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrandProfile_ProfilePic">
+          <End Role="ProfilePic" Type="Self.ProfilePic" Multiplicity="1" />
+          <End Role="BrandProfile" Type="Self.BrandProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="BrandProfile">
+              <PropertyRef Name="BrandLogoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusDepartments_CampusProfile">
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="1" />
+          <End Role="CampusDepartments" Type="Self.CampusDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusDepartments">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusProfile_ProfilePic">
+          <End Role="ProfilePic" Type="Self.ProfilePic" Multiplicity="0..1" />
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="CampusProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_CampusProfile">
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="1" />
+          <End Role="CampusExpertRequest" Type="Self.CampusExpertRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusExpertRequest">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_CampusProfile1">
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="1" />
+          <End Role="CampusRequest" Type="Self.CampusRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusRequest">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_ExpertProfile">
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="1" />
+          <End Role="CampusExpertRequest" Type="Self.CampusExpertRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="CampusExpertRequest">
+              <PropertyRef Name="RequestedToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusWebinarMapping_CampusProfile">
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="1" />
+          <End Role="CampusWebinarMapping" Type="Self.CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusWebinarMapping_Webinar">
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="1" />
+          <End Role="CampusWebinarMapping" Type="Self.CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertProfile_ProfilePic">
+          <End Role="ProfilePic" Type="Self.ProfilePic" Multiplicity="0..1" />
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="ExpertProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertTagMapping_ExpertProfile">
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="1" />
+          <End Role="ExpertTagMapping" Type="Self.ExpertTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="ExpertTagMapping">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertTagMapping_TagMaster">
+          <End Role="TagMaster" Type="Self.TagMaster" Multiplicity="1" />
+          <End Role="ExpertTagMapping" Type="Self.ExpertTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagMaster">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="ExpertTagMapping">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_CampusProfile">
+          <End Role="CampusProfile" Type="Self.CampusProfile" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_ExpertProfile">
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecommandAFriend_ExpertProfile">
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="1" />
+          <End Role="RecommandAFriend" Type="Self.RecommandAFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="RecommandAFriend">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBlogs_BrandProfile">
+          <End Role="BrandProfile" Type="Self.BrandProfile" Multiplicity="0..1" />
+          <End Role="StudentBlogs" Type="Self.StudentBlogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="StudentBlogs">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBlogs_StudentBlogs">
+          <End Role="StudentProfile" Type="Self.StudentProfile" Multiplicity="1" />
+          <End Role="StudentBlogs" Type="Self.StudentBlogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentProfile">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentBlogs">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentProfile_ProfilePic">
+          <End Role="ProfilePic" Type="Self.ProfilePic" Multiplicity="0..1" />
+          <End Role="StudentProfile" Type="Self.StudentProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="StudentProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_BrandProfile">
+          <End Role="BrandProfile" Type="Self.BrandProfile" Multiplicity="0..1" />
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ExpertProfile">
+          <End Role="ExpertProfile" Type="Self.ExpertProfile" Multiplicity="0..1" />
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ProfilePic">
+          <End Role="ProfilePic" Type="Self.ProfilePic" Multiplicity="1" />
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="WebinarPicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_statusMaster">
+          <End Role="StatusMaster" Type="Self.StatusMaster" Multiplicity="1" />
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMaster">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarAnswers_WebinarQuestions">
+          <End Role="WebinarQuestions" Type="Self.WebinarQuestions" Multiplicity="0..1" />
+          <End Role="WebinarAnswers" Type="Self.WebinarAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebinarQuestions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="WebinarAnswers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarFeedBack_CampusWebinarMapping">
+          <End Role="CampusWebinarMapping" Type="Self.CampusWebinarMapping" Multiplicity="1" />
+          <End Role="WebinarFeedBack" Type="Self.WebinarFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusWebinarID" />
+            </Principal>
+            <Dependent Role="WebinarFeedBack">
+              <PropertyRef Name="CampusWabinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarQuestions_Webinar">
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="0..1" />
+          <End Role="WebinarQuestions" Type="Self.WebinarQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarQuestions">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarTagMapping_TagMaster">
+          <End Role="TagMaster" Type="Self.TagMaster" Multiplicity="1" />
+          <End Role="WebinarTagMapping" Type="Self.WebinarTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagMaster">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="WebinarTagMapping">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarTagMapping_Webinar">
+          <End Role="Webinar" Type="Self.Webinar" Multiplicity="1" />
+          <End Role="WebinarTagMapping" Type="Self.WebinarTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarTagMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="WeBindModelStoreContainer">
+          <EntitySet Name="BrandBannerImage" EntityType="Self.BrandBannerImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BrandProfile" EntityType="Self.BrandProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampusDepartments" EntityType="Self.CampusDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampusExpertRequest" EntityType="Self.CampusExpertRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampusProfile" EntityType="Self.CampusProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampusRequest" EntityType="Self.CampusRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampusWebinarMapping" EntityType="Self.CampusWebinarMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigurationData" EntityType="Self.ConfigurationData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpertProfile" EntityType="Self.ExpertProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpertTagMapping" EntityType="Self.ExpertTagMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfilePic" EntityType="Self.ProfilePic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecommandAFriend" EntityType="Self.RecommandAFriend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusMaster" EntityType="Self.StatusMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentBlogs" EntityType="Self.StudentBlogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentProfile" EntityType="Self.StudentProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagMaster" EntityType="Self.TagMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Webinar" EntityType="Self.Webinar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebinarAnswers" EntityType="Self.WebinarAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebinarFeedBack" EntityType="Self.WebinarFeedBack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebinarQuestions" EntityType="Self.WebinarQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebinarTagMapping" EntityType="Self.WebinarTagMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BrandBannerImage_BrandProfile" Association="Self.FK_BrandBannerImage_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfile" />
+            <End Role="BrandBannerImage" EntitySet="BrandBannerImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrandProfile_ProfilePic" Association="Self.FK_BrandProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePic" />
+            <End Role="BrandProfile" EntitySet="BrandProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusDepartments_CampusProfile" Association="Self.FK_CampusDepartments_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+            <End Role="CampusDepartments" EntitySet="CampusDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusProfile_ProfilePic" Association="Self.FK_CampusProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePic" />
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_CampusProfile" Association="Self.FK_CampusRequest_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+            <End Role="CampusExpertRequest" EntitySet="CampusExpertRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_CampusProfile1" Association="Self.FK_CampusRequest_CampusProfile1">
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+            <End Role="CampusRequest" EntitySet="CampusRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_ExpertProfile" Association="Self.FK_CampusRequest_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+            <End Role="CampusExpertRequest" EntitySet="CampusExpertRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusWebinarMapping_CampusProfile" Association="Self.FK_CampusWebinarMapping_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusWebinarMapping_Webinar" Association="Self.FK_CampusWebinarMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinar" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertProfile_ProfilePic" Association="Self.FK_ExpertProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePic" />
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertTagMapping_ExpertProfile" Association="Self.FK_ExpertTagMapping_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+            <End Role="ExpertTagMapping" EntitySet="ExpertTagMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertTagMapping_TagMaster" Association="Self.FK_ExpertTagMapping_TagMaster">
+            <End Role="TagMaster" EntitySet="TagMaster" />
+            <End Role="ExpertTagMapping" EntitySet="ExpertTagMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_CampusProfile" Association="Self.FK_Message_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfile" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_ExpertProfile" Association="Self.FK_Message_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecommandAFriend_ExpertProfile" Association="Self.FK_RecommandAFriend_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+            <End Role="RecommandAFriend" EntitySet="RecommandAFriend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBlogs_BrandProfile" Association="Self.FK_StudentBlogs_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfile" />
+            <End Role="StudentBlogs" EntitySet="StudentBlogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBlogs_StudentBlogs" Association="Self.FK_StudentBlogs_StudentBlogs">
+            <End Role="StudentProfile" EntitySet="StudentProfile" />
+            <End Role="StudentBlogs" EntitySet="StudentBlogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentProfile_ProfilePic" Association="Self.FK_StudentProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePic" />
+            <End Role="StudentProfile" EntitySet="StudentProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_BrandProfile" Association="Self.FK_Webinar_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfile" />
+            <End Role="Webinar" EntitySet="Webinar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ExpertProfile" Association="Self.FK_Webinar_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfile" />
+            <End Role="Webinar" EntitySet="Webinar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ProfilePic" Association="Self.FK_Webinar_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePic" />
+            <End Role="Webinar" EntitySet="Webinar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_statusMaster" Association="Self.FK_Webinar_statusMaster">
+            <End Role="StatusMaster" EntitySet="StatusMaster" />
+            <End Role="Webinar" EntitySet="Webinar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarAnswers_WebinarQuestions" Association="Self.FK_WebinarAnswers_WebinarQuestions">
+            <End Role="WebinarQuestions" EntitySet="WebinarQuestions" />
+            <End Role="WebinarAnswers" EntitySet="WebinarAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarFeedBack_CampusWebinarMapping" Association="Self.FK_WebinarFeedBack_CampusWebinarMapping">
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMapping" />
+            <End Role="WebinarFeedBack" EntitySet="WebinarFeedBack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarQuestions_Webinar" Association="Self.FK_WebinarQuestions_Webinar">
+            <End Role="Webinar" EntitySet="Webinar" />
+            <End Role="WebinarQuestions" EntitySet="WebinarQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarTagMapping_TagMaster" Association="Self.FK_WebinarTagMapping_TagMaster">
+            <End Role="TagMaster" EntitySet="TagMaster" />
+            <End Role="WebinarTagMapping" EntitySet="WebinarTagMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarTagMapping_Webinar" Association="Self.FK_WebinarTagMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinar" />
+            <End Role="WebinarTagMapping" EntitySet="WebinarTagMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WeBindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WeBindDemoEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(WeBindModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(WeBindModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="CampusDepartments" EntityType="WeBindModel.CampusDepartment" />
+          <EntitySet Name="ExpertTagMappings" EntityType="WeBindModel.ExpertTagMapping" />
+          <EntitySet Name="ProfilePics" EntityType="WeBindModel.ProfilePic" />
+          <EntitySet Name="StatusMasters" EntityType="WeBindModel.StatusMaster" />
+          <EntitySet Name="TagMasters" EntityType="WeBindModel.TagMaster" />
+          <EntitySet Name="WebinarTagMappings" EntityType="WeBindModel.WebinarTagMapping" />
+          <AssociationSet Name="FK_ExpertTagMapping_TagMaster" Association="WeBindModel.FK_ExpertTagMapping_TagMaster">
+            <End Role="TagMaster" EntitySet="TagMasters" />
+            <End Role="ExpertTagMapping" EntitySet="ExpertTagMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarTagMapping_TagMaster" Association="WeBindModel.FK_WebinarTagMapping_TagMaster">
+            <End Role="TagMaster" EntitySet="TagMasters" />
+            <End Role="WebinarTagMapping" EntitySet="WebinarTagMappings" />
+          </AssociationSet>
+          <EntitySet Name="RecommandAFriends" EntityType="WeBindModel.RecommandAFriend" />
+          <EntitySet Name="WebinarFeedBacks" EntityType="WeBindModel.WebinarFeedBack" />
+          <EntitySet Name="CampusWebinarMappings" EntityType="WeBindModel.CampusWebinarMapping" />
+          <AssociationSet Name="FK_WebinarFeedBack_CampusWebinarMapping" Association="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping">
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+            <End Role="WebinarFeedBack" EntitySet="WebinarFeedBacks" />
+          </AssociationSet>
+          <EntitySet Name="Webinars" EntityType="WeBindModel.Webinar" />
+          <AssociationSet Name="FK_CampusWebinarMapping_Webinar" Association="WeBindModel.FK_CampusWebinarMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ProfilePic" Association="WeBindModel.FK_Webinar_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_statusMaster" Association="WeBindModel.FK_Webinar_statusMaster">
+            <End Role="StatusMaster" EntitySet="StatusMasters" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarTagMapping_Webinar" Association="WeBindModel.FK_WebinarTagMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="WebinarTagMapping" EntitySet="WebinarTagMappings" />
+          </AssociationSet>
+          <EntitySet Name="CampusRequests" EntityType="WeBindModel.CampusRequest" />
+          <EntitySet Name="CampusExpertRequests" EntityType="WeBindModel.CampusExpertRequest" />
+          <EntitySet Name="Messages" EntityType="WeBindModel.Message" />
+          <EntitySet Name="CampusProfiles" EntityType="WeBindModel.CampusProfile" />
+          <EntitySet Name="ExpertProfiles" EntityType="WeBindModel.ExpertProfile" />
+          <AssociationSet Name="FK_CampusDepartments_CampusProfile" Association="WeBindModel.FK_CampusDepartments_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="CampusDepartment" EntitySet="CampusDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_CampusProfile" Association="WeBindModel.FK_CampusRequest_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="CampusExpertRequest" EntitySet="CampusExpertRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_ExpertProfile" Association="WeBindModel.FK_CampusRequest_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="CampusExpertRequest" EntitySet="CampusExpertRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusProfile_ProfilePic" Association="WeBindModel.FK_CampusProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusRequest_CampusProfile1" Association="WeBindModel.FK_CampusRequest_CampusProfile1">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="CampusRequest" EntitySet="CampusRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusWebinarMapping_CampusProfile" Association="WeBindModel.FK_CampusWebinarMapping_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_CampusProfile" Association="WeBindModel.FK_Message_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertProfile_ProfilePic" Association="WeBindModel.FK_ExpertProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertTagMapping_ExpertProfile" Association="WeBindModel.FK_ExpertTagMapping_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="ExpertTagMapping" EntitySet="ExpertTagMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_ExpertProfile" Association="WeBindModel.FK_Message_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecommandAFriend_ExpertProfile" Association="WeBindModel.FK_RecommandAFriend_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="RecommandAFriend" EntitySet="RecommandAFriends" />
+          </AssociationSet>
+          <EntitySet Name="ConfigurationDatas" EntityType="WeBindModel.ConfigurationData" />
+          <EntitySet Name="EmailTemplates" EntityType="WeBindModel.EmailTemplate" />
+          <EntitySet Name="StudentProfiles" EntityType="WeBindModel.StudentProfile" />
+          <AssociationSet Name="FK_StudentProfile_ProfilePic" Association="WeBindModel.FK_StudentProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="StudentProfile" EntitySet="StudentProfiles" />
+          </AssociationSet>
+          <EntitySet Name="WebinarAnswers" EntityType="WeBindModel.WebinarAnswer" />
+          <EntitySet Name="WebinarQuestions" EntityType="WeBindModel.WebinarQuestion" />
+          <AssociationSet Name="FK_WebinarQuestions_Webinar" Association="WeBindModel.FK_WebinarQuestions_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="WebinarQuestion" EntitySet="WebinarQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarAnswers_WebinarQuestions" Association="WeBindModel.FK_WebinarAnswers_WebinarQuestions">
+            <End Role="WebinarQuestion" EntitySet="WebinarQuestions" />
+            <End Role="WebinarAnswer" EntitySet="WebinarAnswers" />
+          </AssociationSet>
+          <EntitySet Name="StudentBlogs" EntityType="WeBindModel.StudentBlog" />
+          <AssociationSet Name="FK_StudentBlogs_StudentBlogs" Association="WeBindModel.FK_StudentBlogs_StudentBlogs">
+            <End Role="StudentProfile" EntitySet="StudentProfiles" />
+            <End Role="StudentBlog" EntitySet="StudentBlogs" />
+          </AssociationSet>
+          <EntitySet Name="BrandProfiles" EntityType="WeBindModel.BrandProfile" />
+          <AssociationSet Name="FK_BrandProfile_ProfilePic" Association="WeBindModel.FK_BrandProfile_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="BrandProfile" EntitySet="BrandProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_BrandProfile" Association="WeBindModel.FK_Webinar_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfiles" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ExpertProfile" Association="WeBindModel.FK_Webinar_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBlogs_BrandProfile" Association="WeBindModel.FK_StudentBlogs_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfiles" />
+            <End Role="StudentBlog" EntitySet="StudentBlogs" />
+          </AssociationSet>
+          <EntitySet Name="BrandBannerImages" EntityType="WeBindModel.BrandBannerImage" />
+          <AssociationSet Name="FK_BrandBannerImage_BrandProfile" Association="WeBindModel.FK_BrandBannerImage_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfiles" />
+            <End Role="BrandBannerImage" EntitySet="BrandBannerImages" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CampusDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusDepartments_CampusProfile" FromRole="CampusDepartment" ToRole="CampusProfile" />
+        </EntityType>
+        <EntityType Name="ExpertTagMapping">
+          <Key>
+            <PropertyRef Name="ExpertTagMappingID" />
+          </Key>
+          <Property Name="ExpertTagMappingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagID" Type="Int64" Nullable="false" />
+          <Property Name="ExpertID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="TagMaster" Relationship="WeBindModel.FK_ExpertTagMapping_TagMaster" FromRole="ExpertTagMapping" ToRole="TagMaster" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_ExpertTagMapping_ExpertProfile" FromRole="ExpertTagMapping" ToRole="ExpertProfile" />
+        </EntityType>
+        <EntityType Name="ProfilePic">
+          <Key>
+            <PropertyRef Name="ProfilePicID" />
+          </Key>
+          <Property Name="ProfilePicID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfilePicPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="ProfilePic" ToRole="Webinar" />
+          <NavigationProperty Name="CampusProfiles" Relationship="WeBindModel.FK_CampusProfile_ProfilePic" FromRole="ProfilePic" ToRole="CampusProfile" />
+          <NavigationProperty Name="ExpertProfiles" Relationship="WeBindModel.FK_ExpertProfile_ProfilePic" FromRole="ProfilePic" ToRole="ExpertProfile" />
+          <NavigationProperty Name="StudentProfiles" Relationship="WeBindModel.FK_StudentProfile_ProfilePic" FromRole="ProfilePic" ToRole="StudentProfile" />
+          <NavigationProperty Name="BrandProfiles" Relationship="WeBindModel.FK_BrandProfile_ProfilePic" FromRole="ProfilePic" ToRole="BrandProfile" />
+        </EntityType>
+        <EntityType Name="StatusMaster">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_statusMaster" FromRole="StatusMaster" ToRole="Webinar" />
+        </EntityType>
+        <EntityType Name="TagMaster">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ExpertTagMappings" Relationship="WeBindModel.FK_ExpertTagMapping_TagMaster" FromRole="TagMaster" ToRole="ExpertTagMapping" />
+          <NavigationProperty Name="WebinarTagMappings" Relationship="WeBindModel.FK_WebinarTagMapping_TagMaster" FromRole="TagMaster" ToRole="WebinarTagMapping" />
+        </EntityType>
+        <EntityType Name="WebinarTagMapping">
+          <Key>
+            <PropertyRef Name="WebinarTagMappingID" />
+          </Key>
+          <Property Name="WebinarTagMappingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebinarID" Type="Int64" Nullable="false" />
+          <Property Name="TagID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="TagMaster" Relationship="WeBindModel.FK_WebinarTagMapping_TagMaster" FromRole="WebinarTagMapping" ToRole="TagMaster" />
+          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_WebinarTagMapping_Webinar" FromRole="WebinarTagMapping" ToRole="Webinar" />
+        </EntityType>
+        <Association Name="FK_ExpertTagMapping_TagMaster">
+          <End Type="WeBindModel.TagMaster" Role="TagMaster" Multiplicity="1" />
+          <End Type="WeBindModel.ExpertTagMapping" Role="ExpertTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagMaster">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="ExpertTagMapping">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarTagMapping_TagMaster">
+          <End Type="WeBindModel.TagMaster" Role="TagMaster" Multiplicity="1" />
+          <End Type="WeBindModel.WebinarTagMapping" Role="WebinarTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagMaster">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="WebinarTagMapping">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecommandAFriend">
+          <Key>
+            <PropertyRef Name="RecommandationID" />
+          </Key>
+          <Property Name="RecommandationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpertID" Type="Int64" Nullable="false" />
+          <Property Name="FriendEmailIDs" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecommandedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_RecommandAFriend_ExpertProfile" FromRole="RecommandAFriend" ToRole="ExpertProfile" />
+        </EntityType>
+        <EntityType Name="WebinarFeedBack">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeedBack" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusWabinarID" Type="Int64" Nullable="false" />
+          <Property Name="SubmittedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="CampusWebinarMapping" Relationship="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" FromRole="WebinarFeedBack" ToRole="CampusWebinarMapping" />
+        </EntityType>
+        <EntityType Name="CampusWebinarMapping">
+          <Key>
+            <PropertyRef Name="CampusWebinarID" />
+          </Key>
+          <Property Name="CampusWebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebinarID" Type="Int64" Nullable="false" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="WebinarFeedBacks" Relationship="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" FromRole="CampusWebinarMapping" ToRole="WebinarFeedBack" />
+          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="CampusWebinarMapping" ToRole="Webinar" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusWebinarMapping" ToRole="CampusProfile" />
+        </EntityType>
+        <Association Name="FK_WebinarFeedBack_CampusWebinarMapping">
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="1" />
+          <End Type="WeBindModel.WebinarFeedBack" Role="WebinarFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusWebinarID" />
+            </Principal>
+            <Dependent Role="WebinarFeedBack">
+              <PropertyRef Name="CampusWabinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Webinar">
+          <Key>
+            <PropertyRef Name="WebinarID" />
+          </Key>
+          <Property Name="WebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebinarName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarSummary" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhatWillYouLearn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeDuration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ToDateTime" Type="DateTime" Precision="3" />
+          <Property Name="statusID" Type="Int64" Nullable="false" />
+          <Property Name="Participants" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="YoutubeUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarPicID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="Webinar" ToRole="CampusWebinarMapping" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="Webinar" ToRole="ProfilePic" />
+          <NavigationProperty Name="StatusMaster" Relationship="WeBindModel.FK_Webinar_statusMaster" FromRole="Webinar" ToRole="StatusMaster" />
+          <NavigationProperty Name="WebinarTagMappings" Relationship="WeBindModel.FK_WebinarTagMapping_Webinar" FromRole="Webinar" ToRole="WebinarTagMapping" />
+          <NavigationProperty Name="WebinarQuestions" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="Webinar" ToRole="WebinarQuestion" />
+          <Property Name="BrandID" Type="Int64" />
+          <Property Name="ExpertID" Type="Int64" />
+          <NavigationProperty Name="BrandProfile" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="Webinar" ToRole="BrandProfile" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_Webinar_ExpertProfile" FromRole="Webinar" ToRole="ExpertProfile" />
+        </EntityType>
+        <Association Name="FK_CampusWebinarMapping_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="WebinarPicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_statusMaster">
+          <End Type="WeBindModel.StatusMaster" Role="StatusMaster" Multiplicity="1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMaster">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarTagMapping_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
+          <End Type="WeBindModel.WebinarTagMapping" Role="WebinarTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarTagMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CampusRequest">
+          <Key>
+            <PropertyRef Name="expertRequestID" />
+          </Key>
+          <Property Name="expertRequestID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <Property Name="RequestedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusRequest_CampusProfile1" FromRole="CampusRequest" ToRole="CampusProfile" />
+        </EntityType>
+        <EntityType Name="CampusExpertRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <Property Name="RequestedToID" Type="Int64" Nullable="false" />
+          <Property Name="RequestedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsAdminApproved" Type="Boolean" />
+          <Property Name="IsExpertApproved" Type="Boolean" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusRequest_CampusProfile" FromRole="CampusExpertRequest" ToRole="CampusProfile" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_CampusRequest_ExpertProfile" FromRole="CampusExpertRequest" ToRole="ExpertProfile" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpertID" Type="Int64" Nullable="false" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <Property Name="MessageDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFromExpert" Type="Boolean" Nullable="false" />
+          <Property Name="IsAdminApproved" Type="Boolean" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_Message_CampusProfile" FromRole="Message" ToRole="CampusProfile" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_Message_ExpertProfile" FromRole="Message" ToRole="ExpertProfile" />
+        </EntityType>
+        <EntityType Name="CampusProfile">
+          <Key>
+            <PropertyRef Name="CampusID" />
+          </Key>
+          <Property Name="CampusID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="LoginID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="ProfilePicID" Type="Int64" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="IsPartnerCollege" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CampusDepartments" Relationship="WeBindModel.FK_CampusDepartments_CampusProfile" FromRole="CampusProfile" ToRole="CampusDepartment" />
+          <NavigationProperty Name="CampusExpertRequests" Relationship="WeBindModel.FK_CampusRequest_CampusProfile" FromRole="CampusProfile" ToRole="CampusExpertRequest" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_CampusProfile_ProfilePic" FromRole="CampusProfile" ToRole="ProfilePic" />
+          <NavigationProperty Name="CampusRequests" Relationship="WeBindModel.FK_CampusRequest_CampusProfile1" FromRole="CampusProfile" ToRole="CampusRequest" />
+          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusProfile" ToRole="CampusWebinarMapping" />
+          <NavigationProperty Name="Messages" Relationship="WeBindModel.FK_Message_CampusProfile" FromRole="CampusProfile" ToRole="Message" />
+          <Property Name="ProfessorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ExpertProfile">
+          <Key>
+            <PropertyRef Name="ExpertID" />
+          </Key>
+          <Property Name="ExpertID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoginID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExperienceYear" Type="Int32" />
+          <Property Name="ExperienceMonth" Type="Int32" />
+          <Property Name="LinkedInProfileLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TweeterProfileLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="ProfilePicID" Type="Int64" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="ProfileCompleted" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="IsEliteMaster" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CampusExpertRequests" Relationship="WeBindModel.FK_CampusRequest_ExpertProfile" FromRole="ExpertProfile" ToRole="CampusExpertRequest" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_ExpertProfile_ProfilePic" FromRole="ExpertProfile" ToRole="ProfilePic" />
+          <NavigationProperty Name="ExpertTagMappings" Relationship="WeBindModel.FK_ExpertTagMapping_ExpertProfile" FromRole="ExpertProfile" ToRole="ExpertTagMapping" />
+          <NavigationProperty Name="Messages" Relationship="WeBindModel.FK_Message_ExpertProfile" FromRole="ExpertProfile" ToRole="Message" />
+          <NavigationProperty Name="RecommandAFriends" Relationship="WeBindModel.FK_RecommandAFriend_ExpertProfile" FromRole="ExpertProfile" ToRole="RecommandAFriend" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_ExpertProfile" FromRole="ExpertProfile" ToRole="Webinar" />
+        </EntityType>
+        <Association Name="FK_CampusDepartments_CampusProfile">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusDepartment" Role="CampusDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusDepartment">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_CampusProfile">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusExpertRequest" Role="CampusExpertRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusExpertRequest">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusExpertRequest" Role="CampusExpertRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="CampusExpertRequest">
+              <PropertyRef Name="RequestedToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusProfile_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="0..1" />
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="CampusProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusRequest_CampusProfile1">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusRequest" Role="CampusRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusRequest">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusWebinarMapping_CampusProfile">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_CampusProfile">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertProfile_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="0..1" />
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="ExpertProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertTagMapping_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="1" />
+          <End Type="WeBindModel.ExpertTagMapping" Role="ExpertTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="ExpertTagMapping">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="1" />
+          <End Type="WeBindModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecommandAFriend_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="1" />
+          <End Type="WeBindModel.RecommandAFriend" Role="RecommandAFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="RecommandAFriend">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ConfigurationData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Default_Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="EmailTemplateID" />
+          </Key>
+          <Property Name="EmailTemplateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailTemplate1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailSubject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StudentProfile">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoginID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int64" />
+          <Property Name="ContactNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="ProfilePicID" Type="Int64" />
+          <Property Name="RegisteredOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_StudentProfile_ProfilePic" FromRole="StudentProfile" ToRole="ProfilePic" />
+          <NavigationProperty Name="StudentBlogs" Relationship="WeBindModel.FK_StudentBlogs_StudentBlogs" FromRole="StudentProfile" ToRole="StudentBlog" />
+        </EntityType>
+        <Association Name="FK_StudentProfile_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="0..1" />
+          <End Type="WeBindModel.StudentProfile" Role="StudentProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="StudentProfile">
+              <PropertyRef Name="ProfilePicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WebinarAnswer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int64" Nullable="false" />
+          <Property Name="QuestionID" Type="Int64" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCorrect" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WebinarQuestion" Relationship="WeBindModel.FK_WebinarAnswers_WebinarQuestions" FromRole="WebinarAnswer" ToRole="WebinarQuestion" />
+        </EntityType>
+        <EntityType Name="WebinarQuestion">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int64" Nullable="false" />
+          <Property Name="WebinarID" Type="Int64" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="WebinarQuestion" ToRole="Webinar" />
+          <NavigationProperty Name="WebinarAnswers" Relationship="WeBindModel.FK_WebinarAnswers_WebinarQuestions" FromRole="WebinarQuestion" ToRole="WebinarAnswer" />
+        </EntityType>
+        <Association Name="FK_WebinarQuestions_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="0..1" />
+          <End Type="WeBindModel.WebinarQuestion" Role="WebinarQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarQuestion">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarAnswers_WebinarQuestions">
+          <End Type="WeBindModel.WebinarQuestion" Role="WebinarQuestion" Multiplicity="0..1" />
+          <End Type="WeBindModel.WebinarAnswer" Role="WebinarAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebinarQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="WebinarAnswer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentBlog">
+          <Key>
+            <PropertyRef Name="StudentBlogID" />
+          </Key>
+          <Property Name="StudentBlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Blog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="Int64" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="StudentProfile" Relationship="WeBindModel.FK_StudentBlogs_StudentBlogs" FromRole="StudentBlog" ToRole="StudentProfile" />
+          <Property Name="BrandID" Type="Int64" />
+          <NavigationProperty Name="BrandProfile" Relationship="WeBindModel.FK_StudentBlogs_BrandProfile" FromRole="StudentBlog" ToRole="BrandProfile" />
+        </EntityType>
+        <Association Name="FK_StudentBlogs_StudentBlogs">
+          <End Type="WeBindModel.StudentProfile" Role="StudentProfile" Multiplicity="1" />
+          <End Type="WeBindModel.StudentBlog" Role="StudentBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentProfile">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentBlog">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BrandProfile">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="BrandLogoID" Type="Int64" Nullable="false" />
+          <Property Name="BrandLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_BrandProfile_ProfilePic" FromRole="BrandProfile" ToRole="ProfilePic" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="BrandProfile" ToRole="Webinar" />
+          <NavigationProperty Name="StudentBlogs" Relationship="WeBindModel.FK_StudentBlogs_BrandProfile" FromRole="BrandProfile" ToRole="StudentBlog" />
+          <Property Name="BrandContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BrandBannerImages" Relationship="WeBindModel.FK_BrandBannerImage_BrandProfile" FromRole="BrandProfile" ToRole="BrandBannerImage" />
+        </EntityType>
+        <Association Name="FK_BrandProfile_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="1" />
+          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="BrandProfile">
+              <PropertyRef Name="BrandLogoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_BrandProfile">
+          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="0..1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="0..1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBlogs_BrandProfile">
+          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="0..1" />
+          <End Type="WeBindModel.StudentBlog" Role="StudentBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="StudentBlog">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BrandBannerImage">
+          <Key>
+            <PropertyRef Name="BrandImageID" />
+          </Key>
+          <Property Name="BrandImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandBannerImagePath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BrandID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="BrandProfile" Relationship="WeBindModel.FK_BrandBannerImage_BrandProfile" FromRole="BrandBannerImage" ToRole="BrandProfile" />
+        </EntityType>
+        <Association Name="FK_BrandBannerImage_BrandProfile">
+          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="1" />
+          <End Type="WeBindModel.BrandBannerImage" Role="BrandBannerImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="BrandBannerImage">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WeBindModelStoreContainer" CdmEntityContainer="WeBindDemoEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="WeBindModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="WeBindModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="WeBindModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="WeBindModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WeBindModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="WeBindModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WeBindModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="WeBindModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="WeBindModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="CampusDepartments">
+            <EntityTypeMapping TypeName="WeBindModel.CampusDepartment">
+              <MappingFragment StoreEntitySet="CampusDepartments">
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpertTagMappings">
+            <EntityTypeMapping TypeName="WeBindModel.ExpertTagMapping">
+              <MappingFragment StoreEntitySet="ExpertTagMapping">
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="ExpertTagMappingID" ColumnName="ExpertTagMappingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfilePics">
+            <EntityTypeMapping TypeName="WeBindModel.ProfilePic">
+              <MappingFragment StoreEntitySet="ProfilePic">
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
+                <ScalarProperty Name="ProfilePicID" ColumnName="ProfilePicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusMasters">
+            <EntityTypeMapping TypeName="WeBindModel.StatusMaster">
+              <MappingFragment StoreEntitySet="StatusMaster">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagMasters">
+            <EntityTypeMapping TypeName="WeBindModel.TagMaster">
+              <MappingFragment StoreEntitySet="TagMaster">
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebinarTagMappings">
+            <EntityTypeMapping TypeName="WeBindModel.WebinarTagMapping">
+              <MappingFragment StoreEntitySet="WebinarTagMapping">
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+                <ScalarProperty Name="WebinarTagMappingID" ColumnName="WebinarTagMappingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecommandAFriends">
+            <EntityTypeMapping TypeName="WeBindModel.RecommandAFriend">
+              <MappingFragment StoreEntitySet="RecommandAFriend">
+                <ScalarProperty Name="RecommandedOn" ColumnName="RecommandedOn" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="FriendEmailIDs" ColumnName="FriendEmailIDs" />
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="RecommandationID" ColumnName="RecommandationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebinarFeedBacks">
+            <EntityTypeMapping TypeName="WeBindModel.WebinarFeedBack">
+              <MappingFragment StoreEntitySet="WebinarFeedBack">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="CampusWabinarID" ColumnName="CampusWabinarID" />
+                <ScalarProperty Name="FeedBack" ColumnName="FeedBack" />
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusWebinarMappings">
+            <EntityTypeMapping TypeName="WeBindModel.CampusWebinarMapping">
+              <MappingFragment StoreEntitySet="CampusWebinarMapping">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+                <ScalarProperty Name="CampusWebinarID" ColumnName="CampusWebinarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Webinars">
+            <EntityTypeMapping TypeName="WeBindModel.Webinar">
+              <MappingFragment StoreEntitySet="Webinar">
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="WebinarPicID" ColumnName="WebinarPicID" />
+                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
+                <ScalarProperty Name="Participants" ColumnName="Participants" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="ToDateTime" ColumnName="ToDateTime" />
+                <ScalarProperty Name="TimeDuration" ColumnName="TimeDuration" />
+                <ScalarProperty Name="FromDateTime" ColumnName="FromDateTime" />
+                <ScalarProperty Name="WhatWillYouLearn" ColumnName="WhatWillYouLearn" />
+                <ScalarProperty Name="WebinarDescription" ColumnName="WebinarDescription" />
+                <ScalarProperty Name="WebinarSummary" ColumnName="WebinarSummary" />
+                <ScalarProperty Name="WebinarName" ColumnName="WebinarName" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusRequests">
+            <EntityTypeMapping TypeName="WeBindModel.CampusRequest">
+              <MappingFragment StoreEntitySet="CampusRequest">
+                <ScalarProperty Name="RequestedOn" ColumnName="RequestedOn" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="RequestMessage" ColumnName="RequestMessage" />
+                <ScalarProperty Name="expertRequestID" ColumnName="expertRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusExpertRequests">
+            <EntityTypeMapping TypeName="WeBindModel.CampusExpertRequest">
+              <MappingFragment StoreEntitySet="CampusExpertRequest">
+                <ScalarProperty Name="IsExpertApproved" ColumnName="IsExpertApproved" />
+                <ScalarProperty Name="IsAdminApproved" ColumnName="IsAdminApproved" />
+                <ScalarProperty Name="RequestedOn" ColumnName="RequestedOn" />
+                <ScalarProperty Name="RequestedToID" ColumnName="RequestedToID" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="RequestMessage" ColumnName="RequestMessage" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="WeBindModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="IsAdminApproved" ColumnName="IsAdminApproved" />
+                <ScalarProperty Name="IsFromExpert" ColumnName="IsFromExpert" />
+                <ScalarProperty Name="MessageDateTime" ColumnName="MessageDateTime" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusProfiles">
+            <EntityTypeMapping TypeName="WeBindModel.CampusProfile">
+              <MappingFragment StoreEntitySet="CampusProfile">
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+                <ScalarProperty Name="IsPartnerCollege" ColumnName="IsPartnerCollege" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ProfilePicID" ColumnName="ProfilePicID" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpertProfiles">
+            <EntityTypeMapping TypeName="WeBindModel.ExpertProfile">
+              <MappingFragment StoreEntitySet="ExpertProfile">
+                <ScalarProperty Name="IsEliteMaster" ColumnName="IsEliteMaster" />
+                <ScalarProperty Name="ProfileCompleted" ColumnName="ProfileCompleted" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ProfilePicID" ColumnName="ProfilePicID" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="TweeterProfileLink" ColumnName="TweeterProfileLink" />
+                <ScalarProperty Name="LinkedInProfileLink" ColumnName="LinkedInProfileLink" />
+                <ScalarProperty Name="ExperienceMonth" ColumnName="ExperienceMonth" />
+                <ScalarProperty Name="ExperienceYear" ColumnName="ExperienceYear" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="AboutMe" ColumnName="AboutMe" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigurationDatas">
+            <EntityTypeMapping TypeName="WeBindModel.ConfigurationData">
+              <MappingFragment StoreEntitySet="ConfigurationData">
+                <ScalarProperty Name="Default_Value" ColumnName="Default_Value" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTemplates">
+            <EntityTypeMapping TypeName="WeBindModel.EmailTemplate">
+              <MappingFragment StoreEntitySet="EmailTemplate">
+                <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+                <ScalarProperty Name="EmailTemplate1" ColumnName="EmailTemplate" />
+                <ScalarProperty Name="EmailTemplateID" ColumnName="EmailTemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentProfiles">
+            <EntityTypeMapping TypeName="WeBindModel.StudentProfile">
+              <MappingFragment StoreEntitySet="StudentProfile">
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+                <ScalarProperty Name="ProfilePicID" ColumnName="ProfilePicID" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebinarAnswers">
+            <EntityTypeMapping TypeName="WeBindModel.WebinarAnswer">
+              <MappingFragment StoreEntitySet="WebinarAnswers">
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebinarQuestions">
+            <EntityTypeMapping TypeName="WeBindModel.WebinarQuestion">
+              <MappingFragment StoreEntitySet="WebinarQuestions">
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentBlogs">
+            <EntityTypeMapping TypeName="WeBindModel.StudentBlog">
+              <MappingFragment StoreEntitySet="StudentBlogs">
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="UpdationDate" ColumnName="UpdationDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
+                <ScalarProperty Name="StudentBlogID" ColumnName="StudentBlogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrandProfiles">
+            <EntityTypeMapping TypeName="WeBindModel.BrandProfile">
+              <MappingFragment StoreEntitySet="BrandProfile">
+                <ScalarProperty Name="BrandContent" ColumnName="BrandContent" />
+                <ScalarProperty Name="YoutubeURL" ColumnName="YoutubeURL" />
+                <ScalarProperty Name="BrandLink" ColumnName="BrandLink" />
+                <ScalarProperty Name="BrandLogoID" ColumnName="BrandLogoID" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrandBannerImages">
+            <EntityTypeMapping TypeName="WeBindModel.BrandBannerImage">
+              <MappingFragment StoreEntitySet="BrandBannerImage">
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="BrandBannerImagePath" ColumnName="BrandBannerImagePath" />
+                <ScalarProperty Name="BrandImageID" ColumnName="BrandImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

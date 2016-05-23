@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+
+}
+
+<script type="text/javascript">
+ var message = '@message';
+
+if(message) alert(message);
+
+</script>
+
+@Html.ActionLink("Webinar FeedBacks Pending For Approval/Rejection", "WebinarFeedback", "Admin")<br />
+@Html.ActionLink("Messages Pending For Approval/Rejection", "Messages", "Admin")<br />
+@Html.ActionLink("Approve a Campus Request to a Master", "CampusRequest", "Admin")<br />
+@Html.ActionLink("Approve a Campus Request for a Webinar", "CampusRequestWebinar", "Admin")<br /><br/>
+@Html.ActionLink("Webinars", "WebinarList", "Admin")<br /><br />
+
+@Html.ActionLink("Set/Remove Elite Masters", "EliteMaster", "Admin")<br />
+@Html.ActionLink("Set/Remove Partner College", "PartnerColleges", "Admin")<br /><br />
+
+@*@Html.ActionLink("Change Our Story Content", "Story", "Admin")<br />
+@Html.ActionLink("Change Team Content", "Team", "Admin")<br />
+@Html.ActionLink("Change The Concept Content", "Concept", "Admin")<br />
+@Html.ActionLink("Change Being Master Content", "BeingMaster", "Admin")<br />*@

@@ -1,0 +1,291 @@
+﻿@model WeBind.Models.WebinarViewModel
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-newspaper-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">@Model.WebinarName</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 col-md-8">
+            <div class="page-section">
+                @if (TempData["msg"] != null)
+                {
+                    <div class="panel panel-success paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h3 class="margin-none text-green-500 text-center">@TempData["thnx"]</h3>
+                            <h4 class="margin-none text-center">@TempData["msg"]</h4>
+                        </div>
+                    </div>
+                }
+                @if (Model.YoutubeUrl != null)
+                {
+                    <div class="width-350 width-300-md width-100pc-xs paragraph-inline">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="//www.youtube-nocookie.com/embed/@Model.YoutubeUrl?rel=0"></iframe>
+                        </div>
+                    </div>
+                }
+                <p>
+                    <strong>Description:</strong>
+                    <br />
+                    @Model.WebinarDescription
+                    <br />
+                    @*<p>
+                            <strong>Summary: </strong><br />
+                            @Model.WebinarSummary
+                        </p>*@
+                    <br />
+                <p class="margin-none">
+                    @foreach (string Tag in Model.Tags)
+                    {
+                        <span class="label bg-gray-dark">@Tag</span>
+                    }
+                </p>
+            </div>
+            <div class="page-section">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="text-headline margin-none">Key Takeaways</h2>
+                        <p class="text-subhead text-light"></p>
+                        <ul class="list-group relative paper-shadow" data-hover-z="0.5" data-animated>
+                            @foreach (var learnTopic in Model.WhatWillYouLearn.Split(';'))
+                            {
+                                <li class="list-group-item paper-shadow">
+                                    <div class="media v-middle">
+                                        <div class="media-left">
+                                            <div class="icon-block s30 bg-green-500 text-white img-circle">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                        <div class="media-body text-body-2">
+                                            @learnTopic
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-md-5">
+                        @if (Model.FromDateTime > DateTime.Now)
+                        {
+                            <h2 class="text-headline margin-none">Attending Colleges</h2>
+                        }
+                        else
+                        {
+                            <h2 class="text-headline margin-none">Colleges Attended</h2>
+                        }
+                        <p class="text-subhead text-light"></p>
+                        <div class="slick-basic slick-slider" data-items="1" data-items-lg="1" data-items-md="1" data-items-sm="1" data-items-xs="1">
+                            @foreach (var campus in Model.Campuses)
+                            {
+                                <div class="item">
+                                    <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                                        <div class="panel-body">
+                                            <div class="media media-clearfix-xs">
+                                                <div class="media-left">
+                                                    <div class="cover width-90 width-100pc-xs">
+                                                        <span class="v-center">
+                                                            <img class="img icon-block s90" src="@Url.Content(campus.ProfilePicPath)" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading margin-v-5-3"><a href="website-course.html">@campus.CampusName</a></h4>
+                                                    <p class="small margin-none">
+                                                        @campus.DepartmentName
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Brand != null)
+                {
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img src="@Url.Content(Model.Brand.ProfilePicPath)" alt="People" class="img width-60" />
+                        </div>
+                        <div class="col-md-11">
+                            <blockquote>
+                                <p class="text-subhead text-light">@Model.Brand.BrandContent</p>
+                                <footer>
+                                    Powered By
+                                    <cite title="@Model.Brand.BrandName"><a href="@Model.Brand.BrandLink" target="_blank"> @Model.Brand.BrandName</a></cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+            <div class="page-section">
+                <!-- .panel -->
+                <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-heading">
+                        <h4 class="text-headline">Master Class Details</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-caption">
+                            <i class="fa fa-clock-o fa-fw"></i> Duration: @Model.TimeDuration
+                            <br />
+                            <i class="fa fa-calendar fa-fw"></i> @Model.FromDateTime.ToString("dd/MM/yyyy") @Model.FromDateTime.ToShortTimeString()
+                            <br />
+                            <i class="fa fa-university fa-fw"></i> Attending Colleges: @Model.Campuses.Count
+                            <br />
+                            <i class="fa fa-mortar-board fa-fw"></i> Students Attending: @Model.Participants
+                        </p>
+                    </div>
+                    @if (((ViewBag.UserData != null && ViewBag.UserData.RoleName != "Expert" && !Model.IsWebinarRequested) || ViewBag.UserData == null) && Model.FromDateTime > DateTime.Now)
+                    {
+                        <hr class="margin-none" />
+                        <div class="panel-body text-center">
+                            @*<p><a href="@Url.Action("AttendClass", "Educator" , routeValues: new { webinarid=Model.WebinarID })" class="btn btn-primary paper-shadow relative" data-z="1" data-hover-z="2">Attend This Class</a></p>*@
+                            <p><a class="btn btn-primary paper-shadow relative" data-z="1" data-hover-z="2" data-animated data-toggle="modal" href="#modal-update-credit-card">Attend This Class</a></p>
+                        </div>
+                    }
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div id="fb-root"></div>
+                            <script>
+                                (function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s); js.id = id;
+                                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=133924510083142";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-share-button" data-href="https://www.facebook.com/webindC2C/?fref=nf" data-layout="icon_link"></div>
+                        </li>
+                        <li class="list-group-item">
+                            @*<a href="#" class="text-light"><i class="fa fa-twitter fa-fw"></i> Tweet this course</a>*@
+                            <a href="https://twitter.com/intent/tweet?button_hashtag=webind" class="text-light" data-size="large" data-related="rushil27shah"><i class="fa fa-twitter fa-fw"></i>Tweet #webind</a>
+                            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                        </li>
+                    </ul>
+                </div>
+                <!-- // END .panel -->
+                <!-- .panel -->
+                <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-heading">
+                        <h4 class="text-headline">Expert</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="media v-middle">
+                            <div class="media-left">
+                                <img src="@Url.Content(Model.Expert.ProfilePicPath)" alt="@Model.Expert.FirstName" width="60" class="img-circle" />
+                            </div>
+                            <div class="media-body">
+                                <h4 class="text-title margin-none">
+                                    @Html.ActionLink(Model.Expert.FirstName + " " + Model.Expert.LastName, "PublicProfile", "Home", routeValues: new { ExpertID = Model.Expert.ExpertID }, htmlAttributes: new { id = "signupLink" })
+                                </h4>
+                                <span class="caption text-light">Profile</span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="expandable expandable-indicator-white expandable-trigger">
+                            <div class="expandable-content">
+                                <p>
+                                    @Model.Expert.AboutMe
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- // END .panel -->
+            </div>
+            <!-- // END .page-section -->
+        </div>
+    </div>
+</div>
+<script>
+    if ('@TempData["msg"]' != "") {
+        $('#modal-overlay-signup').dialog('open');
+    }
+</script>
+
+<div class="modal grow modal-backdrop-white fade" id="modal-update-credit-card">
+    <div class="modal-dialog modal-sm">
+        <div class="v-cell">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Are you sure you want to attend this Master-Class ?</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group form-control-material">
+                            <input type="text" class="form-control" id="credit-card" placeholder="">
+                            <label for="credit-card">Number Of Students Attending</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">Yes</button>
+                        <button type="button" class="btn btn-default paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">No</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal grow modal-overlay modal-backdrop-body fade" id="modal-overlay-signup">
+    <div class="modal-dialog">
+        <div class="v-cell">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <div class="wizard-container wizard-1" id="wizard-demo-1">
+                        <form action="#" data-toggle="wizard" class="h-center">
+                            <fieldset class="step relative paper-shadow" data-z="2">
+                                <div class="page-section-heading">
+                                    <h2 class="text-h4 margin-v-0">Are you sure you want to attend this Master-Class ?</h2>
+                                </div>
+
+                                <div class="row text-right">
+                                    <div class="col-xs-2 col-xs-offset-6">
+                                        <a href="@Url.Action("AttendClass", "Educator" , routeValues: new { webinarid=Model.WebinarID })" class="btn btn-primary">ok</a>
+                                    </div>
+                                    <div class="col-xs-2 text-right">
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal grow modal-overlay modal-backdrop-body fade" id="brandAdvertize">
+    <div class="modal-dialog">
+        <div class="v-cell">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="img width-60" alt="" src="@Url.Content(Model.Brand.ProfilePicPath)" />
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <div class="wizard-container wizard-1" id="wizard-demo-1">
+                        <a href="@Model.Brand.BrandLink" target="_blank">
+                            <img class="img" style="max-width:100%;width:100%;height:auto" src="@Url.Content(Model.Brand.BrandBannerImages.FirstOrDefault().BrandBannerImagePath)" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+</script>

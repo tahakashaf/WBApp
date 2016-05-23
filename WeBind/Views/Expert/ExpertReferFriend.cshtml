@@ -1,0 +1,75 @@
+﻿@model WeBind.Models.RecommandAFriendViewModel
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="md md-group"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Recommend A Friend</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (TempData["referFriendSentMsg"] != null)
+                {
+                    <div class="panel panel-success paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h3 class="margin-none text-green-500 text-center">@TempData["referFriendSentMsg"]</h3>
+                        </div>
+                    </div>
+                }
+                else { 
+                <div class="panel panel-default paper-shadow" data-z="0.5">
+                    <div class="panel-body">
+                        <div class="media media-clearfix-xs">
+                            @using (Html.BeginForm("ExpertReferFriend", "Expert", FormMethod.Post, new { @name="expertReferForm", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Recipients' EmailID <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.FriendEmailIDs, new { type = "text", data_toggle = "select2-tags", data_Tags = "", value = "", style = "width: 100%;" })
+@*                                        <input type="hidden" data-toggle="select2-tags" data-tags="" style="width: 100%;" value="@Model.em" />*@
+                                    </div>
+                                    <div id="expertReferForm_FriendEmailIDs_errorloc" class="text-danger"></div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Message</label>
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = "7" })
+                                    </div>
+                                </div>
+                                <div class="form-group margin-none">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-primary">Send Invite</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+
+            </div>
+            @Html.Partial("_ExpertNavigationPartial")
+        </div>
+    </div>
+</div>
+<script language="JavaScript" type="text/javascript"
+        xml:space="preserve">
+        //<![CDATA[
+        //You should create the validator only after the definition of the HTML form
+        var frmvalidator = new Validator("expertReferForm");
+        frmvalidator.EnableOnPageErrorDisplay();
+        frmvalidator.EnableMsgsTogether();
+
+        frmvalidator.addValidation("FriendEmailIDs", "req", "Please enter EmailId");      
+        //]]></script>

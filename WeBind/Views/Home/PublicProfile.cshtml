@@ -1,0 +1,180 @@
+﻿@model WeBind.Models.ExpertProfileViewModel
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="media media-grid media-clearfix-xs">
+                    <div class="media-left">
+                        <div class="width-200 width-auto-xs">
+                            <div class="panel panel-default text-center paper-shadow" data-z="0.5">
+                                <img src="@Url.Content(Model.ProfilePicPath)" alt="person" class="width-100pc" />
+                                <div class="panel-body">
+                                    <a class="text-headline">@Model.FirstName @Model.LastName</a>
+                                </div>
+                                <hr />
+                                @*<div class="panel-body">
+                                        <span class="icon-block s25 img-circle bg-purple-300"><i class="fa fa-star text-white"></i></span>
+                                        <span class="icon-block s25 img-circle bg-indigo-300"><i class="fa fa-trophy text-white"></i></span>
+                                        <span class="icon-block s25 img-circle bg-green-300"><i class="fa fa-mortar-board text-white"></i></span>
+                                        <span class="icon-block s25 img-circle bg-orange-300"><i class="fa fa-code-fork text-white"></i></span>
+                                    </div>*@
+                                @if (ViewBag.UserData != null && ViewBag.UserData.RoleName != "Expert")
+                                {
+                                    <div class="panel-footer">
+                                        <a href="@Url.Action("EducatorMessages", "Educator", routeValues: new { ExpertID = @Model.ExpertID })" class="btn btn-white btn-flat">Send Message <i class="fa fa-envelope"></i></a>
+                                    </div>
+                                }
+                            </div>
+                            @*<div class="panel panel-default">
+                                    <ul class="list-group text-subhead">
+                                        <li class="list-group-item">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <i class="fa fa-facebook fa-fw text-blue-800"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a href="#" class="link-text-color">/facebook</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <i class="fa fa-twitter fa-fw text-blue-300"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a href="#" class="link-text-color">/twitter</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <i class="fa fa-dribbble fa-fw text-pink-300"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a href="#" class="link-text-color">/dribble</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <i class="fa fa-google-plus fa-fw text-red-800"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a href="#" class="link-text-color">/google-plus</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>*@
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="text-headline">
+                                    About the Expert
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    @Model.AboutMe
+                                </p>
+                                @if (!string.IsNullOrEmpty(@Model.Company))
+                                {
+                                    <p>
+                                        <strong class="col-xs-3"><i class="fa fa-building fa-fw"></i> Company</strong> @Model.Company
+                                    </p>
+                                }
+                                @if (!string.IsNullOrEmpty(@Model.Position))
+                                {
+                                    <p>
+                                        <strong class="col-xs-3"><i class="icon-identification fa-fw"></i>&nbsp; Position</strong> @Model.Position
+                                    </p>
+                                }
+                                @if (Model.ExperienceYear != 0 || Model.ExperienceMonth != 0)
+                                {
+                                    <p>
+                                        <strong class="col-xs-3"><i class="fa fa-calendar fa-fw"></i> Experience</strong> @Model.ExperienceYear Year @Model.ExperienceMonth Months
+                                    </p>
+                                }
+                                @if (!string.IsNullOrEmpty(@Model.LinkedInProfileLink))
+                                {
+                                    <p>
+                                        <strong class="col-xs-3"><i class="fa fa-link fa-fw"></i> LinkedIn Profile</strong> <a href="@Model.LinkedInProfileLink" target="_blank">@Model.LinkedInProfileLink</a>
+                                    </p>
+                                }
+                                @if (!string.IsNullOrEmpty(@Model.TweeterProfileLink))
+                                {
+                                    <p>
+                                        <strong class="col-xs-3"><i class="fa fa-twitter fa-fw"></i> Twitter Profile</strong> 
+                                        <a href="https://twitter.com/intent/tweet?screen_name=@Model.TweeterProfileLink" class="" data-size="large">@Model.TweeterProfileLink</a>
+                                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                                    </p>
+                                }
+                                <p class="margin-none">
+                                    @foreach (string Tag in Model.Tags)
+                                    {
+                                        <span class="label bg-gray-dark">@Tag</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="text-headline">
+                                    @Model.FirstName 's Master Classes
+                                </h4>
+                            </div>
+                            <div class="list-group">
+                                @foreach (var webinar in Model.Webinars)
+                                {
+
+                                    <div class="list-group-item">
+                                        <div class="media media-clearfix-xs">
+                                            <div class="media-body">
+                                                <h4 class="text-headline margin-v-5-0">
+                                                    @Html.ActionLink(webinar.WebinarName, "WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID }, htmlAttributes: new { id = "signupLink" })
+                                                </h4>
+                                                <p class="small">
+                                                    <i class="fa fa-calendar fa-fw"></i> Date: @webinar.FromDateTime.ToString("dd/MM/yyyy")
+                                                </p>
+                                                <p>
+                                                    @webinar.WebinarSummary
+                                                </p>
+                                                <p class="margin-none">
+                                                    @foreach (string Tag in webinar.Tags)
+                                                    {
+                                                        <span class="label bg-gray-dark">@Tag</span>
+                                                    }
+                                                </p>
+                                                @foreach (var campus in webinar.Campuses)
+                                                {
+                                                    <p><i class="fa fa-building fa-fw"></i><strong> @campus.CampusName</strong> <span class="text-light">@campus.DepartmentName</span></p>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Expert")
+            {
+                @Html.Partial("~/Views/Expert/_ExpertNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Educator")
+            {
+                @Html.Partial("~/Views/Educator/_EducatorNavigationPartial.cshtml")
+            }
+        </div>
+    </div>
+</div>

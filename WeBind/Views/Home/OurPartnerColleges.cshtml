@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WeBind.Models.CampusViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-university"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Our Partner Colleges</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row" data-toggle="isotope">
+            @foreach (var campus in Model)
+            {
+                <div class="item col-xs-12 col-sm-6 col-lg-4">
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-body" style="height:115px">
+                            <div class="media">
+                                <div class="media-left">
+                                    <img src="@Url.Content(campus.ProfilePicPath)" alt="people" class="img-circle width-80" />
+                                </div>
+                                <div class="media-body">
+                                    <h4><strong>@campus.CampusName </strong></h4>
+                                    <p class="">@campus.DepartmentName</p>
+                                    <p class="">
+                                        @if (!string.IsNullOrEmpty(campus.District))
+                                        {
+                                            @campus.District<span>,</span>
+                                        }
+                                        @campus.State
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<h3>Login WeBind CMS</h3>
+@using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+{
+    <div>@Html.Label("UserName")</div>
+    <div>@Html.TextBox("name")</div>
+
+    <div>@Html.Label("Password")</div>
+    <div>@Html.Password("password")</div>
+    <input type="submit" value="Login" />
+}

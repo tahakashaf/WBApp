@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WeBind.Models.CampusExpertRequestViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-share-square-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Requests From Campus </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (Model.Count() == 0)
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">No Requests</h4>
+                        </div>
+                    </div>
+                }
+
+                @foreach (var req in Model)
+                {
+
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <div class="pull-right">
+                                <a href="@Url.Action("ExpertRequestResponse", "Expert", routeValues: new { RequestID = req.RequestID, IsExpertApproved = true })" class="btn btn-success btn-flat"><i class="fa fa-check fa-fw"></i> Accept</a>
+                                <a href="@Url.Action("ExpertRequestResponse", "Expert", routeValues: new { RequestID = req.RequestID, IsExpertApproved = false })" class="btn btn-danger btn-flat"><i class="fa fa-close fa-fw"></i> Reject</a>
+                            </div>
+                            <div class="media-clearfix-xs">
+                                <div class="media-left text-center">
+                                    <div class="width-120">
+                                        <a href="@Url.Action("PublicProfile", "Home", routeValues: new { CampusID = req.CampusID })">
+                                            <span class="img icon-block">
+                                                <img class="img icon-block bg-default" src="@Url.Content(req.CampusProfile.ProfilePicPath)" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="text-headline margin-v-5-0">
+                                        @Html.ActionLink(req.CampusProfile.CampusName, "PublicProfile", "Home", routeValues: new { CampusID = req.CampusID }, htmlAttributes: new { id = "signupLink" })
+                                    </h4>
+                                    @if (!string.IsNullOrEmpty(req.CampusProfile.DepartmentName))
+                                    {
+                                        <p>
+                                            <i class="fa fa-building fa-fw"></i> Department <strong> @req.CampusProfile.DepartmentName</strong>
+                                        </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(req.CampusProfile.State))
+                                    {
+                                        <p>
+                                            <i class="icon-identification fa-fw"></i> Position <strong>@req.CampusProfile.State</strong>
+                                        </p>
+                                    }
+                                    <p>
+                                        <i class="fa fa-calendar fa-fw"></i> Requested Schedule <strong>@req.ScheduleDate.ToShortDateString()</strong>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-align-justify fa-fw"></i> Message <strong>@req.RequestMessage</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Expert")
+            {
+                @Html.Partial("~/Views/Expert/_ExpertNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Educator")
+            {
+                @Html.Partial("~/Views/Educator/_EducatorNavigationPartial.cshtml")
+            }
+        </div>
+    </div>
+</div>

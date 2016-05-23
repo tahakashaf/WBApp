@@ -1,0 +1,104 @@
+﻿@model List<WeBind.Models.Webinar>
+@{
+    ViewBag.Title = "WebinarList";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+   
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 2);
+    grid.Pager(WebGridPagerModes.All);
+}
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+
+}
+
+<script type="text/javascript">
+ var message = '@message';
+
+if(message) alert(message);
+
+</script>
+
+
+
+
+
+
+
+
+@Html.ActionLink("Create Webinar", "Webinar", "Admin")
+
+<br/>
+<br />
+
+
+<h2>Webinars</h2>
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.0em;
+        width: 10%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/custom/deleteWebinar.js"></script>
+
+
+
+<div id="content">
+    @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+                    @*grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),*@
+                    grid.Column(columnName:"WebinarName",header:"WebinarName"),
+                    grid.Column(columnName:"WebinarSummary",header:"WebinarSummary"),
+                    grid.Column(columnName:"WebinarDescription",header:"WebinarDescription"),
+                    grid.Column(columnName:"WhatWillYouLearn",header:"WhatWillYouLearn"),
+                    grid.Column(columnName:"FromDateTime",header:"FromDateTime"),
+                    grid.Column(columnName:"TimeDuration",header:"TimeDuration"),
+                    grid.Column(columnName:"Participants",header:"Participants"),
+                    grid.Column(columnName:"YoutubeUrl",header:"YoutubeUrl"),
+                    
+                     grid.Column("Action", format: @<text>
+                        @Html.ActionLink("Edit", "GetWebinarById", "Admin", routeValues: new { id = item.WebinarID }, htmlAttributes: null)<br />
+    <button class="delete-case" id="@item.WebinarID">Delete</button>
+
+                    </text>, style: "col3Width", canSort: false)
+                   ))
+</div>

@@ -1,0 +1,183 @@
+﻿@model WeBind.Models.CampusRequestViewModel
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-share-square-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Request A Session</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default paper-shadow" data-z="0.5">
+                    <div class="panel-body">
+                        <div class="media media-clearfix-xs">
+                            @if (Model.IsSubmitted)
+                            {
+                                <div class="panel panel-success paper-shadow" data-z="0.5">
+                                    <div class="panel-body">
+                                        <h4 class="margin-none text-green-500 text-center">Your Request Submitted Successfully. We will get back to you in 24 Hours.</h4>
+                                    </div>
+                                </div>
+                            }
+                            @using (Html.BeginForm("EducatorSessionRequest", "Educator", FormMethod.Post, new { @name = "educatorRequestForm", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Friend's EmailID</label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.CampusName, new { type = "text", data_toggle = "select2-tags", data_Tags = "", value = "", style = "width: 100%;" })
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Request Message<span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(m => m.RequestMessage, new { @class = "form-control", rows = "5", @placeholder = "Write your request of webinar" })
+                                    </div>
+                                    <div id="educatorRequestForm_RequestMessage_errorloc" class="text-danger"></div>
+                                </div>
+                                <div class="form-group margin-none">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-primary">Post Request</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="eliteMasters" class="parallax overflow-hidden page-section">
+                    <div class="container parallax-layer" data-opacity="true">
+                        <div class="media media-grid v-middle">
+                            <div class="media-left">
+                                <span class="icon-block half bg-black text-white"><i class="fa fa-check-square-o"></i></span>
+                            </div>
+                            <div class="media-body">
+                                <h2 class="margin-none">Your Request Status</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @{
+                    List<WeBind.Models.CampusExpertRequestViewModel> requests = (List<WeBind.Models.CampusExpertRequestViewModel>)ViewData["Requests"];
+                }
+                @if (requests.Count() == 0)
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">You haven't Requested for any Master Class</h4>
+                        </div>
+                    </div>
+                }
+
+                @foreach (var req in requests)
+                {
+
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <div class="pull-right">
+                                @if (req.IsExpertApproved == true)
+                                {
+                                    <span class="label bg-green-400">Approved</span>
+                                }
+                                else if (req.IsExpertApproved == false)
+                                {
+                                    <span class="label bg-red-400">Rejected</span>
+                                }
+                                else { 
+                                    <span class="label bg-yellow-400">Pending</span>
+                                }
+                            </div>
+                            <div class="media-clearfix-xs">
+                                <div class="media-left text-center">
+                                    <div class="width-120">
+                                        <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = req.ExpertProfile.ExpertID })">
+                                            <span class="img icon-block">
+                                                <img class="img icon-block bg-default" src="@Url.Content(req.ExpertProfile.ProfilePicPath)" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="text-headline margin-v-5-0">
+                                        @Html.ActionLink(req.ExpertProfile.FirstName + " " + req.ExpertProfile.LastName, "PublicProfile", "Home", routeValues: new { ExpertID = req.ExpertProfile.ExpertID }, htmlAttributes: new { id = "signupLink" })
+                                    </h4>
+                                    <p>
+                                        <i class="fa fa-calendar fa-fw"></i> Requested Schedule <strong>@req.ScheduleDate.ToShortDateString()</strong>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-align-justify fa-fw"></i> Request Message <strong>@req.RequestMessage</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @Html.Partial("_EducatorNavigationPartial")
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
+        <div class="text-center">
+            <h3 class="text-display-1">Upcoming Master Classes</h3>
+        </div>
+        <div class="slick-basic slick-slider" data-items="4" data-items-lg="3" data-items-md="2" data-items-sm="1" data-items-xs="1">
+            @foreach (var mc in Model.UpcomingMCList)
+            {
+                <div class="item">
+                    <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                        <div class="panel-body">
+                            <div class="media media-clearfix-xs">
+                                <div class="media-left">
+                                    <div class="cover width-90 width-100pc-xs overlay cover-image-full hover">
+                                        <span class="img icon-block s90 bg-white"></span>
+                                        <span class="overlay overlay-full padding-none icon-block s90 bg-white">
+                                            <span class="v-center">
+                                                <i class="fa fa-graduation-cap"></i>
+                                            </span>
+                                        </span>
+                                        <a href="website-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                            <span class="v-center">
+                                                <span class="btn btn-circle btn-primary btn-lg"><i class="fa fa-graduation-cap"></i></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading margin-v-5-3"><a href="website-course.html">@mc.WebinarName</a></h4>
+                                    <p class="small margin-none">
+                                        @mc.FromDateTime.ToShortDateString()
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+        </div>
+        <div class="text-center">
+            <br />
+            <a class="btn btn-lg btn-primary" href="website-directory-grid.html">Browse </a>
+        </div>
+    </div>*@
+<script language="JavaScript" type="text/javascript"
+        xml:space="preserve">
+    //<![CDATA[
+    //You should create the validator only after the definition of the HTML form
+
+    var frmvalidator = new Validator("educatorRequestForm");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("RequestMessage", "req", "Please enter the request message");
+    //]]></script>

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<WeBind.Models.WebinarViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-mortar-board"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Upcoming Master Classes</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row" data-toggle="isotope">
+                    @if (Model.Count() == 0)
+                    {
+                        <div class="panel paper-shadow" data-z="0.5">
+                            <div class="panel-body">
+                                <h4 class="margin-none text-center">No Upcoming Master Class Found</h4>
+                            </div>
+                        </div>
+                    }
+                    @foreach (var webinar in Model)
+                    {
+                        <div class="modal grow modal-overlay modal-backdrop-body fade" id="modal-overlay-signup-@webinar.WebinarID">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span>Close</span></button>
+                            <div class="modal-dialog">
+                                <div class="v-cell">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="wizard-container wizard-1" id="wizard-demo-1">
+                                                <form action="#" data-toggle="wizard" class="max-width-400 h-center">
+                                                    <fieldset class="step relative paper-shadow" data-z="2">
+                                                        <div class="page-section-heading">
+                                                            <h2 class="text-h4 margin-v-0">Are you sure you want to attend this class ?</h2>
+                                                        </div>
+
+                                                        <div class="row text-right">
+                                                            <div class="col-xs-2 col-xs-offset-6">
+                                                                <a href="@Url.Action("AttendClass", "Educator" , routeValues: new { webinarid=webinar.WebinarID })" class="btn btn-primary">Ok</a>
+                                                            </div>
+                                                            <div class="col-xs-2 text-right">
+                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="item col-xs-12 col-sm-6 col-lg-4">
+                            <div class="panel panel-default paper-shadow" data-z="0.5">
+                                <a href="@Url.Action("WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID })">
+                                    <div class="cover width-100pc-xs overlay-full cover-image-full margin-v-0-10">
+                                        <img src="@Url.Content(webinar.WebinarPicPath)" class="img col-lg-12 padding-none height-230" />
+                                    </div>
+                                </a>
+                                <div class="panel-body">
+                                    <h4 class="text-headline margin-v-0-10"><a class="ellipsis multiple-2-lg" href="@Url.Action("WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID })">@webinar.WebinarName</a></h4>
+
+                                    <div class="margin-none col-sm-8">
+                                        <i class="fa fa-calendar fa-fw"></i> Date: @webinar.FromDateTime.ToString("dd/MM/yyyy")
+                                    </div>
+                                    @*@if (((ViewBag.UserData != null && ViewBag.UserData.RoleName != "Expert" && !webinar.IsWebinarRequested) || ViewBag.UserData == null) && webinar.FromDateTime > DateTime.Now)
+                                    {
+
+                                        <div class="pull-right">
+                                            <a href="@Url.Action("AttendClass", "Educator" , routeValues: new { webinarid=webinar.WebinarID })" data-z="1" data-hover-z="2" class="btn btn-primary btn-sm paper-shadow relative">Attend</a>
+                                            @*<a class="btn btn-primary btn-sm paper-shadow relative" data-z="1" data-hover-z="2" data-animated data-toggle="modal" href="#modal-overlay-signup-@webinar.WebinarID">Attend</a>
+                                        </div>
+                                    }*@
+                                    <div class="margin-none col-sm-8">
+                                        <i class="fa fa-clock-o fa-fw"></i> Date: @webinar.FromDateTime.ToShortTimeString()
+                                    </div>
+                                    @*<p class="margin-none">
+                                            @foreach (string Tag in webinar.Tags)
+                                            {
+                                                <span class="label bg-gray-dark">@Tag</span>
+                                            }
+                                        </p>*@
+                                </div>
+                                <hr class="margin-none" />
+                                <div class="panel-body">
+                                    <p class="ellipsis multiple-3">@webinar.WebinarSummary</p>
+                                    @if (webinar.Expert != null)
+                                    {
+                                        <div class="media v-middle">
+                                            <div class="media-left">
+                                                <img src="@Url.Content(webinar.Expert.ProfilePicPath)" alt="People" class="img-circle width-40" />
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>
+                                                    <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = webinar.Expert.ExpertID })">@webinar.Expert.FirstName @webinar.Expert.LastName</a>
+                                                    <br />
+                                                </h4>
+                                                @webinar.Expert.Company
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Expert")
+            {
+                @Html.Partial("~/Views/Expert/_ExpertNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Educator")
+            {
+                @Html.Partial("~/Views/Educator/_EducatorNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Student")
+            {
+                @Html.Partial("~/Views/Student/_StudentNavigationPartial.cshtml")
+            }
+        </div>
+    </div>
+</div>

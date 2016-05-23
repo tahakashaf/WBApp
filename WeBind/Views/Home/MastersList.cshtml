@@ -1,0 +1,102 @@
+﻿@model IEnumerable<WeBind.Models.ExpertProfileViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-search"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Search Experts </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @foreach (var expert in Model)
+                {
+
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <div class="pull-right">
+                                <a href="@Url.Action("EducatorMasterClassRequest", "Educator", routeValues: new { id = expert.ExpertID })" class="btn btn-primary btn-flat"><i class="fa fa-share-square-o fa-fw"></i> Request For Master Class</a>
+                            </div>
+                            <div class="media-clearfix-xs">
+                                <div class="media-left text-center">
+                                    <div class="width-120">
+                                        <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID })">
+                                            <span class="img icon-block">
+                                                <img class="img icon-block bg-default" src="@Url.Content(expert.ProfilePicPath)" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="text-headline margin-v-5-0">
+                                        @Html.ActionLink(expert.FirstName + " " + expert.LastName, "PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID }, htmlAttributes: new { id = "signupLink" })
+                                    </h4>
+                                    @if (!string.IsNullOrEmpty(expert.Company))
+                                    {
+                                        <p>
+                                            <i class="fa fa-building fa-fw"></i> Company <strong> @expert.Company</strong>
+                                        </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(expert.Position))
+                                    {
+                                        <p>
+                                            <i class="icon-identification fa-fw"></i> Position <strong>@expert.Position</strong>
+                                        </p>
+                                    }
+                                    <p class="margin-none">
+                                        @foreach (string Tag in expert.Tags)
+                                        {
+                                            <span class="label bg-gray-dark">@Tag</span>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("MastersList", "Home", FormMethod.Post, new { role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group form-control-material">
+                                @Html.TextBox("tag", "", new { id = "forumSearch", type = "text", @class = "form-control", placeholder = "Search Expert By Skill" })
+                                <label for="forumSearch">Search by skill...</label>
+                            </div>
+                            <button type="submit" class="btn btn-inverse paper-shadow relative" data-z="0.5" data-hover-z="1">Search Expert</button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Expert")
+            {
+                @Html.Partial("~/Views/Expert/_ExpertNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Educator")
+            {
+                @Html.Partial("~/Views/Educator/_EducatorNavigationPartial.cshtml")
+            }
+            <div class="col-md-4 col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <h4>Expert not Found ?</h4>
+                        </div>
+                        <a href="@Url.Action("EducatorSessionRequest", "Educator")" class="btn btn-inverse paper-shadow relative" data-z="0.5" data-hover-z="1">Request A Session</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

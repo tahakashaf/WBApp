@@ -1,0 +1,100 @@
+﻿@*@using Microsoft.AspNet.Identity*@
+
+
+@if (Request.IsAuthenticated)
+{
+    if (ViewBag.UserData.RoleName == WeBind.Models.Roles.Educator.ToString())
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-nav-bordered navbar-nav-margin-left">
+                <!-- user -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@Url.Content(ViewBag.UserData.ProfilePicPath)" alt="" class="img-circle" title="@ViewBag.UserData.CampusName" /> @*@ViewBag.UserData.CampusName*@
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@Url.Action("EducatorUpcomingMCList", "Educator", routeValues: null)"><i class="fa fa-mortar-board"></i> Upcoming MC</a></li>
+                        <li><a href="@Url.Action("EducatorProfile", "Educator", routeValues: null)"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="javascript:window.localStorage.clear();document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <!-- // END user -->
+            </ul>
+        }
+    }
+    else if (ViewBag.UserData.RoleName == WeBind.Models.Roles.Expert.ToString())
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-nav-bordered navbar-nav-margin-left">
+                <!-- user -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@Url.Content(ViewBag.UserData.ProfilePicPath)" alt="" class="img-circle" title="@ViewBag.UserData.FirstName @ViewBag.UserData.LastName" /> @ViewBag.UserData.FirstName
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@Url.Action("ExpertDashBoard", "Expert", routeValues: null)"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                        <li><a href="@Url.Action("ExpertWebinarsList", "Expert", routeValues: null)"><i class="fa fa-mortar-board"></i> My Master Class</a></li>
+                        <li><a href="@Url.Action("ExpertProfile", "Expert", routeValues: null)"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="javascript:window.localStorage.clear();document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <!-- // END user -->
+            </ul>
+            @*<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>*@
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-nav-bordered navbar-nav-margin-left">
+                <!-- user -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@Url.Content(ViewBag.UserData.ProfilePicPath)" alt="" class="img-circle" title="@ViewBag.UserData.StudentName" /> @ViewBag.UserData.StudentName
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@Url.Action("StudentDashBoard", "Student", routeValues: null)"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                        @*<li><a href="@Url.Action("StudentWebinarsList", "Student", routeValues: null)"><i class="fa fa-mortar-board"></i> My Master Class</a></li>*@
+                        <li><a href="@Url.Action("StudentProfile", "Student", routeValues: null)"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="javascript:window.localStorage.clear();document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <!-- // END user -->
+            </ul>
+            @*<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>*@
+        }
+    }
+}
+else
+{
+    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    <ul class="nav navbar-nav navbar-nav-bordered navbar-nav-margin-right">
+        <!-- user -->
+        @*<a class="navbar-btn btn btn-primary" data-z="1" data-hover-z="2" data-animated data-toggle="modal" href="#modal-overlay-signup1">Sign up</a>*@
+        @Html.ActionLink("Sign up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "signupLink", @class = "navbar-btn btn btn-primary" })
+        <!-- // END user -->
+    </ul>
+    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "navbar-btn btn btn-primary" })
+}

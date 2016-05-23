@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="548bef4d1ba94d2380ad97603730ceae" Name="Diagram1">
+        <EntityTypeShape EntityType="WeBindModel.CampusDepartment" Width="1.5" PointX="5.25" PointY="15.75" />
+        <EntityTypeShape EntityType="WeBindModel.ExpertTagMapping" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="WeBindModel.ProfilePic" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="WeBindModel.StatusMaster" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="WeBindModel.TagMaster" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="WeBindModel.WebinarTagMapping" Width="1.5" PointX="10.5" PointY="11.125" />
+        <AssociationConnector Association="WeBindModel.FK_ExpertTagMapping_TagMaster" />
+        <AssociationConnector Association="WeBindModel.FK_WebinarTagMapping_TagMaster" />
+        <EntityTypeShape EntityType="WeBindModel.RecommandAFriend" Width="1.5" PointX="5.25" PointY="2.75" />
+        <EntityTypeShape EntityType="WeBindModel.WebinarFeedBack" Width="1.5" PointX="12.75" PointY="7.625" />
+        <EntityTypeShape EntityType="WeBindModel.CampusWebinarMapping" Width="1.5" PointX="7.5" PointY="9.875" />
+        <AssociationConnector Association="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" />
+        <EntityTypeShape EntityType="WeBindModel.Webinar" Width="1.5" PointX="5.25" PointY="9.75" />
+        <AssociationConnector Association="WeBindModel.FK_CampusWebinarMapping_Webinar" />
+        <AssociationConnector Association="WeBindModel.FK_Webinar_ProfilePic" />
+        <AssociationConnector Association="WeBindModel.FK_Webinar_statusMaster" />
+        <AssociationConnector Association="WeBindModel.FK_WebinarTagMapping_Webinar" />
+        <EntityTypeShape EntityType="WeBindModel.CampusRequest" Width="1.5" PointX="5.25" PointY="18.875" />
+        <EntityTypeShape EntityType="WeBindModel.CampusExpertRequest" Width="1.5" PointX="8.25" PointY="13.625" />
+        <EntityTypeShape EntityType="WeBindModel.Message" Width="1.5" PointX="10.25" PointY="17.625" />
+        <EntityTypeShape EntityType="WeBindModel.CampusProfile" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="WeBindModel.ExpertProfile" Width="1.5" PointX="3" PointY="18.375" />
+        <AssociationConnector Association="WeBindModel.FK_CampusDepartments_CampusProfile" />
+        <AssociationConnector Association="WeBindModel.FK_CampusRequest_CampusProfile" />
+        <AssociationConnector Association="WeBindModel.FK_CampusRequest_ExpertProfile" />
+        <AssociationConnector Association="WeBindModel.FK_CampusProfile_ProfilePic" />
+        <AssociationConnector Association="WeBindModel.FK_CampusRequest_CampusProfile1" />
+        <AssociationConnector Association="WeBindModel.FK_CampusWebinarMapping_CampusProfile" />
+        <AssociationConnector Association="WeBindModel.FK_Message_CampusProfile" />
+        <AssociationConnector Association="WeBindModel.FK_ExpertProfile_ProfilePic" />
+        <AssociationConnector Association="WeBindModel.FK_ExpertTagMapping_ExpertProfile" />
+        <AssociationConnector Association="WeBindModel.FK_Message_ExpertProfile" />
+        <AssociationConnector Association="WeBindModel.FK_RecommandAFriend_ExpertProfile" />
+        <EntityTypeShape EntityType="WeBindModel.ConfigurationData" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WeBindModel.EmailTemplate" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="WeBindModel.StudentProfile" Width="1.5" PointX="3" PointY="25.625" />
+        <AssociationConnector Association="WeBindModel.FK_StudentProfile_ProfilePic" />
+        <EntityTypeShape EntityType="WeBindModel.WebinarAnswer" Width="1.5" PointX="9.75" PointY="7" />
+        <EntityTypeShape EntityType="WeBindModel.WebinarQuestion" Width="1.5" PointX="7.5" PointY="7" />
+        <AssociationConnector Association="WeBindModel.FK_WebinarQuestions_Webinar" />
+        <AssociationConnector Association="WeBindModel.FK_WebinarAnswers_WebinarQuestions" />
+        <EntityTypeShape EntityType="WeBindModel.StudentBlog" Width="1.5" PointX="5.25" PointY="26.25" />
+        <AssociationConnector Association="WeBindModel.FK_StudentBlogs_StudentBlogs" />
+        <EntityTypeShape EntityType="WeBindModel.BrandProfile" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="WeBindModel.FK_BrandProfile_ProfilePic" />
+        <AssociationConnector Association="WeBindModel.FK_Webinar_BrandProfile" />
+        <AssociationConnector Association="WeBindModel.FK_Webinar_ExpertProfile" />
+        <AssociationConnector Association="WeBindModel.FK_StudentBlogs_BrandProfile" />
+        <EntityTypeShape EntityType="WeBindModel.BrandBannerImage" Width="1.5" PointX="5.25" PointY="21.625" />
+        <AssociationConnector Association="WeBindModel.FK_BrandBannerImage_BrandProfile" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

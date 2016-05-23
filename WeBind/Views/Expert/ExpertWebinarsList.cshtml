@@ -1,0 +1,227 @@
+﻿@model IEnumerable<WeBind.Models.WebinarViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-mortar-board"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">My Master Classes</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                @if (Model.Count() == 0)
+                {
+                    <div class="panel paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <h4 class="margin-none text-center">No Master Class Conducted</h4>
+                        </div>
+                    </div>
+                }
+
+                @foreach (var webinar in Model)
+                {
+
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-body">
+                            <div class="media media-clearfix-xs">
+                                <div class="media-left text-center">
+                                    <a href="@Url.Action("WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID })">
+                                        <div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10">
+
+                                            <img src="@Url.Content(webinar.WebinarPicPath)" class="img icon-block height-130" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="text-headline margin-v-5-0">
+                                        @Html.ActionLink(webinar.WebinarName, "WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID }, htmlAttributes: new { id = "signupLink" })
+                                    </h4>
+                                    <p class="small">
+                                        <i class="fa fa-calendar fa-fw"></i> Date: @webinar.FromDateTime.ToString("dd/MM/yyyy")
+                                        @*<span class="fa fa-fw fa-star text-yellow-800"></span>
+                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>*@
+                                    </p>
+                                    <p>
+                                        @webinar.WebinarSummary
+                                    </p>
+                                    <p class="margin-none">
+                                        @foreach (string Tag in webinar.Tags)
+                                        {
+                                            <span class="label bg-gray-dark">@Tag</span>
+                                        }
+                                    </p>
+                                    <hr class="margin-v-8" />
+                                    <div class="media v-middle">
+                                        @*@foreach (var expert in webinar.Experts)
+                                            {
+                                                <div class="media-left">
+                                                    <img src="@Url.Content(expert.ProfilePicPath)" alt="People" class="img-circle width-40" />
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4>
+                                                        @expert.FirstName @expert.LastName
+                                                        <br />
+                                                    </h4>
+                                                    Expert
+                                                </div>
+                                            }*@
+                                        @foreach (var campus in webinar.Campuses.Take(2))
+                                        {
+                                            <div class="media-right">
+                                                <img src="@Url.Content(campus.ProfilePicPath)" alt="People" class="img-circle width-40" />
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>
+                                                    @campus.CampusName
+                                                    <br />
+                                                </h4>
+                                                @campus.DepartmentName
+                                            </div>
+                                        }
+                                        @if (webinar.Campuses.Count > 2)
+                                        {
+                                            <div class="media-right">
+                                                <a class="btn btn-primary btn-sm paper-shadow relative" data-z="1" data-hover-z="2" data-animated data-toggle="modal" href="#modal-overlay-signup-@webinar.WebinarID">Show All</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal grow modal-overlay modal-backdrop-body fade" id="modal-overlay-signup-@webinar.WebinarID">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span>Close</span></button>
+                        <div class="modal-dialog">
+                            <div class="v-cell">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="wizard-container wizard-1" id="wizard-demo-1">
+                                            <form action="#" data-toggle="wizard" class="max-width-400 h-center">
+                                                <fieldset class="step relative paper-shadow" data-z="2">
+                                                    @foreach (var campus in webinar.Campuses)
+                                                    {
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item media v-middle">
+                                                                <div class="media-left">
+                                                                    <img src="@Url.Content(campus.ProfilePicPath)" alt="People" class="img-circle width-40" />
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h4 class="text-subhead margin-none">
+                                                                        <a href="#" class="link-text-color">@campus.CampusName</a>
+                                                                    </h4>
+                                                                    <div class="text-light text-caption">
+                                                                        @campus.DepartmentName
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    }
+                                                    @*<h3 class="text-h4 margin-v-10">Your request has been generated</h3>*@
+
+                                                    <div class="row text-right">
+                                                        <div class="col-xs-2 text-right">
+                                                            <button type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                @*<ul class="pagination margin-top-none">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                    <br />
+                    <br />*@
+            </div>
+            @Html.Partial("_ExpertNavigationPartial")
+
+
+            @*<div class="col-md-3">
+                <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+                    <div class="panel-heading panel-collapse-trigger">
+                        <h4 class="panel-title">Category</h4>
+                    </div>
+                    <div class="panel-body list-group">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge pull-right">120+</span>
+                                <a class="list-group-link" href="index.html">Design</a>
+                            </li>
+                            <li class="list-group-item active">
+                                <span class="badge pull-right">30+</span>
+                                <a class="list-group-link" href="index.html">Programming</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">40+</span>
+                                <a class="list-group-link" href="index.html">WordPress</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">60+</span>
+                                <a class="list-group-link" href="index.html">Workflow</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">15+</span>
+                                <a class="list-group-link" href="index.html">HTML</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">25+</span>
+                                <a class="list-group-link" href="index.html">CSS</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">35+</span>
+                                <a class="list-group-link" href="index.html">iOS</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge pull-right">20+</span>
+                                <a class="list-group-link" href="index.html">Free</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default" data-toggle="panel-collapse" data-open="false">
+                    <div class="panel-heading panel-collapse-trigger">
+                        <h4 class="panel-title">Price</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group input-group margin-none">
+                            <div class="row margin-none">
+                                <div class="col-xs-6 padding-none">
+                                    <input class="form-control" type="text" placeholder="Min .." />
+                                </div>
+                                <div class="col-xs-6 padding-none">
+                                    <input class="form-control" type="text" placeholder="Max .." />
+                                </div>
+                            </div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+        </div>
+    </div>
+</div>
+
+

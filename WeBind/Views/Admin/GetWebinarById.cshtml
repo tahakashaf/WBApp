@@ -1,0 +1,100 @@
+﻿@model WeBind.Models.WebinarViewModel
+
+@{
+    ViewBag.Title = "Webinar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Webinar</h2>
+
+@using (Html.BeginForm("EditWebinar", "Admin", new { id = Model.WebinarID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Webinar</h4>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.WebinarName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WebinarName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WebinarName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WebinarSummary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.WebinarSummary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WebinarSummary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WebinarDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.WebinarDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WebinarDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            What will you learn (';' seperated text)
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.WhatWillYouLearn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WhatWillYouLearn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Date Time (MM:DD:YYYY HH:MM:SS)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FromDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FromDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Time Duration (HH:MM:SS)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeDuration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TimeDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Number of participants
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Participants, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Participants, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YoutubeUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YoutubeUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YoutubeUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            @Html.DropDownListFor(model => model.ExpertID, new SelectList(Model.Experts, "ExpertID", "FirstName", Model.ExpertID), "-- Select Expert --", new { id = "ExpertID" });
+        </div>
+
+        <input type="file" name="file" accept=".jpg,.png,.jpeg" id="file" class="btn btn-white btn-sm paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated value="Update Photo" />
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "WebinarList")
+</div>

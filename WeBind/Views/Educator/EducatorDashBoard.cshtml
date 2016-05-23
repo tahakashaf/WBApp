@@ -1,0 +1,178 @@
+﻿@model WeBind.Models.CampusViewModel
+@{
+}
+
+@Html.Partial("_EducatorHeaderPartial")
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row" data-toggle="isotope">
+                    <div class="item col-xs-12 col-lg-6">
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <div class="media v-middle">
+                                    <div class="media-body">
+                                        <h4 class="text-headline margin-none">Lives Touched</h4>
+                                        <p class="text-subhead text-light">Per Master Class</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div id="line-holder" data-toggle="flot-chart-mixed" onload="tkFlotChartMixed([[1, 3], [2, 6], [3, 30], [7, 50], [8, 15], [9, 18]])" class="flotchart-holder height-200"></div>
+                            </div>
+                            <hr />
+                            <div class="panel-body">
+                                <div class="row text-center">
+                                    <div class="col-md-6">
+                                        <h4 class="margin-none"></h4>
+                                        <p class="text-display-1 text-warning margin-none"></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="margin-none">Total Lives Touched</h4>
+                                        <p class="text-display-1 text-success margin-none">
+                                            @{
+                                                Int64 participantCount = 0;
+                                                foreach (var item in Model.Webinars)
+                                                {
+                                                    participantCount += (long)item.Participants;
+                                                }
+                                                @participantCount
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item col-xs-12 col-lg-6">
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <h4 class="text-headline margin-none">Upcoming Master Classes</h4>
+                                <p class="text-subhead text-light">Your recent Master Classes</p>
+                            </div>
+
+                            <ul class="list-group">
+                                @foreach (var item in Model.Webinars)
+                                {
+                                    <li class="list-group-item">
+                                        <div class="media v-middle margin-v-0-10">
+                                            <div class="media-body">
+                                                <p class="text-subhead">
+                                                    @Html.ActionLink(item.WebinarName, "WebinarDetails", "Home", routeValues: new { WebinarID = item.WebinarID }, htmlAttributes: new { id = "signupLink" }) &nbsp;
+                                                </p>
+                                            </div>
+                                            <div class="media-right">
+                                                <div class="width-100 text-right">
+                                                    <span class="text-caption text-light">@item.FromDateTime.ToString("dd/MM/yyyy") </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>@item.WebinarSummary</p>
+                                        @foreach (var expert in item.Experts)
+                                        {
+                                            <p class="text-light">
+                                                <span class="caption">Expert:</span>
+                                                <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID })">@expert.FirstName @expert.LastName</a>
+                                            </p>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                            <div class="panel-footer text-right">
+                                @Html.ActionLink("View All", "EducatorWebinarsList", "Educator", routeValues: null, htmlAttributes: new { id = "expertWebinarsList", @class = "btn btn-white paper-shadow relative" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item col-xs-12 col-lg-6">
+                        <div class="panel panel-default paper-shadow" data-z="0.5">
+                            <div class="panel-heading">
+                                <div class="media v-middle">
+                                    <div class="media-body">
+                                        <h4 class="text-headline margin-none">Transactions</h4>
+                                        <p class="text-subhead text-light">Latest from statement</p>
+                                    </div>
+                                    <div class="media-right">
+                                        <a class="btn btn-white btn-flat" href="website-instructor-statement.html">Statement</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table text-subhead v-middle">
+                                    <tbody>
+                                        <tr>
+                                            <td class="width-100 text-caption">
+                                                <div class="label label-grey-200 label-xs">12 Jan 2015</div>
+                                            </td>
+                                            <td>Adrian Demian</td>
+                                            <td class="width-80 text-center"><a href="#">#4975</a></td>
+                                            <td class="width-50 text-center">&dollar;74</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="width-100 text-caption">
+                                                <div class="label label-grey-200 label-xs">12 Jan 2015</div>
+                                            </td>
+                                            <td>Adrian Demian</td>
+                                            <td class="width-80 text-center"><a href="#">#8981</a></td>
+                                            <td class="width-50 text-center">&dollar;42</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="width-100 text-caption">
+                                                <div class="label label-grey-200 label-xs">12 Jan 2015</div>
+                                            </td>
+                                            <td>Adrian Demian</td>
+                                            <td class="width-80 text-center"><a href="#">#11090</a></td>
+                                            <td class="width-50 text-center">&dollar;42</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="width-100 text-caption">
+                                                <div class="label label-grey-200 label-xs">12 Jan 2015</div>
+                                            </td>
+                                            <td>Adrian Demian</td>
+                                            <td class="width-80 text-center"><a href="#">#9805</a></td>
+                                            <td class="width-50 text-center">&dollar;38</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+            @Html.Partial("_EducatorNavigationPartial")
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <strong>Learning</strong> v1.1.0 &copy; Copyright 2015
+</footer>
+<!-- // Footer -->
+<!-- Inline Script for colors and config objects; used by various external scripts; -->
+<script>
+    var colors = {
+        "danger-color": "#e74c3c",
+        "success-color": "#81b53e",
+        "warning-color": "#f0ad4e",
+        "inverse-color": "#2c3e50",
+        "info-color": "#2d7cb5",
+        "default-color": "#6e7882",
+        "default-light-color": "#cfd9db",
+        "purple-color": "#9D8AC7",
+        "mustard-color": "#d4d171",
+        "lightred-color": "#e15258",
+        "body-bg": "#f6f6f6"
+    };
+    var config = {
+        theme: "html",
+        skins: {
+            "default": {
+                "primary-color": "#42a5f5"
+            }
+        }
+    };
+</script>

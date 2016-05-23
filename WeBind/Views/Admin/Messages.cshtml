@@ -1,0 +1,117 @@
+﻿@model List<WeBind.Models.MessageContentViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "List of Messages";
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 5);
+    grid.Pager(WebGridPagerModes.All);
+}
+
+
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.0em;
+        width: 30%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/messagesService.js"></script>
+<h2>Messages</h2>
+<div id="content">
+    @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+
+                    @*grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),*@
+                    grid.Column(columnName:"Message",header:"Message"),
+                    grid.Column(columnName: "CampusName", header: "Campus"),
+                    grid.Column(columnName: "DepartmentName", header: "Department"),
+                    grid.Column(columnName: "ExpertFirstName", header: "Expert FirstName"),
+                    grid.Column(columnName: "ExpertLastName", header: "Expert LastName"),
+                    grid.Column("Action", format: @<text>
+                        <button class="approve-message-case" id="@item.MessageId">Approve</button>
+                        <br />
+                        <br />
+                        <button class="reject-message-case" id="@item.MessageId">Reject</button>
+                    </text>, style: "col3Width", canSort: false)
+
+                         ))
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+﻿@model WeBind.Models.StudentBlogViewModel
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-file-text-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Update Blog</h3>
+                @*<p class="text-white text-subhead">Ask our awesome community</p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- Tabbable Widget -->
+                <div class="tabbable paper-shadow relative" data-z="0.5">
+                    <!-- Tabs -->
+                    <!-- // END Tabs -->
+                    <!-- Panes -->
+                    <div class="tab-content">
+                        <div id="course" class="tab-pane active">
+                            @using (Html.BeginForm("PostBlog", "Student", new { id = Model.StudentBlogID }, FormMethod.Post, new { @name = "educatorProfileForm", role = "form" }))
+                            {
+                                <div class="form-group form-control-material">
+                                    @Html.TextBoxFor(x => x.BlogTitle, new { type = "text", name = "title", id = "title", placeholder = "Blog Title", @class = "form-control" })
+                                    <label for="title">Blog Title</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Blog</label>
+                                    @Html.TextAreaFor(x => x.Blog, new { name = "blog", id = "blog", cols = "30", rows = "10", @class = "summernote" })
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- // END Panes -->
+                </div>
+                <!-- // END Tabbable Widget -->
+            </div>
+            @Html.Partial("_StudentNavigationPartial")
+        </div>
+    </div>
+</div>

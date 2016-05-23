@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WeBind.Models.ExpertProfileViewModel>
+
+
+<div class="parallax cover overlay height-300 height-500-lg height-320-xs">
+    <img class="parallax-layer" src="~/images/Being a Master.png" alt="parallax image" />
+    <div class="parallax-layer overlay overlay-full" data-opacity="true">
+        <div class="v-center">
+            <div class="container">
+                <h1 class="text-display-1 overlay-bg-white-strong display-inline-block">Being A Master</h1>
+                <p class="text-subhead overlay-bg-white-strong">Webind’s Master is an established name who has already constructively impacted and continue to impact the industry that he is in. He could be an entrepreneur or an industry professional  who has proved his mettle and possess enough experience and proven intellect to educate the young minds of this country.</p>
+                <p class="text-subhead overlay-bg-white-strong">
+                    Becoming a  Master is an opportunity to  substantially contribute and create value in the lives of millions of student across India. We have designed a slew of tangible and intangible returns for the Master. If you happen to know someone whom we should reach out to, please help us with his info here.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="eliteMasters" class="parallax overflow-hidden page-section">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-black text-white"><i class="fa fa-group"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 margin-none">Our Elite Masters</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-section">
+    <div class="container">
+        <div class="row" data-toggle="isotope">
+            @foreach (var expert in Model)
+            {
+                <div class="item col-xs-12 col-sm-6 col-lg-4">
+                    <div class="panel panel-default paper-shadow" data-z="0.5">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID })">@expert.FirstName @expert.LastName </a><span class="text-muted"> @@ @expert.Company</span></h3>
+                        </div>
+                        <div class="panel-body" style="height:150px">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID })">
+                                        <img src="@Url.Content(expert.ProfilePicPath)" alt="people" class="img-circle width-80" />
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="ellipsis multiple-5">@expert.AboutMe</p>
+                                </div>
+                                <div class="media-bottom">
+                                    <div class="label label-default">@expert.Position</div>
+                                    @*@foreach (var tag in expert.Tags)
+                                    {
+                                        <div class="label label-default">@tag</div>
+                                    }*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer" style="height:100px">
+                            <h5 class="margin-none">Latest Master Class</h5>
+                            <div class="media">
+                                @if (expert.Webinars.Count == 0)
+                                {
+                                    <div class="media-body">
+                                        <h4 class="media-heading">No Webinar Found</h4>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="media-left">
+                                        <a class="icon-block half bg-gray-dark"><i class="text-white fa fa-mortar-board"></i></a>
+                                    </div>
+                                    <div class="media-body">
+                                        @foreach (var webinar in expert.Webinars)
+                                        {
+                                            <h4 class="media-heading"><a href="@Url.Action("WebinarDetails", "Home", routeValues: new { WebinarID = webinar.WebinarID })" class="text-primary">@webinar.WebinarName</a></h4>
+                                            <p class="small text-muted">@webinar.FromDateTime.ToString("dd/MM/yyyy")</p>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right">
+                            <a href="@Url.Action("PublicProfile", "Home", routeValues: new { ExpertID = expert.ExpertID })" class="btn btn-sm btn-primary">View profile</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            <br />
+            <a class="btn btn-lg btn-primary" href="@Url.Action("Register", "Account", routeValues: new { RoleName = "Expert" })">Become a WeBind Master</a>
+        </div>
+    </div>
+</div>

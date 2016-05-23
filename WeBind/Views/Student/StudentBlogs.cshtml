@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WeBind.Models.StudentBlogViewModel>
+
+<div class="parallax overflow-hidden page-section bg-blue-400">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-blue-500 text-white"><i class="fa fa-file-text-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Blog</h3>
+                @*<p class="text-white text-subhead">Ask our awesome community</p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="page-section padding-top-none">
+                    <div class="media v-middle">
+                        <div class="media-body">
+                            @*<h1 class="text-display-1 margin-none">Quize For "@Model.WebinarName"</h1>*@
+                        </div>
+                        <div class="media-right">
+                            <a href="@Url.Action("StudentCreateBlog", "Student", routeValues: null)" class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated><i class="fa fa-fw fa-plus"></i> Write New Blog</a>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var blog in Model)
+                {
+                    <div class="media media-grid media-paper-shadow margin-top-none s-container">
+                        <div class="media-left">
+                            <div class="half cover width-90 width-100pc-xs overlay cover-image-full hover">
+                                <span class="img-circle icon-block s90 bg-default"></span>
+                                <span class="overlay overlay-full padding-none icon-block s90 bg-default">
+                                    <span class="v-center">
+                                        <i class="fa fa-file-text text-white"></i>
+                                    </span>
+                                </span>
+                                <a href="@Url.Action("StudentShowBlog", "Student", routeValues: new { id = blog.StudentBlogID })" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                    <span class="v-center">
+                                        <span class="btn btn-circle btn-white btn-lg"><i class="fa fa-file-text"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        @*<div class="media-left">
+                            <div class="icon-block half img-circle bg-grey-300">
+                                <i class="fa fa-file-text text-white"></i>
+                            </div>
+                        </div>*@
+                        <div class="media-body">
+                            <div class="panel panel-default paper-shadow" data-z="0.5">
+                                <div class="panel-body">
+                                    @if (blog.IsWrittenByMe)
+                                    {
+                                        <div class="pull-right">
+                                            <a href="@Url.Action("StudentUpdateBlog", "Student", routeValues: new { id = blog.StudentBlogID })" class="btn btn-white btn-flat"><i class="fa fa-pencil-square fa-fw"></i> Update</a>
+                                        </div>
+                                    }
+                                    <h4 class="text-title media-heading">
+                                        <a href="@Url.Action("StudentShowBlog", "Student", routeValues: new { id = blog.StudentBlogID })" class="link-text-color">@blog.BlogTitle</a>
+                                    </h4>
+                                    <p class="text-light text-caption">
+                                        posted by
+                                        <img src="@Url.Content(blog.StudentProfile.ProfilePicPath)" alt="person" class="img-circle width-20" /> <b>@blog.StudentProfile.StudentName</b>
+                                        &nbsp; | <i class="fa fa-clock-o fa-fw"></i> @blog.UpdationDate
+                                    </p>
+                                    @*<p class="text-light">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam atque deserunt, dicta eius, fuga id illo ipsa ipsam minus neque non sunt, vitae. Animi aperiam beatae blanditiis dicta dolore eaque, ex excepturi explicabo laudantium
+                                            nobis nulla praesentium quia voluptatem.
+                                        </p>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*<ul class="pagination margin-top-none">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                    <br />*@
+            </div>
+            @Html.Partial("_StudentNavigationPartial")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+﻿@model List<WeBind.Models.CampusProfile>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 5);
+    grid.Pager(WebGridPagerModes.All);
+}
+
+
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.0em;
+        width: 30%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/messagesService.js"></script>
+<h2>Partner Colleges</h2>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script src="~/Scripts/Custom/partnerCollege.js"></script>
+
+
+
+<div id="content">
+    @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+
+
+                    @*grid.Column(header: "Serial No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                    grid.Column(columnName: "CampusID", header: "CampusID"),*@
+                    grid.Column(columnName: "CampusName", header: "CampusName"),
+                    grid.Column(columnName: "DepartmentName", header: "DepartmentName"),
+                    grid.Column(columnName: "ContactNo", header: "ContactNo"),
+                    grid.Column(columnName: "EmailID", header: "EmailID"),
+                    grid.Column(columnName: "State", header: "State"),
+                    grid.Column(columnName: "District", header: "District"),
+                    grid.Column(columnName: "Street", header: "Street"),
+                    grid.Column(columnName: "IsConfirmed", header: "IsConfirmed"),
+                    grid.Column(columnName: "RegisteredOn", header: "RegisteredOn"),
+                    grid.Column("Action", format: @<text>
+                        @if (item.IsPartnerCollege == true)
+                        {
+
+                            <button class="unsetcampus-message-case" id="@item.CampusID">UnSet</button>
+                            <br />
+                            <br />
+                        }
+                        else
+                        {
+                            <button class="setcampus-message-case" id="@item.CampusID">Set</button>
+                        }
+                    </text>, style: "col3Width", canSort: false)
+
+                                                 ))
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

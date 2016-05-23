@@ -1,0 +1,77 @@
+﻿<div class="parallax overflow-hidden page-section bg-cyan-300">
+    <div class="container parallax-layer" data-opacity="true">
+        <div class="media media-grid v-middle">
+            <div class="media-left">
+                <span class="icon-block half bg-cyan-500 text-white"><i class="fa fa-file-text-o"></i></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-display-2 text-white margin-none">Blog</h3>
+                <p class="text-white text-subhead">Ask our awesome community</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="page-section padding-top-none">
+                    <div class="s-container">
+                        <h1 class="text-display-1 margin-top-none">Can someone help me? I need a design advice</h1>
+                        <p class="text-light text-caption">
+                            posted by
+                            <a href="#">
+                                <img src="~/images/people/Team/abul.jpg" alt="person" class="img-circle width-20" /> Jennifer Hudson
+                            </a> &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 minutes ago
+                        </p>
+                    </div>
+                    <br />
+                    <p>
+                        <img class="paragraph-inline width-280 clearfix-xs width-100pc-xs" src="~/images/people/Team/abul.jpg" alt="image" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus culpa deserunt distinctio, eos expedita inventore labore laborum libero magnam nisi recusandae sapiente sunt unde, voluptatibus? Accusantium distinctio laborum nihil,
+                        nostrum possimus quos rem repellendus tenetur voluptatem! A, ad adipisci commodi doloribus id maxime provident quo suscipit. Itaque, recusandae ut.
+                    </p>
+                    <blockquote class="blockquote-reverse">
+                        <p class="text-subhead text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque debitis distinctio earum et fugiat id itaque officia provident quasi! Dolorem, fuga modi molestias natus non nulla optio porro praesentium provident quaerat.</p>
+                        <footer>
+                            Someone famous in
+                            <cite title="Source Title">Source Title</cite>
+                        </footer>
+                    </blockquote>
+                    <p class="text-light">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dignissimos eaque facilis inventore ipsa modi natus, optio quisquam quod quos, ratione sed, ullam veritatis. Delectus dolorem doloremque, doloribus explicabo facere fugiat,
+                        incidunt ipsam maiores minima modi molestias natus quia quis recusandae rem reprehenderit saepe sint sunt tenetur velit voluptate voluptatum!
+                    </p>
+                    <hr />
+                    <h4 class="text-title">Labore nemo nisi recusandae</h4>
+                    <p>
+                        <img class="paragraph-inline width-280 pull-right clearfix-xs width-100pc-xs" src="~/images/people/Team/abul.jpg" alt="image" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus culpa deserunt distinctio, eos expedita inventore labore laborum libero magnam nisi recusandae sapiente sunt unde, voluptatibus? Accusantium distinctio laborum nihil,
+                        nostrum possimus quos rem repellendus tenetur voluptatem! A, ad adipisci commodi doloribus id maxime provident quo suscipit. Itaque, recusandae ut.
+                    </p>
+                    <blockquote>
+                        <p class="text-subhead text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque debitis distinctio earum et fugiat id itaque officia provident quasi! Dolorem, fuga modi molestias natus non nulla optio porro praesentium provident quaerat</p>
+                        <footer>
+                            Someone famous in
+                            <cite title="Source Title">Source Title</cite>
+                        </footer>
+                    </blockquote>
+                    <p class="text-light">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dignissimos eaque facilis inventore ipsa modi natus, optio quisquam quod quos, ratione sed, ullam veritatis. Delectus dolorem doloremque, doloribus explicabo facere fugiat,
+                        incidunt ipsam maiores minima modi molestias natus quia quis recusandae rem reprehenderit saepe sint sunt tenetur velit voluptate voluptatum!
+                    </p>
+                    <br />
+                    <span class="label bg-gray-dark">New</span>
+                    <span class="label label-grey-200">WordPress</span>
+                    <span class="label label-grey-200">Beginner</span>
+                </div>
+            </div>
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Expert")
+            {
+                @Html.Partial("~/Views/Expert/_ExpertNavigationPartial.cshtml")
+            }
+            @if (ViewBag.UserData != null && ViewBag.UserData.RoleName == "Educator")
+            {
+                @Html.Partial("~/Views/Educator/_EducatorNavigationPartial.cshtml")
+            }
+        </div>
+    </div>
+</div>

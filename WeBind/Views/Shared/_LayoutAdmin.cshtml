@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h1>Welcome to WeBind CMS</h1>
+        <br />
+        Hello <b>@Session["user"]</b>
+        <br />
+        @Html.ActionLink("Logout", "Logout", "Admin")
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        @RenderBody()
+        <br />
+        <br />
+        <br />
+        <br /><br />
+
+        @Html.ActionLink("Home", "Home", "Admin")
+    </div>
+</body>
+</html>
