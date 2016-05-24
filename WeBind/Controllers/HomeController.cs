@@ -9,7 +9,7 @@ using WeBind.Models;
 
 namespace WeBind.Controllers
 {
-    public class HomeController : BaseExpertController
+    public class HomeController : BaseController
     {
         EmailHelper emailHelper = null;
         public HomeController()

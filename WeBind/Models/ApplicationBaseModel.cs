@@ -7,6 +7,8 @@ namespace WeBind.Models
 {
     public class ApplicationBaseModel
     {
+        public long BrandID { get; set; }
+        public string BrandName { get; set; }
         public long CampusID { get; set; }
         public string CampusName { get; set; }
         public long ExpertID { get; set; }

@@ -7,7 +7,7 @@ using WeBind.Models;
 
 namespace WeBind.Controllers
 {
-    public class BaseExpertController : Controller
+    public class BaseController : Controller
     {
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
@@ -49,8 +49,19 @@ namespace WeBind.Controllers
                         {
                             StudentID = student.StudentID,
                             StudentName = student.StudentName,
-                            ProfilePicPath = campus.ProfilePic.ProfilePicPath,
+                            ProfilePicPath = student.ProfilePic.ProfilePicPath,
                             RoleName = Roles.Student.ToString()
+                        };
+                    }
+                    BrandProfile brand = _Context.BrandProfiles.Where(x => x.EmailID == userEmail).FirstOrDefault();
+                    if (brand != null)
+                    {
+                        data = new ApplicationBaseModel()
+                        {
+                            BrandID = brand.BrandID,
+                            StudentName = brand.BrandName,
+                            ProfilePicPath = brand.ProfilePic.ProfilePicPath,
+                            RoleName = Roles.Brand.ToString()
                         };
                     }
                 }

@@ -11,7 +11,7 @@ using System.Data.Entity;
 namespace WeBind.Controllers
 {
     [Authorize(Roles = "Educator")]
-    public class EducatorController : BaseExpertController
+    public class EducatorController : BaseController
     {
         WeBindDemoEntities _Context = new WeBindDemoEntities();
         DateTimeHelper dateTimeHelper = null;

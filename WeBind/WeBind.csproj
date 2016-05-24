@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GoogleMaps.LocationServices">
+      <HintPath>C:\Users\Kruti\Source\Repos\MapPOC\MapPOC\bin\GoogleMaps.LocationServices.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -169,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseEducatorController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\EducatorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Helper\Constants.cs" />
@@ -525,6 +529,7 @@
     <Content Include="Content\vendor\fonts\slick.svg" />
     <Content Include="Content\vendor\fonts\slick.ttf" />
     <Content Include="Content\vendor\fonts\slick.woff" />
+    <Content Include="Scripts\custom\BrandGoogleMap.js" />
     <Content Include="Scripts\custom\campusRequest.js" />
     <Content Include="Scripts\custom\campusWebinarRequest.js" />
     <Content Include="Scripts\custom\deleteWebinar.js" />
@@ -733,6 +738,8 @@
     <Content Include="Views\Student\StudentCreateBlog.cshtml" />
     <Content Include="Views\Student\StudentUpdateBlog.cshtml" />
     <Content Include="Views\Student\StudentShowBlog.cshtml" />
+    <Content Include="Views\Account\BrandLogin.cshtml" />
+    <Content Include="Views\Brand\BrandDashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,7 @@ using System.Data.Entity;
 namespace WeBind.Controllers
 {
     [Authorize(Roles = "Expert")]
-    public class ExpertController : BaseExpertController
+    public class ExpertController : BaseController
     {
         WeBindDemoEntities _Context = new WeBindDemoEntities();
 

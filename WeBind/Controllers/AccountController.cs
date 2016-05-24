@@ -17,7 +17,7 @@ namespace WeBind.Controllers
 {
 
     [Authorize]
-    public class AccountController : BaseExpertController
+    public class AccountController : BaseController
     {
         WeBindDemoEntities _Context = new WeBindDemoEntities();
         private ApplicationUserManager _userManager;
@@ -76,7 +76,7 @@ namespace WeBind.Controllers
                         {
                             return RedirectToCampusDashboard(returnUrl, _Context.CampusProfiles.Where(x => x.EmailID == user.Email).Select(x => x.CampusID).FirstOrDefault());
                         }
-                        else 
+                        else
                         {
                             return RedirectToStudentDashboard(returnUrl, _Context.StudentProfiles.Where(x => x.EmailID == user.Email).Select(x => x.StudentID).FirstOrDefault());
                         }
@@ -85,6 +85,40 @@ namespace WeBind.Controllers
                     {
                         return RedirectToAction("RegisterConfirmation", "Account");
                     }
+                }
+                else
+                {
+                    ModelState.AddModelError("invalidLogin", "Invalid username or password.");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult BrandLogin(string returnUrl, string RoleID)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View(new LoginViewModel() { RoleId = RoleID });
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> BrandLogin(LoginViewModel model, string returnUrl, string RoleId)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user != null && user.Roles.FirstOrDefault().RoleId == model.RoleId)
+                {
+                    await SignInAsync(user, model.RememberMe);
+                    return RedirectToBrandDashboard(returnUrl, _Context.BrandProfiles.Where(x => x.EmailID == user.Email).Select(x => x.BrandID).FirstOrDefault());
                 }
                 else
                 {
@@ -827,6 +861,17 @@ namespace WeBind.Controllers
             }
         }
 
+        private ActionResult RedirectToBrandDashboard(string returnUrl, long userId)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("BrandDashBoard", "Brand");
+            }
+        }
 
         private class ChallengeResult : HttpUnauthorizedResult
         {

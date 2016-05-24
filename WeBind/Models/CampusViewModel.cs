@@ -25,5 +25,8 @@ namespace WeBind.Models
         public string ProfilePicPath { get; set; }
         public virtual ICollection<WebinarViewModel> Webinars { get; set; }
         public string ProfessorName { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ using WeBind.Models;
 namespace WeBind.Controllers
 {
     [Authorize(Roles = "Student")]
-    public class StudentController : BaseExpertController
+    public class StudentController : BaseController
     {
         WeBindDemoEntities _Context = new WeBindDemoEntities();
         DateTimeHelper dateTimeHelper = null;

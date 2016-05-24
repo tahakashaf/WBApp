@@ -9,6 +9,7 @@ namespace WeBind.Models
     {
         Expert = 1,
         Educator = 2,
-        Student = 3
+        Student = 3,
+        Brand = 4
     }
 }
