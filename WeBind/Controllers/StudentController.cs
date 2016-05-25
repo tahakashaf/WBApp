@@ -57,6 +57,17 @@ namespace WeBind.Controllers
                         LastName = x.ExpertProfile.LastName,
                         ExpertID = (long)x.ExpertID,
                         ProfilePicPath = x.ExpertProfile.ProfilePic.ProfilePicPath
+                    },
+                    Brand = x.BrandID == null ? null : new BrandViewModel()
+                    {
+                        BrandID = x.BrandProfile.BrandID,
+                        BrandLink = x.BrandProfile.BrandLink,
+                        ProfilePicPath = x.BrandProfile.ProfilePic.ProfilePicPath,
+                        YoutubeURL = x.BrandProfile.YoutubeURL,
+                        BrandContent = x.BrandProfile.BrandContent,
+                        BrandName = x.BrandProfile.BrandName,
+                        ContactNo = x.BrandProfile.ContactNo,
+                        BrandBannerImages = x.BrandProfile.BrandBannerImages
                     }
                 }).ToList();
                 return View(webinarList);
@@ -235,7 +246,19 @@ namespace WeBind.Controllers
                             StudentName = x.StudentProfile.StudentName,
                             ProfilePicPath = x.StudentProfile.ProfilePic.ProfilePicPath,
                         },
-                        UpdationDate = x.UpdationDate
+                        UpdationDate = x.UpdationDate,
+                        BrandProfile = x.BrandID == null ? null : new BrandViewModel()
+                        {
+                            BrandID = x.BrandProfile.BrandID,
+                            BrandLink = x.BrandProfile.BrandLink,
+                            ProfilePicPath = x.BrandProfile.ProfilePic.ProfilePicPath,
+                            YoutubeURL = x.BrandProfile.YoutubeURL,
+                            BrandContent = x.BrandProfile.BrandContent,
+                            BrandName = x.BrandProfile.BrandName,
+                            ContactNo = x.BrandProfile.ContactNo,
+                            BrandBannerImages = x.BrandProfile.BrandBannerImages
+                        }
+
                     }).ToList();
                     return View(StudentBlogs);
                 }
@@ -348,10 +371,21 @@ namespace WeBind.Controllers
                         UpdationDate = studentBlog.UpdationDate,
                         CreationDate = studentBlog.CreationDate,
                         StudentProfile = new StudentViewModel()
-                         {
-                             StudentName = studentBlog.StudentProfile.StudentName,
-                             ProfilePicPath = studentBlog.StudentProfile.ProfilePic.ProfilePicPath
-                         }
+                        {
+                            StudentName = studentBlog.StudentProfile.StudentName,
+                            ProfilePicPath = studentBlog.StudentProfile.ProfilePic.ProfilePicPath
+                        },
+                        BrandProfile = studentBlog.BrandID == null ? null : new BrandViewModel()
+                        {
+                            BrandID = studentBlog.BrandProfile.BrandID,
+                            BrandLink = studentBlog.BrandProfile.BrandLink,
+                            ProfilePicPath = studentBlog.BrandProfile.ProfilePic.ProfilePicPath,
+                            YoutubeURL = studentBlog.BrandProfile.YoutubeURL,
+                            BrandContent = studentBlog.BrandProfile.BrandContent,
+                            BrandName = studentBlog.BrandProfile.BrandName,
+                            ContactNo = studentBlog.BrandProfile.ContactNo,
+                            BrandBannerImages = studentBlog.BrandProfile.BrandBannerImages
+                        }
                     };
                     return View(StudentBlog);
                 }

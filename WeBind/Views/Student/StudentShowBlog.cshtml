@@ -32,6 +32,35 @@
                     <br />
                 </div>
             </div>
+            @if (Model.BrandProfile != null)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            <img src="@Url.Content(Model.BrandProfile.ProfilePicPath)" alt="People" class="img width-60" />
+                        </div>
+                        <div class="col-md-11">
+                            <blockquote>
+                                <p class="text-subhead text-light">@Model.BrandProfile.BrandContent</p>
+                                <footer>
+                                    Powered By
+                                    <cite title="@Model.BrandProfile.BrandName"><a href="@Model.BrandProfile.BrandLink" target="_blank"> @Model.BrandProfile.BrandName</a></cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    @if (Model.BrandProfile.YoutubeURL != null)
+                    {
+                        <div class="col-md-12 text-center">
+                            <div class="width-350 width-300-md width-100pc-xs paragraph-inline">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="//www.youtube-nocookie.com/embed/po0jY4WvCIc?rel=0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>

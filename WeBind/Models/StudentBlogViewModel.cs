@@ -19,5 +19,6 @@ namespace WeBind.Models
         public System.DateTime UpdationDate { get; set; }
 
         public StudentViewModel StudentProfile { get; set; }
+        public virtual BrandViewModel BrandProfile { get; set; }
     }
 }

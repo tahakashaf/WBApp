@@ -353,6 +353,8 @@
     <Content Include="images\Insight.png" />
     <Content Include="images\Inspiration.png" />
     <Content Include="images\Interaction.png" />
+    <Content Include="images\markers\mark.png" />
+    <Content Include="images\markers\marker.png" />
     <Content Include="images\people\Investors\nextcom.jpg" />
     <Content Include="images\people\Investors\Siddique Kuwari.jpg" />
     <Content Include="images\learning-logo.png" />

@@ -109,6 +109,22 @@
                                             </div>
                                         </div>
                                     }
+                                    @if (webinar.Brand != null)
+                                    {
+                                        <hr />
+                                        <div class="media v-middle">
+                                            <div class="media-left">
+                                                <img src="@Url.Content(webinar.Brand.ProfilePicPath)" alt="People" class="img width-40" />
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>
+                                                    <a href="@webinar.Brand.BrandLink" target="_blank">@webinar.Brand.BrandName</a>
+                                                    <br />
+                                                </h4>
+                                                @*@webinar.Expert.Company*@
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
