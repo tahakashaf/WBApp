@@ -4,39 +4,38 @@
 
 function Initialize() {
     var mapProp = {
-        center: new google.maps.LatLng(21.7679, 78.8718),
-        zoom: 4,
+        center: new google.maps.LatLng(20.5937, 78.9629),
+        zoom: 5,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    var mapp = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
     $.ajax({
         type: 'GET',
         url: '/Brand/GetMapData/',
         dataType: 'json',
         success: function (data) {
-            console.dir(data);
-            var items = '';
             $.each(data, function (i, item) {
                 console.dir(item);
+                var marker;
                 $.each(item.Campuses, function (j, jtem) {
-                    console.dir(jtem.Latitude);
-                    console.dir(jtem.Longitude);
-                    var marker = new google.maps.Marker({
-                        'position': new google.maps.LatLng(jtem.Latitude, jtem.Longitude),
-                        'map': map,
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(jtem.Latitude, jtem.Longitude),
+                        map: mapp,
                         //'title': item.City
                     });
 
                     //// Make the marker-pin blue! 
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/micons/blue-dot.png')
                     var infowindow = new google.maps.InfoWindow({
-                        content: "<div class='infoDiv'><h2>" + jtem.CampusName + "</div></div>"
+                        content: '<p class="text-light text-caption">' +
+                            '<img src="../' + jtem.ProfilePicPath.substring(2) + '" alt="person" class="img width-20" /> <b>' + jtem.CampusName + '</b>' +
+                                        '<br> <i class="fa fa-group fa-fw"></i> Attended Students: ' + item.Participants + '</p>'
                     });
 
                     // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked! 
                     google.maps.event.addListener(marker, 'mouseover', function () {
-                        infowindow.open(map, marker);
+                        infowindow.open(mapp, marker);
                     });
                     google.maps.event.addListener(marker, 'mouseout', function () {
                         infowindow.close();

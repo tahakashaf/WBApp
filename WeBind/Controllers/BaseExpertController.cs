@@ -59,7 +59,7 @@ namespace WeBind.Controllers
                         data = new ApplicationBaseModel()
                         {
                             BrandID = brand.BrandID,
-                            StudentName = brand.BrandName,
+                            BrandName = brand.BrandName,
                             ProfilePicPath = brand.ProfilePic.ProfilePicPath,
                             RoleName = Roles.Brand.ToString()
                         };
