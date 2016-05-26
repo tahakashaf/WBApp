@@ -51,7 +51,7 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMaps.LocationServices">
-      <HintPath>C:\Users\Kruti\Source\Repos\MapPOC\MapPOC\bin\GoogleMaps.LocationServices.dll</HintPath>
+      <HintPath>..\packages\GoogleMaps.LocationServices.0.9.8.6\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -340,6 +340,7 @@
     <Content Include="Content\vendor\slick.css" />
     <Content Include="favicon1.ico" />
     <Content Include="Global.asax" />
+    <Content Include="GoogleMaps.LocationServices.readme.txt" />
     <Content Include="images\Being a Master.png" />
     <Content Include="images\Campus Super Hero.png" />
     <Content Include="images\Careers.jpg" />
