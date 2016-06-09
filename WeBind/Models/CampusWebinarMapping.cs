@@ -23,9 +23,10 @@ namespace WeBind.Models
         public long WebinarID { get; set; }
         public long CampusID { get; set; }
         public Nullable<bool> IsApproved { get; set; }
+        public long ParticipantCount { get; set; }
     
-        public virtual ICollection<WebinarFeedBack> WebinarFeedBacks { get; set; }
-        public virtual Webinar Webinar { get; set; }
         public virtual CampusProfile CampusProfile { get; set; }
+        public virtual Webinar Webinar { get; set; }
+        public virtual ICollection<WebinarFeedBack> WebinarFeedBacks { get; set; }
     }
 }

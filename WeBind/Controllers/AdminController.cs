@@ -745,7 +745,6 @@ namespace WeBind.Controllers
                         webinartobeSaved.FromDateTime = webinar.FromDateTime;
                         webinartobeSaved.TimeDuration = webinar.TimeDuration;
                         webinartobeSaved.YoutubeUrl = webinar.YoutubeUrl;
-                        webinartobeSaved.Participants = webinar.Participants;
                         webinartobeSaved.WebinarPicID = 3;
                         webinartobeSaved.statusID = 1;
                         webinartobeSaved.ExpertID = webinar.ExpertID;
@@ -864,7 +863,6 @@ namespace WeBind.Controllers
                     webinar.FromDateTime = webinarDB.FromDateTime;
                     webinar.TimeDuration = webinarDB.TimeDuration;
                     webinar.YoutubeUrl = webinarDB.YoutubeUrl;
-                    webinar.Participants = webinarDB.Participants;
                     webinar.WebinarPicID = webinarDB.WebinarPicID;
                     webinar.ExpertID = webinarDB.ExpertID;
                     webinar.ExpertsList = experts;
@@ -895,7 +893,6 @@ namespace WeBind.Controllers
                     webinartobeSaved.FromDateTime = webinar.FromDateTime;
                     webinartobeSaved.TimeDuration = webinar.TimeDuration;
                     webinartobeSaved.YoutubeUrl = webinar.YoutubeUrl;
-                    webinartobeSaved.Participants = webinar.Participants;
                     webinartobeSaved.ExpertID = webinar.ExpertID;
 
                     db.Entry(webinartobeSaved).State = System.Data.Entity.EntityState.Modified;

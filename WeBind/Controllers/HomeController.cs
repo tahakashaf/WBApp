@@ -118,7 +118,7 @@ namespace WeBind.Controllers
                                 DepartmentName = z.CampusProfile.DepartmentName,
                                 ProfilePicPath = z.CampusProfile.ProfilePic.ProfilePicPath
                             }).ToList(),
-                            Participants = y.Participants
+                            ParticipantCount = y.CampusWebinarMappings.Sum(z => z.ParticipantCount),
                         }).ToList()
                     };
 
@@ -179,7 +179,7 @@ namespace WeBind.Controllers
                         FromDateTime = webinar.FromDateTime,
                         TimeDuration = webinar.TimeDuration,
                         Tags = webinar.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                        Participants = webinar.Participants,
+                        ParticipantCount = webinar.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                         YoutubeUrl = id,
                         IsWebinarRequested = webinar.CampusWebinarMappings.Where(y => y.CampusID == CampusID).FirstOrDefault() == null ? false : true,
                         Campuses = webinar.CampusWebinarMappings.Where(x => x.IsApproved == true).Select(z => new CampusViewModel()
@@ -330,7 +330,7 @@ namespace WeBind.Controllers
                         WebinarSummary = x.WebinarSummary,
                         FromDateTime = x.FromDateTime,
                         Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                        Participants = x.Participants,
+                        ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                         WebinarPicPath = x.ProfilePic.ProfilePicPath,
                         Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
                         {

@@ -87,6 +87,7 @@
           <Property Name="WebinarID" Type="bigint" Nullable="false" />
           <Property Name="CampusID" Type="bigint" Nullable="false" />
           <Property Name="IsApproved" Type="bit" />
+          <Property Name="ParticipantCount" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="ConfigurationData">
           <Key>
@@ -226,7 +227,6 @@
           <Property Name="TimeDuration" Type="time" Precision="7" Nullable="false" />
           <Property Name="ToDateTime" Type="datetime" />
           <Property Name="statusID" Type="bigint" Nullable="false" />
-          <Property Name="Participants" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="YoutubeUrl" Type="nvarchar(max)" />
           <Property Name="WebinarPicID" Type="bigint" Nullable="false" />
           <Property Name="BrandID" Type="bigint" />
@@ -806,28 +806,6 @@
           </AssociationSet>
           <EntitySet Name="RecommandAFriends" EntityType="WeBindModel.RecommandAFriend" />
           <EntitySet Name="WebinarFeedBacks" EntityType="WeBindModel.WebinarFeedBack" />
-          <EntitySet Name="CampusWebinarMappings" EntityType="WeBindModel.CampusWebinarMapping" />
-          <AssociationSet Name="FK_WebinarFeedBack_CampusWebinarMapping" Association="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping">
-            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
-            <End Role="WebinarFeedBack" EntitySet="WebinarFeedBacks" />
-          </AssociationSet>
-          <EntitySet Name="Webinars" EntityType="WeBindModel.Webinar" />
-          <AssociationSet Name="FK_CampusWebinarMapping_Webinar" Association="WeBindModel.FK_CampusWebinarMapping_Webinar">
-            <End Role="Webinar" EntitySet="Webinars" />
-            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Webinar_ProfilePic" Association="WeBindModel.FK_Webinar_ProfilePic">
-            <End Role="ProfilePic" EntitySet="ProfilePics" />
-            <End Role="Webinar" EntitySet="Webinars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Webinar_statusMaster" Association="WeBindModel.FK_Webinar_statusMaster">
-            <End Role="StatusMaster" EntitySet="StatusMasters" />
-            <End Role="Webinar" EntitySet="Webinars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WebinarTagMapping_Webinar" Association="WeBindModel.FK_WebinarTagMapping_Webinar">
-            <End Role="Webinar" EntitySet="Webinars" />
-            <End Role="WebinarTagMapping" EntitySet="WebinarTagMappings" />
-          </AssociationSet>
           <EntitySet Name="CampusRequests" EntityType="WeBindModel.CampusRequest" />
           <EntitySet Name="CampusExpertRequests" EntityType="WeBindModel.CampusExpertRequest" />
           <EntitySet Name="Messages" EntityType="WeBindModel.Message" />
@@ -852,10 +830,6 @@
           <AssociationSet Name="FK_CampusRequest_CampusProfile1" Association="WeBindModel.FK_CampusRequest_CampusProfile1">
             <End Role="CampusProfile" EntitySet="CampusProfiles" />
             <End Role="CampusRequest" EntitySet="CampusRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CampusWebinarMapping_CampusProfile" Association="WeBindModel.FK_CampusWebinarMapping_CampusProfile">
-            <End Role="CampusProfile" EntitySet="CampusProfiles" />
-            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
           </AssociationSet>
           <AssociationSet Name="FK_Message_CampusProfile" Association="WeBindModel.FK_Message_CampusProfile">
             <End Role="CampusProfile" EntitySet="CampusProfiles" />
@@ -886,10 +860,6 @@
           </AssociationSet>
           <EntitySet Name="WebinarAnswers" EntityType="WeBindModel.WebinarAnswer" />
           <EntitySet Name="WebinarQuestions" EntityType="WeBindModel.WebinarQuestion" />
-          <AssociationSet Name="FK_WebinarQuestions_Webinar" Association="WeBindModel.FK_WebinarQuestions_Webinar">
-            <End Role="Webinar" EntitySet="Webinars" />
-            <End Role="WebinarQuestion" EntitySet="WebinarQuestions" />
-          </AssociationSet>
           <AssociationSet Name="FK_WebinarAnswers_WebinarQuestions" Association="WeBindModel.FK_WebinarAnswers_WebinarQuestions">
             <End Role="WebinarQuestion" EntitySet="WebinarQuestions" />
             <End Role="WebinarAnswer" EntitySet="WebinarAnswers" />
@@ -904,14 +874,6 @@
             <End Role="ProfilePic" EntitySet="ProfilePics" />
             <End Role="BrandProfile" EntitySet="BrandProfiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Webinar_BrandProfile" Association="WeBindModel.FK_Webinar_BrandProfile">
-            <End Role="BrandProfile" EntitySet="BrandProfiles" />
-            <End Role="Webinar" EntitySet="Webinars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Webinar_ExpertProfile" Association="WeBindModel.FK_Webinar_ExpertProfile">
-            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
-            <End Role="Webinar" EntitySet="Webinars" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentBlogs_BrandProfile" Association="WeBindModel.FK_StudentBlogs_BrandProfile">
             <End Role="BrandProfile" EntitySet="BrandProfiles" />
             <End Role="StudentBlog" EntitySet="StudentBlogs" />
@@ -920,6 +882,44 @@
           <AssociationSet Name="FK_BrandBannerImage_BrandProfile" Association="WeBindModel.FK_BrandBannerImage_BrandProfile">
             <End Role="BrandProfile" EntitySet="BrandProfiles" />
             <End Role="BrandBannerImage" EntitySet="BrandBannerImages" />
+          </AssociationSet>
+          <EntitySet Name="Webinars" EntityType="WeBindModel.Webinar" />
+          <AssociationSet Name="FK_Webinar_BrandProfile" Association="WeBindModel.FK_Webinar_BrandProfile">
+            <End Role="BrandProfile" EntitySet="BrandProfiles" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ExpertProfile" Association="WeBindModel.FK_Webinar_ExpertProfile">
+            <End Role="ExpertProfile" EntitySet="ExpertProfiles" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_ProfilePic" Association="WeBindModel.FK_Webinar_ProfilePic">
+            <End Role="ProfilePic" EntitySet="ProfilePics" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Webinar_statusMaster" Association="WeBindModel.FK_Webinar_statusMaster">
+            <End Role="StatusMaster" EntitySet="StatusMasters" />
+            <End Role="Webinar" EntitySet="Webinars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarQuestions_Webinar" Association="WeBindModel.FK_WebinarQuestions_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="WebinarQuestion" EntitySet="WebinarQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarTagMapping_Webinar" Association="WeBindModel.FK_WebinarTagMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="WebinarTagMapping" EntitySet="WebinarTagMappings" />
+          </AssociationSet>
+          <EntitySet Name="CampusWebinarMappings" EntityType="WeBindModel.CampusWebinarMapping" />
+          <AssociationSet Name="FK_CampusWebinarMapping_CampusProfile" Association="WeBindModel.FK_CampusWebinarMapping_CampusProfile">
+            <End Role="CampusProfile" EntitySet="CampusProfiles" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampusWebinarMapping_Webinar" Association="WeBindModel.FK_CampusWebinarMapping_Webinar">
+            <End Role="Webinar" EntitySet="Webinars" />
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebinarFeedBack_CampusWebinarMapping" Association="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping">
+            <End Role="CampusWebinarMapping" EntitySet="CampusWebinarMappings" />
+            <End Role="WebinarFeedBack" EntitySet="WebinarFeedBacks" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -959,11 +959,11 @@
           <Property Name="ProfilePicID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProfilePicPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="ProfilePic" ToRole="Webinar" />
           <NavigationProperty Name="CampusProfiles" Relationship="WeBindModel.FK_CampusProfile_ProfilePic" FromRole="ProfilePic" ToRole="CampusProfile" />
           <NavigationProperty Name="ExpertProfiles" Relationship="WeBindModel.FK_ExpertProfile_ProfilePic" FromRole="ProfilePic" ToRole="ExpertProfile" />
           <NavigationProperty Name="StudentProfiles" Relationship="WeBindModel.FK_StudentProfile_ProfilePic" FromRole="ProfilePic" ToRole="StudentProfile" />
           <NavigationProperty Name="BrandProfiles" Relationship="WeBindModel.FK_BrandProfile_ProfilePic" FromRole="ProfilePic" ToRole="BrandProfile" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="ProfilePic" ToRole="Webinar" />
         </EntityType>
         <EntityType Name="StatusMaster">
           <Key>
@@ -1038,104 +1038,6 @@
           <Property Name="IsApproved" Type="Boolean" />
           <NavigationProperty Name="CampusWebinarMapping" Relationship="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" FromRole="WebinarFeedBack" ToRole="CampusWebinarMapping" />
         </EntityType>
-        <EntityType Name="CampusWebinarMapping">
-          <Key>
-            <PropertyRef Name="CampusWebinarID" />
-          </Key>
-          <Property Name="CampusWebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WebinarID" Type="Int64" Nullable="false" />
-          <Property Name="CampusID" Type="Int64" Nullable="false" />
-          <Property Name="IsApproved" Type="Boolean" />
-          <NavigationProperty Name="WebinarFeedBacks" Relationship="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" FromRole="CampusWebinarMapping" ToRole="WebinarFeedBack" />
-          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="CampusWebinarMapping" ToRole="Webinar" />
-          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusWebinarMapping" ToRole="CampusProfile" />
-        </EntityType>
-        <Association Name="FK_WebinarFeedBack_CampusWebinarMapping">
-          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="1" />
-          <End Type="WeBindModel.WebinarFeedBack" Role="WebinarFeedBack" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CampusWebinarMapping">
-              <PropertyRef Name="CampusWebinarID" />
-            </Principal>
-            <Dependent Role="WebinarFeedBack">
-              <PropertyRef Name="CampusWabinarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Webinar">
-          <Key>
-            <PropertyRef Name="WebinarID" />
-          </Key>
-          <Property Name="WebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WebinarName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WebinarSummary" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="WebinarDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WhatWillYouLearn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FromDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TimeDuration" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="ToDateTime" Type="DateTime" Precision="3" />
-          <Property Name="statusID" Type="Int64" Nullable="false" />
-          <Property Name="Participants" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="YoutubeUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WebinarPicID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="Webinar" ToRole="CampusWebinarMapping" />
-          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="Webinar" ToRole="ProfilePic" />
-          <NavigationProperty Name="StatusMaster" Relationship="WeBindModel.FK_Webinar_statusMaster" FromRole="Webinar" ToRole="StatusMaster" />
-          <NavigationProperty Name="WebinarTagMappings" Relationship="WeBindModel.FK_WebinarTagMapping_Webinar" FromRole="Webinar" ToRole="WebinarTagMapping" />
-          <NavigationProperty Name="WebinarQuestions" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="Webinar" ToRole="WebinarQuestion" />
-          <Property Name="BrandID" Type="Int64" />
-          <Property Name="ExpertID" Type="Int64" />
-          <NavigationProperty Name="BrandProfile" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="Webinar" ToRole="BrandProfile" />
-          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_Webinar_ExpertProfile" FromRole="Webinar" ToRole="ExpertProfile" />
-        </EntityType>
-        <Association Name="FK_CampusWebinarMapping_Webinar">
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
-          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Webinar">
-              <PropertyRef Name="WebinarID" />
-            </Principal>
-            <Dependent Role="CampusWebinarMapping">
-              <PropertyRef Name="WebinarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Webinar_ProfilePic">
-          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="1" />
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProfilePic">
-              <PropertyRef Name="ProfilePicID" />
-            </Principal>
-            <Dependent Role="Webinar">
-              <PropertyRef Name="WebinarPicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Webinar_statusMaster">
-          <End Type="WeBindModel.StatusMaster" Role="StatusMaster" Multiplicity="1" />
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusMaster">
-              <PropertyRef Name="statusID" />
-            </Principal>
-            <Dependent Role="Webinar">
-              <PropertyRef Name="statusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WebinarTagMapping_Webinar">
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
-          <End Type="WeBindModel.WebinarTagMapping" Role="WebinarTagMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Webinar">
-              <PropertyRef Name="WebinarID" />
-            </Principal>
-            <Dependent Role="WebinarTagMapping">
-              <PropertyRef Name="WebinarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CampusRequest">
           <Key>
             <PropertyRef Name="expertRequestID" />
@@ -1199,9 +1101,9 @@
           <NavigationProperty Name="CampusExpertRequests" Relationship="WeBindModel.FK_CampusRequest_CampusProfile" FromRole="CampusProfile" ToRole="CampusExpertRequest" />
           <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_CampusProfile_ProfilePic" FromRole="CampusProfile" ToRole="ProfilePic" />
           <NavigationProperty Name="CampusRequests" Relationship="WeBindModel.FK_CampusRequest_CampusProfile1" FromRole="CampusProfile" ToRole="CampusRequest" />
-          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusProfile" ToRole="CampusWebinarMapping" />
           <NavigationProperty Name="Messages" Relationship="WeBindModel.FK_Message_CampusProfile" FromRole="CampusProfile" ToRole="Message" />
           <Property Name="ProfessorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusProfile" ToRole="CampusWebinarMapping" />
         </EntityType>
         <EntityType Name="ExpertProfile">
           <Key>
@@ -1290,18 +1192,6 @@
               <PropertyRef Name="CampusID" />
             </Principal>
             <Dependent Role="CampusRequest">
-              <PropertyRef Name="CampusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CampusWebinarMapping_CampusProfile">
-          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
-          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CampusProfile">
-              <PropertyRef Name="CampusID" />
-            </Principal>
-            <Dependent Role="CampusWebinarMapping">
               <PropertyRef Name="CampusID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1432,21 +1322,9 @@
           <Property Name="QuestionID" Type="Int64" Nullable="false" />
           <Property Name="WebinarID" Type="Int64" />
           <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="WebinarQuestion" ToRole="Webinar" />
           <NavigationProperty Name="WebinarAnswers" Relationship="WeBindModel.FK_WebinarAnswers_WebinarQuestions" FromRole="WebinarQuestion" ToRole="WebinarAnswer" />
+          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="WebinarQuestion" ToRole="Webinar" />
         </EntityType>
-        <Association Name="FK_WebinarQuestions_Webinar">
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="0..1" />
-          <End Type="WeBindModel.WebinarQuestion" Role="WebinarQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Webinar">
-              <PropertyRef Name="WebinarID" />
-            </Principal>
-            <Dependent Role="WebinarQuestion">
-              <PropertyRef Name="WebinarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WebinarAnswers_WebinarQuestions">
           <End Type="WeBindModel.WebinarQuestion" Role="WebinarQuestion" Multiplicity="0..1" />
           <End Type="WeBindModel.WebinarAnswer" Role="WebinarAnswer" Multiplicity="*" />
@@ -1499,10 +1377,10 @@
           <Property Name="BrandLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="YoutubeURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_BrandProfile_ProfilePic" FromRole="BrandProfile" ToRole="ProfilePic" />
-          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="BrandProfile" ToRole="Webinar" />
           <NavigationProperty Name="StudentBlogs" Relationship="WeBindModel.FK_StudentBlogs_BrandProfile" FromRole="BrandProfile" ToRole="StudentBlog" />
           <Property Name="BrandContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BrandBannerImages" Relationship="WeBindModel.FK_BrandBannerImage_BrandProfile" FromRole="BrandProfile" ToRole="BrandBannerImage" />
+          <NavigationProperty Name="Webinars" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="BrandProfile" ToRole="Webinar" />
         </EntityType>
         <Association Name="FK_BrandProfile_ProfilePic">
           <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="1" />
@@ -1513,30 +1391,6 @@
             </Principal>
             <Dependent Role="BrandProfile">
               <PropertyRef Name="BrandLogoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Webinar_BrandProfile">
-          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="0..1" />
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrandProfile">
-              <PropertyRef Name="BrandID" />
-            </Principal>
-            <Dependent Role="Webinar">
-              <PropertyRef Name="BrandID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Webinar_ExpertProfile">
-          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="0..1" />
-          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExpertProfile">
-              <PropertyRef Name="ExpertID" />
-            </Principal>
-            <Dependent Role="Webinar">
-              <PropertyRef Name="ExpertID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1570,6 +1424,152 @@
             </Principal>
             <Dependent Role="BrandBannerImage">
               <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Webinar">
+          <Key>
+            <PropertyRef Name="WebinarID" />
+          </Key>
+          <Property Name="WebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebinarName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarSummary" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhatWillYouLearn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeDuration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ToDateTime" Type="DateTime" Precision="3" />
+          <Property Name="statusID" Type="Int64" Nullable="false" />
+          <Property Name="YoutubeUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebinarPicID" Type="Int64" Nullable="false" />
+          <Property Name="BrandID" Type="Int64" />
+          <Property Name="ExpertID" Type="Int64" />
+          <NavigationProperty Name="BrandProfile" Relationship="WeBindModel.FK_Webinar_BrandProfile" FromRole="Webinar" ToRole="BrandProfile" />
+          <NavigationProperty Name="ExpertProfile" Relationship="WeBindModel.FK_Webinar_ExpertProfile" FromRole="Webinar" ToRole="ExpertProfile" />
+          <NavigationProperty Name="ProfilePic" Relationship="WeBindModel.FK_Webinar_ProfilePic" FromRole="Webinar" ToRole="ProfilePic" />
+          <NavigationProperty Name="StatusMaster" Relationship="WeBindModel.FK_Webinar_statusMaster" FromRole="Webinar" ToRole="StatusMaster" />
+          <NavigationProperty Name="WebinarQuestions" Relationship="WeBindModel.FK_WebinarQuestions_Webinar" FromRole="Webinar" ToRole="WebinarQuestion" />
+          <NavigationProperty Name="WebinarTagMappings" Relationship="WeBindModel.FK_WebinarTagMapping_Webinar" FromRole="Webinar" ToRole="WebinarTagMapping" />
+          <NavigationProperty Name="CampusWebinarMappings" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="Webinar" ToRole="CampusWebinarMapping" />
+        </EntityType>
+        <Association Name="FK_Webinar_BrandProfile">
+          <End Type="WeBindModel.BrandProfile" Role="BrandProfile" Multiplicity="0..1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandProfile">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ExpertProfile">
+          <End Type="WeBindModel.ExpertProfile" Role="ExpertProfile" Multiplicity="0..1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpertProfile">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_ProfilePic">
+          <End Type="WeBindModel.ProfilePic" Role="ProfilePic" Multiplicity="1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfilePic">
+              <PropertyRef Name="ProfilePicID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="WebinarPicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Webinar_statusMaster">
+          <End Type="WeBindModel.StatusMaster" Role="StatusMaster" Multiplicity="1" />
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMaster">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Webinar">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarQuestions_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="0..1" />
+          <End Type="WeBindModel.WebinarQuestion" Role="WebinarQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarQuestion">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarTagMapping_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
+          <End Type="WeBindModel.WebinarTagMapping" Role="WebinarTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="WebinarTagMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CampusWebinarMapping">
+          <Key>
+            <PropertyRef Name="CampusWebinarID" />
+          </Key>
+          <Property Name="CampusWebinarID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebinarID" Type="Int64" Nullable="false" />
+          <Property Name="CampusID" Type="Int64" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ParticipantCount" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CampusProfile" Relationship="WeBindModel.FK_CampusWebinarMapping_CampusProfile" FromRole="CampusWebinarMapping" ToRole="CampusProfile" />
+          <NavigationProperty Name="Webinar" Relationship="WeBindModel.FK_CampusWebinarMapping_Webinar" FromRole="CampusWebinarMapping" ToRole="Webinar" />
+          <NavigationProperty Name="WebinarFeedBacks" Relationship="WeBindModel.FK_WebinarFeedBack_CampusWebinarMapping" FromRole="CampusWebinarMapping" ToRole="WebinarFeedBack" />
+        </EntityType>
+        <Association Name="FK_CampusWebinarMapping_CampusProfile">
+          <End Type="WeBindModel.CampusProfile" Role="CampusProfile" Multiplicity="1" />
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusProfile">
+              <PropertyRef Name="CampusID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampusWebinarMapping_Webinar">
+          <End Type="WeBindModel.Webinar" Role="Webinar" Multiplicity="1" />
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Webinar">
+              <PropertyRef Name="WebinarID" />
+            </Principal>
+            <Dependent Role="CampusWebinarMapping">
+              <PropertyRef Name="WebinarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebinarFeedBack_CampusWebinarMapping">
+          <End Type="WeBindModel.CampusWebinarMapping" Role="CampusWebinarMapping" Multiplicity="1" />
+          <End Type="WeBindModel.WebinarFeedBack" Role="WebinarFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CampusWebinarMapping">
+              <PropertyRef Name="CampusWebinarID" />
+            </Principal>
+            <Dependent Role="WebinarFeedBack">
+              <PropertyRef Name="CampusWabinarID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1674,36 +1674,6 @@
                 <ScalarProperty Name="CampusWabinarID" ColumnName="CampusWabinarID" />
                 <ScalarProperty Name="FeedBack" ColumnName="FeedBack" />
                 <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CampusWebinarMappings">
-            <EntityTypeMapping TypeName="WeBindModel.CampusWebinarMapping">
-              <MappingFragment StoreEntitySet="CampusWebinarMapping">
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
-                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
-                <ScalarProperty Name="CampusWebinarID" ColumnName="CampusWebinarID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Webinars">
-            <EntityTypeMapping TypeName="WeBindModel.Webinar">
-              <MappingFragment StoreEntitySet="Webinar">
-                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="WebinarPicID" ColumnName="WebinarPicID" />
-                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
-                <ScalarProperty Name="Participants" ColumnName="Participants" />
-                <ScalarProperty Name="statusID" ColumnName="statusID" />
-                <ScalarProperty Name="ToDateTime" ColumnName="ToDateTime" />
-                <ScalarProperty Name="TimeDuration" ColumnName="TimeDuration" />
-                <ScalarProperty Name="FromDateTime" ColumnName="FromDateTime" />
-                <ScalarProperty Name="WhatWillYouLearn" ColumnName="WhatWillYouLearn" />
-                <ScalarProperty Name="WebinarDescription" ColumnName="WebinarDescription" />
-                <ScalarProperty Name="WebinarSummary" ColumnName="WebinarSummary" />
-                <ScalarProperty Name="WebinarName" ColumnName="WebinarName" />
-                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1885,6 +1855,36 @@
                 <ScalarProperty Name="BrandID" ColumnName="BrandID" />
                 <ScalarProperty Name="BrandBannerImagePath" ColumnName="BrandBannerImagePath" />
                 <ScalarProperty Name="BrandImageID" ColumnName="BrandImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Webinars">
+            <EntityTypeMapping TypeName="WeBindModel.Webinar">
+              <MappingFragment StoreEntitySet="Webinar">
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="WebinarPicID" ColumnName="WebinarPicID" />
+                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="ToDateTime" ColumnName="ToDateTime" />
+                <ScalarProperty Name="TimeDuration" ColumnName="TimeDuration" />
+                <ScalarProperty Name="FromDateTime" ColumnName="FromDateTime" />
+                <ScalarProperty Name="WhatWillYouLearn" ColumnName="WhatWillYouLearn" />
+                <ScalarProperty Name="WebinarDescription" ColumnName="WebinarDescription" />
+                <ScalarProperty Name="WebinarSummary" ColumnName="WebinarSummary" />
+                <ScalarProperty Name="WebinarName" ColumnName="WebinarName" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusWebinarMappings">
+            <EntityTypeMapping TypeName="WeBindModel.CampusWebinarMapping">
+              <MappingFragment StoreEntitySet="CampusWebinarMapping">
+                <ScalarProperty Name="ParticipantCount" ColumnName="ParticipantCount" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+                <ScalarProperty Name="WebinarID" ColumnName="WebinarID" />
+                <ScalarProperty Name="CampusWebinarID" ColumnName="CampusWebinarID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

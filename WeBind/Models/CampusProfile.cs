@@ -19,8 +19,8 @@ namespace WeBind.Models
             this.CampusDepartments = new HashSet<CampusDepartment>();
             this.CampusExpertRequests = new HashSet<CampusExpertRequest>();
             this.CampusRequests = new HashSet<CampusRequest>();
-            this.CampusWebinarMappings = new HashSet<CampusWebinarMapping>();
             this.Messages = new HashSet<Message>();
+            this.CampusWebinarMappings = new HashSet<CampusWebinarMapping>();
         }
     
         public long CampusID { get; set; }
@@ -45,7 +45,7 @@ namespace WeBind.Models
         public virtual ICollection<CampusExpertRequest> CampusExpertRequests { get; set; }
         public virtual ProfilePic ProfilePic { get; set; }
         public virtual ICollection<CampusRequest> CampusRequests { get; set; }
-        public virtual ICollection<CampusWebinarMapping> CampusWebinarMappings { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<CampusWebinarMapping> CampusWebinarMappings { get; set; }
     }
 }

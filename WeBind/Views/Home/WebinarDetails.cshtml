@@ -155,7 +155,7 @@
                             <br />
                             <i class="fa fa-university fa-fw"></i> Attending Colleges: @Model.Campuses.Count
                             <br />
-                            <i class="fa fa-mortar-board fa-fw"></i> Students Attending: @Model.Participants
+                            <i class="fa fa-mortar-board fa-fw"></i> Students Attending: @Model.ParticipantCount
                         </p>
                     </div>
                     @if (((ViewBag.UserData != null && ViewBag.UserData.RoleName != "Expert" && !Model.IsWebinarRequested) || ViewBag.UserData == null) && Model.FromDateTime > DateTime.Now)
@@ -235,14 +235,16 @@
                     <h4 class="modal-title">Are you sure you want to attend this Master-Class ?</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    @* href="@Url.Action("AttendClass", "Educator" , routeValues: new { webinarid=Model.WebinarID })"  *@
+                    @using (Html.BeginForm("AttendClass", "Educator", new { webinarid = Model.WebinarID }, FormMethod.Post, new { @name = "", role = "form" }))
+                    {
                         <div class="form-group form-control-material">
-                            <input type="text" class="form-control" id="credit-card" placeholder="">
+                            @Html.TextBoxFor(m => m.ParticipantCount, new { @class = "form-control  text-center", id = "educatorEmail" })
                             <label for="credit-card">Number Of Students Attending</label>
                         </div>
-                        <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">Yes</button>
+                        <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1">Yes</button>
                         <button type="button" class="btn btn-default paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">No</button>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ namespace WeBind.Models
         public string WhatWillYouLearn { get; set; }
         public System.DateTime FromDateTime { get; set; }
         public System.TimeSpan TimeDuration { get; set; }
-        public decimal Participants { get; set; }
+        public long ParticipantCount { get; set; }
         public string YoutubeUrl { get; set; }
         public virtual ICollection<string> Tags { get; set; }
         public long WebinarPicID { get; set; }

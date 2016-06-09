@@ -16,9 +16,9 @@ namespace WeBind.Models
     {
         public BrandProfile()
         {
-            this.Webinars = new HashSet<Webinar>();
             this.StudentBlogs = new HashSet<StudentBlog>();
             this.BrandBannerImages = new HashSet<BrandBannerImage>();
+            this.Webinars = new HashSet<Webinar>();
         }
     
         public long BrandID { get; set; }
@@ -32,8 +32,8 @@ namespace WeBind.Models
         public string BrandContent { get; set; }
     
         public virtual ProfilePic ProfilePic { get; set; }
-        public virtual ICollection<Webinar> Webinars { get; set; }
         public virtual ICollection<StudentBlog> StudentBlogs { get; set; }
         public virtual ICollection<BrandBannerImage> BrandBannerImages { get; set; }
+        public virtual ICollection<Webinar> Webinars { get; set; }
     }
 }

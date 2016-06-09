@@ -30,7 +30,7 @@ namespace WeBind.Controllers
             {
                 long ExpertID = ViewBag.UserData.ExpertID;
 
-                List<int> Participants = _Context.Webinars.Where(x => x.ExpertID == ExpertID).OrderBy(x => x.FromDateTime).Select(x => (int)x.Participants).ToList();
+                List<long> Participants = _Context.Webinars.Where(x => x.ExpertID == ExpertID).OrderBy(x => x.FromDateTime).Select(x => x.CampusWebinarMappings.Sum(y => y.ParticipantCount)).ToList();
                 string chartVal = "";
                 for (int i = 0; i < Participants.Count; i++)
                 {
@@ -71,7 +71,6 @@ namespace WeBind.Controllers
                             DepartmentName = z.CampusProfile.DepartmentName,
                             ProfilePicPath = z.CampusProfile.ProfilePic.ProfilePicPath
                         }).ToList(),
-                        Participants = y.Participants
                     }).ToList()
                 }).FirstOrDefault();
 
@@ -430,7 +429,7 @@ namespace WeBind.Controllers
                     FromDateTime = x.FromDateTime,
                     WebinarPicPath = x.ProfilePic.ProfilePicPath,
                     Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Participants,
+                    ParticipantCount = (long)x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                     Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
                     {
                         CampusName = y.CampusProfile.CampusName,
@@ -549,7 +548,7 @@ namespace WeBind.Controllers
                     WebinarSummary = x.WebinarSummary,
                     FromDateTime = x.FromDateTime,
                     Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Participants,
+                    ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                     Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
                     {
                         CampusName = y.CampusProfile.CampusName,

@@ -35,8 +35,6 @@ namespace WeBind.Models
         public virtual DbSet<WebinarTagMapping> WebinarTagMappings { get; set; }
         public virtual DbSet<RecommandAFriend> RecommandAFriends { get; set; }
         public virtual DbSet<WebinarFeedBack> WebinarFeedBacks { get; set; }
-        public virtual DbSet<CampusWebinarMapping> CampusWebinarMappings { get; set; }
-        public virtual DbSet<Webinar> Webinars { get; set; }
         public virtual DbSet<CampusRequest> CampusRequests { get; set; }
         public virtual DbSet<CampusExpertRequest> CampusExpertRequests { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
@@ -50,6 +48,8 @@ namespace WeBind.Models
         public virtual DbSet<StudentBlog> StudentBlogs { get; set; }
         public virtual DbSet<BrandProfile> BrandProfiles { get; set; }
         public virtual DbSet<BrandBannerImage> BrandBannerImages { get; set; }
+        public virtual DbSet<Webinar> Webinars { get; set; }
+        public virtual DbSet<CampusWebinarMapping> CampusWebinarMappings { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

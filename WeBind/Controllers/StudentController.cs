@@ -42,7 +42,7 @@ namespace WeBind.Controllers
                     WebinarSummary = x.WebinarSummary,
                     FromDateTime = x.FromDateTime,
                     Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Participants,
+                    ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                     WebinarPicPath = x.ProfilePic.ProfilePicPath,
                     //IsWebinarRequested = x.CampusWebinarMappings.Where(y => y.CampusID == CampusID).FirstOrDefault() == null ? false : true,
                     Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
@@ -105,7 +105,7 @@ namespace WeBind.Controllers
                         WebinarSummary = x.WebinarSummary,
                         FromDateTime = x.FromDateTime,
                         Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                        Participants = x.Participants,
+                        ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                         WebinarPicPath = x.ProfilePic.ProfilePicPath,
                         Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
                         {

@@ -21,5 +21,17 @@ namespace WeBind.Models
         public IEnumerable<WebinarViewModel> Webinars { get; set; }
         public IEnumerable<BrandBannerImage> BrandBannerImages { get; set; }
         public IEnumerable<StudentBlogViewModel> StudentBlogs { get; set; }
+        public BrandTableReportViewModel BrandReport { get; set; }
+    }
+    public class BrandTableReportViewModel
+    {
+        public long TotalSessions { get; set; }
+        public long Mailers { get; set; }
+        public long StudentsRegistered { get; set; }
+        public long NewsLetterClicks { get; set; }
+        public long CollegesAttended { get; set; }
+        public long CertificatesDownloaded { get; set; }
+        public long CouponsRedeeemed { get; set; }
+        public long Blogs { get; set; }
     }
 }

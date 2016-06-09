@@ -38,7 +38,7 @@ namespace WeBind.Controllers
                     WebinarSummary = x.WebinarSummary,
                     FromDateTime = x.FromDateTime,
                     Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Participants,
+                    ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                     Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
                     {
                         CampusName = y.CampusProfile.CampusName,
@@ -114,7 +114,7 @@ namespace WeBind.Controllers
                     WebinarSummary = x.WebinarSummary,
                     FromDateTime = x.FromDateTime,
                     Tags = x.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Participants,
+                    ParticipantCount = x.CampusWebinarMappings.Sum(y => y.ParticipantCount),
                     WebinarPicPath = x.ProfilePic.ProfilePicPath,
                     IsWebinarRequested = x.CampusWebinarMappings.Where(y => y.CampusID == CampusID).FirstOrDefault() == null ? false : true,
                     Campuses = x.CampusWebinarMappings.Select(y => new CampusViewModel()
@@ -629,7 +629,7 @@ namespace WeBind.Controllers
                     WebinarSummary = x.Webinar.WebinarSummary,
                     FromDateTime = x.Webinar.FromDateTime,
                     Tags = x.Webinar.WebinarTagMappings.Select(y => y.TagMaster.TagName).ToList(),
-                    Participants = x.Webinar.Participants,
+                    ParticipantCount = x.Webinar.CampusWebinarMappings.Sum(y => y.ParticipantCount),
 
                     CampusWebinarID = x.CampusWebinarID,
 
@@ -721,7 +721,7 @@ namespace WeBind.Controllers
             }
         }
 
-        public ActionResult AttendClass(long WebinarID)
+        public ActionResult AttendClass(long WebinarID, WebinarViewModel webinarAttend)
         {
             try
             {
@@ -752,6 +752,7 @@ namespace WeBind.Controllers
                     campusWebinarMapping.CampusID = CampusID;
                     campusWebinarMapping.WebinarID = WebinarID;
                     campusWebinarMapping.IsApproved = null;
+                    campusWebinarMapping.ParticipantCount = webinarAttend.ParticipantCount;
                     _Context.CampusWebinarMappings.Add(campusWebinarMapping);
                     _Context.SaveChanges();
 

@@ -199,8 +199,21 @@
                             <div class="item col-xs-12 col-lg-7">
                                 <div class="panel panel-default paper-shadow" data-z="0.5">
                                     <div class="panel-heading">
-                                        <h4 class="text-headline margin-none">OverAll Graph</h4>
-                                        <p class="text-subhead text-light">Your branded Masterclasses</p>
+                                        <h4 class="text-headline margin-none">Graph Report</h4>
+                                        <p class="text-subhead text-light">
+                                            @if (ViewBag.Webinar != null)
+                                            {
+                                                <div>
+                                                    Webinar: <span>@ViewBag.Webinar</span>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(ViewBag.State))
+                                            {
+                                                <div>
+                                                    State: <span>@ViewBag.State</span>
+                                                </div>
+                                            }
+                                        </p>
                                     </div>
                                     <div class="relative height-500" style="height: 800px !important">
                                         <div class="maps-google-fs" data-toggle="google-maps" data-draggable="false" data-file="js/data/google_maps/markers.json">
@@ -215,10 +228,20 @@
                                 <div class="table-responsive">
                                     <table class="table panel panel-default table-pricing table-pricing-2">
                                         <thead>
-                                            <tr>
-                                                <th class="text-center">Total Sessions</th>
-                                                <th class="text-center">200</th>
-                                            </tr>
+                                            @if (ViewBag.Webinar != null)
+                                            {
+                                                <tr>
+                                                    <th class="text-center">@ViewBag.Webinar</th>
+                                                    <th class="text-center">Outreach</th>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <th class="text-center">Total Sessions</th>
+                                                    <th class="text-center">@Model.BrandReport.TotalSessions</th>
+                                                </tr>
+                                            }
                                         </thead>
                                         <tbody>
                                             <tr class="pricing">
@@ -226,7 +249,7 @@
                                                     <span class="">Mailers</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">250000</span>
+                                                    <span class="">@Model.BrandReport.Mailers</span>
                                                 </td>
                                             </tr>
                                             <tr class="pricing">
@@ -234,7 +257,7 @@
                                                     <span class="">Students registered</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">40000</span>
+                                                    <span class="">@Model.BrandReport.StudentsRegistered</span>
                                                 </td>
                                             </tr>
                                             <tr class="pricing">
@@ -242,7 +265,7 @@
                                                     <span class="">News letter clicks</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">500000</span>
+                                                    <span class="">@Model.BrandReport.NewsLetterClicks</span>
                                                 </td>
                                             </tr>
                                             <tr class="pricing">
@@ -250,7 +273,7 @@
                                                     <span class="">Colleges Attended</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">800</span>
+                                                    <span class="">@Model.BrandReport.CollegesAttended</span>
                                                 </td>
                                             </tr>
                                             <tr class="pricing">
@@ -258,7 +281,7 @@
                                                     <span class="">Certificate Downloads</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">40000</span>
+                                                    <span class="">@Model.BrandReport.CertificatesDownloaded</span>
                                                 </td>
                                             </tr>
                                             <tr class="pricing">
@@ -266,7 +289,7 @@
                                                     <span class="">Coupons redeemed</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="">42302</span>
+                                                    <span class="">@Model.BrandReport.CouponsRedeeemed</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -276,16 +299,22 @@
 
                                 <div class="panel panel-default paper-shadow" data-z="0.5">
                                     <div class="panel-body">
-                                        <h4 class="text-headline margin-none">Master Classes</h4>
-                                        @using (Html.BeginForm("BrandWebinar", "Brand", FormMethod.Post, new { role = "form" }))
+                                        <h4 class="text-headline margin-none">Filter</h4>
+                                        @using (Html.BeginForm("BrandDashBoard", "Brand", FormMethod.Post, new { role = "form" }))
                                         {
                                             @Html.AntiForgeryToken()
                                             <div class="form-group">
                                                 <div class="col-sm-12">
-                                                    @Html.DropDownList("WebinarID", new SelectList(Model.Webinars, "WebinarID", "WebinarName"), "Select Master-Class", new { @class = "selectpicker", data_style = "btn-white", data_live_search = "true", data_size = "5" })
+                                                    @Html.DropDownList("WebinarID", new SelectList(Model.Webinars, "WebinarID", "WebinarName"), "Select Master-Class", new { @class = "selectpicker", data_style = "btn-white", data_live_search = "true", data_size = "5", @id = "selectedMasterClass" })
                                                 </div>
                                             </div>
-                                            <p><a class="btn btn-primary paper-shadow relative" data-z="1" data-hover-z="2" data-animated data-toggle="modal" href="#modal-update-credit-card">Show Data</a></p>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    @Html.DropDownList("State", ViewBag.statesList as SelectList, "Select State", new { @class = "selectpicker", data_style = "btn-white", data_live_search = "true", data_size = "5", @id = "selectedState" })
+                                                </div>
+                                            </div>
+                                            <p><button class="btn btn-primary paper-shadow relative" data-z="1" data-hover-z="2" data-animated data-toggle="modal">Apply</button></p>
                                         }
                                     </div>
                                 </div>

@@ -13,6 +13,7 @@ namespace WeBind.Controllers
         {
             base.Initialize(requestContext);
             string userEmail = requestContext.HttpContext.User.Identity.Name;
+            //string controller = requestContext.RouteData.Values["controller"].ToString();
             if (!string.IsNullOrEmpty(userEmail))
             {
                 ApplicationBaseModel data = null;

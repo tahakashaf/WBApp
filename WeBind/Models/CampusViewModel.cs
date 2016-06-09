@@ -27,6 +27,6 @@ namespace WeBind.Models
         public string ProfessorName { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-
+        public long Participants { get; set; }
     }
 }

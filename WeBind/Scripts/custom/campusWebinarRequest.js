@@ -7,7 +7,7 @@
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
-            url: "http://webind.in/Admin/Approve/" + id,
+            url: "http://localhost:8081/Admin/Approve/" + id,
             dataType: "json",
             success: function (data) {
                 //alert('Approved');
@@ -26,7 +26,7 @@
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
-            url: "http://webind.in/Admin/Reject/" + id,
+            url: "http://localhost:8081/Admin/Reject/" + id,
             dataType: "json",
             success: function (data) {
                 //alert('Approved');

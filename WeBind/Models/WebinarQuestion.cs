@@ -23,7 +23,7 @@ namespace WeBind.Models
         public Nullable<long> WebinarID { get; set; }
         public string Question { get; set; }
     
-        public virtual Webinar Webinar { get; set; }
         public virtual ICollection<WebinarAnswer> WebinarAnswers { get; set; }
+        public virtual Webinar Webinar { get; set; }
     }
 }

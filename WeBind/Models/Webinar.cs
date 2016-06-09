@@ -16,9 +16,9 @@ namespace WeBind.Models
     {
         public Webinar()
         {
-            this.CampusWebinarMappings = new HashSet<CampusWebinarMapping>();
-            this.WebinarTagMappings = new HashSet<WebinarTagMapping>();
             this.WebinarQuestions = new HashSet<WebinarQuestion>();
+            this.WebinarTagMappings = new HashSet<WebinarTagMapping>();
+            this.CampusWebinarMappings = new HashSet<CampusWebinarMapping>();
         }
     
         public long WebinarID { get; set; }
@@ -30,18 +30,17 @@ namespace WeBind.Models
         public System.TimeSpan TimeDuration { get; set; }
         public Nullable<System.DateTime> ToDateTime { get; set; }
         public long statusID { get; set; }
-        public decimal Participants { get; set; }
         public string YoutubeUrl { get; set; }
         public long WebinarPicID { get; set; }
         public Nullable<long> BrandID { get; set; }
         public Nullable<long> ExpertID { get; set; }
     
-        public virtual ICollection<CampusWebinarMapping> CampusWebinarMappings { get; set; }
-        public virtual ProfilePic ProfilePic { get; set; }
-        public virtual StatusMaster StatusMaster { get; set; }
-        public virtual ICollection<WebinarTagMapping> WebinarTagMappings { get; set; }
-        public virtual ICollection<WebinarQuestion> WebinarQuestions { get; set; }
         public virtual BrandProfile BrandProfile { get; set; }
         public virtual ExpertProfile ExpertProfile { get; set; }
+        public virtual ProfilePic ProfilePic { get; set; }
+        public virtual StatusMaster StatusMaster { get; set; }
+        public virtual ICollection<WebinarQuestion> WebinarQuestions { get; set; }
+        public virtual ICollection<WebinarTagMapping> WebinarTagMappings { get; set; }
+        public virtual ICollection<CampusWebinarMapping> CampusWebinarMappings { get; set; }
     }
 }

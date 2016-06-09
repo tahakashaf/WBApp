@@ -16,21 +16,21 @@ namespace WeBind.Models
     {
         public ProfilePic()
         {
-            this.Webinars = new HashSet<Webinar>();
             this.CampusProfiles = new HashSet<CampusProfile>();
             this.ExpertProfiles = new HashSet<ExpertProfile>();
             this.StudentProfiles = new HashSet<StudentProfile>();
             this.BrandProfiles = new HashSet<BrandProfile>();
+            this.Webinars = new HashSet<Webinar>();
         }
     
         public long ProfilePicID { get; set; }
         public string ProfilePicPath { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
     
-        public virtual ICollection<Webinar> Webinars { get; set; }
         public virtual ICollection<CampusProfile> CampusProfiles { get; set; }
         public virtual ICollection<ExpertProfile> ExpertProfiles { get; set; }
         public virtual ICollection<StudentProfile> StudentProfiles { get; set; }
         public virtual ICollection<BrandProfile> BrandProfiles { get; set; }
+        public virtual ICollection<Webinar> Webinars { get; set; }
     }
 }
